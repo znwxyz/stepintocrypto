@@ -277,6 +277,52 @@
     letter-spacing: 1px;
   }
 
+  .hero-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 28px;
+  }
+
+  .made-by {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .made-by:hover { opacity: 1; }
+
+  .made-by-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .made-by-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-bright);
+    border-bottom: 2px solid var(--accent2);
+    padding-bottom: 2px;
+  }
+
+  .made-by-name svg {
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+
+  .made-by:hover .made-by-name svg { color: var(--accent); }
+
   /* CHAPTER */
   .chapter {
     margin-bottom: 64px;
@@ -815,19 +861,27 @@
       <div class="hero-tag">// BUSINESS EDUCATION</div>
       <h1 class="hero-title">Step into<br><span>Crypto</span></h1>
       <p class="hero-desc">블록체인 기술부터 DeFi, MEV, 스테이블코인까지 — 암호화폐 생태계의 핵심 원리를 체계적으로 정리한 강의 노트입니다. 용어에 마우스를 올려 설명을 확인하세요.</p>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num">15</span>
-          <span class="stat-label">챕터</span>
+      <div class="hero-bottom">
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-num">15</span>
+            <span class="stat-label">챕터</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">80+</span>
+            <span class="stat-label">핵심 용어</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">10</span>
+            <span class="stat-label">퀴즈 문제</span>
+          </div>
         </div>
-        <div class="stat">
-          <span class="stat-num">80+</span>
-          <span class="stat-label">핵심 용어</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">10</span>
-          <span class="stat-label">퀴즈 문제</span>
-        </div>
+        <a href="https://x.com/znwxyz" target="_blank" class="made-by">
+          <span class="made-by-label">made by</span>
+          <span class="made-by-name">Max8
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </span>
+        </a>
       </div>
     </div>
 
