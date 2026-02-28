@@ -1728,31 +1728,25 @@ const mainEl = document.getElementById('main-content');
 
 function updateActiveNav() {
   const navItems = document.querySelectorAll('.nav-item');
+  const scrollPos = mainEl.scrollTop + 160;
   let activeIdx = 0;
   CHAPTERS.forEach((_, i) => {
     const el = document.getElementById(`chapter-${i}`);
     if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const mainRect = mainEl.getBoundingClientRect();
-    // 챕터 상단이 뷰포트 상단 기준 40% 이상 지나쳤으면 활성
-    if (rect.top - mainRect.top <= mainRect.height * 0.4) {
-      activeIdx = i;
-    }
+    if (el.offsetTop <= scrollPos) activeIdx = i;
   });
   navItems.forEach(n => n.classList.remove('active'));
-  navItems[activeIdx].classList.add('active');
+  if (navItems[activeIdx]) navItems[activeIdx].classList.add('active');
 
-  // 활성 nav item이 사이드바 내에서 보이도록 스크롤
   const activeEl = navItems[activeIdx];
-  const sidebar = document.querySelector('.sidebar');
-  const elTop = activeEl.offsetTop;
-  const elBottom = elTop + activeEl.offsetHeight;
-  const sidebarScrollTop = sidebar.scrollTop;
-  const sidebarHeight = sidebar.offsetHeight;
-  if (elTop < sidebarScrollTop + 100) {
-    sidebar.scrollTo({ top: elTop - 100, behavior: 'smooth' });
-  } else if (elBottom > sidebarScrollTop + sidebarHeight - 80) {
-    sidebar.scrollTo({ top: elBottom - sidebarHeight + 80, behavior: 'smooth' });
+  if (activeEl) {
+    const sidebarEl = document.querySelector('.sidebar');
+    const elTop = activeEl.offsetTop;
+    const elBottom = elTop + activeEl.offsetHeight;
+    const st = sidebarEl.scrollTop;
+    const sh = sidebarEl.offsetHeight;
+    if (elTop < st + 100) sidebarEl.scrollTo({ top: elTop - 100, behavior: 'smooth' });
+    else if (elBottom > st + sh - 80) sidebarEl.scrollTo({ top: elBottom - sh + 80, behavior: 'smooth' });
   }
 }
 
@@ -1764,10 +1758,13 @@ mainEl.addEventListener('scroll', () => {
 function scrollToChapter(idx) {
   const el = document.getElementById(`chapter-${idx}`);
   if (!el) return;
-  const mainRect = mainEl.getBoundingClientRect();
-  const elRect = el.getBoundingClientRect();
-  const offset = elRect.top - mainRect.top + mainEl.scrollTop - 20;
-  mainEl.scrollTo({ top: offset, behavior: 'smooth' });
+  const topPadding = window.innerWidth <= 768 ? 72 : 20;
+  const offset = mainEl.scrollTop + el.getBoundingClientRect().top - mainEl.getBoundingClientRect().top - topPadding;
+  // body overflow 해제 후 즉시 스크롤 (rAF로 paint 이후 적용)
+  requestAnimationFrame(() => {
+    document.body.style.overflow = '';
+    mainEl.scrollTop = offset;
+  });
 }
 
 document.getElementById('scroll-top').addEventListener('click', () => {
@@ -1889,24 +1886,6 @@ document.querySelectorAll('.nav-item').forEach(item => {
     if (window.innerWidth <= 768) closeSidebar();
   });
 });
-
-// 모바일 스크롤 트래킹은 window 기준으로 전환
-if (window.innerWidth <= 768) {
-  const mainMobile = document.getElementById('main-content');
-  mainMobile.addEventListener('scroll', () => {
-    const scrollTop = mainMobile.scrollTop;
-    document.getElementById('scroll-top').classList.toggle('visible', scrollTop > 200);
-    CHAPTERS.forEach((_, i) => {
-      const el = document.getElementById(`chapter-${i}`);
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      if (rect.top >= 52 && rect.top < 250) {
-        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-        document.querySelectorAll('.nav-item')[i].classList.add('active');
-      }
-    });
-  });
-}
 </script>
 </body>
 </html>
