@@ -47,9 +47,17 @@
   /* LAYOUT */
   .shell {
     position: relative;
-    z-index: 1;
     display: flex;
     min-height: 100vh;
+  }
+
+  /* MAIN */
+  .main {
+    flex: 1;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 0 40px 80px;
+    max-width: 900px;
   }
 
   /* SIDEBAR */
@@ -148,6 +156,8 @@
     border-left-color: var(--accent);
     color: var(--accent);
     background: rgba(0, 212, 255, 0.08);
+    font-weight: 700;
+    font-size: 13px;
   }
   .nav-item.done { color: var(--accent3); }
   .nav-item.done .nav-num { background: var(--accent3); color: var(--bg); }
@@ -196,12 +206,22 @@
   .tool-btn:hover { border-color: var(--accent); color: var(--accent); }
   .tool-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(0, 212, 255, 0.08); }
 
-  /* MAIN */
-  .main {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0 40px 80px;
-    max-width: 900px;
+  #btn-quiz {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  #btn-quiz:hover {
+    background: rgba(0, 212, 255, 0.12);
+  }
+
+  #btn-glossary {
+    border-color: var(--accent3);
+    color: var(--accent3);
+  }
+
+  #btn-glossary:hover {
+    background: rgba(127, 255, 107, 0.1);
   }
 
   /* HERO */
@@ -823,9 +843,165 @@
     margin: 20px 0;
   }
 
+  /* HAMBURGER TOP BAR (mobile only) */
+  .mobile-topbar {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 52px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 600;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  .mobile-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text-bright);
+  }
+
+  .mobile-logo span { color: var(--accent); }
+
+  .hamburger {
+    width: 36px;
+    height: 36px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: border-color 0.2s;
+  }
+
+  .hamburger:hover { border-color: var(--accent); }
+
+  .hamburger span {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--text-muted);
+    border-radius: 2px;
+    transition: all 0.25s;
+    transform-origin: center;
+  }
+
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: var(--accent); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: var(--accent); }
+
+  /* SIDEBAR OVERLAY (mobile) */
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 8, 17, 0.75);
+    z-index: 400;
+  }
+
+  .sidebar-backdrop.open { display: block; }
+
+  /* RESPONSIVE BREAKPOINTS */
+
+  /* Tablet: 900px 이하 */
+  @media (max-width: 900px) {
+    .main {
+      padding: 0 24px 80px;
+    }
+    .hero-title { font-size: 28px; }
+    .hero::after { font-size: 80px; }
+  }
+
+  /* Mobile: 768px 이하 — 햄버거 모드 */
+  @media (max-width: 768px) {
+    .mobile-topbar { display: flex; }
+
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 100vh;
+      z-index: 500;
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 280px;
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+      box-shadow: 4px 0 40px rgba(0,0,0,0.5);
+    }
+
+    .shell {
+      flex-direction: column;
+    }
+
+    .main {
+      padding: 72px 16px 80px;
+      max-width: 100%;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    .hero { padding: 32px 0 32px; }
+    .hero-title { font-size: 26px; }
+    .hero::after { display: none; }
+    .hero-desc { font-size: 13px; }
+
+    .hero-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .made-by { align-items: flex-start; }
+
+    .chapter-title { font-size: 18px; }
+    .chapter-header { flex-wrap: wrap; gap: 10px; }
+    .complete-btn { margin-left: 0; }
+
+    .scroll-top { bottom: 20px; right: 16px; }
+
+    .quiz-box {
+      width: calc(100vw - 32px);
+      padding: 28px 20px;
+    }
+
+    .glossary-panel { width: 100vw; }
+
+    .comp-table { font-size: 11.5px; }
+    .comp-table th, .comp-table td { padding: 8px 10px; }
+  }
+
+  /* Small mobile: 420px 이하 */
+  @media (max-width: 420px) {
+    .hero-title { font-size: 22px; }
+    .hero-stats { gap: 20px; }
+    .stat-num { font-size: 18px; }
+    .section-title { font-size: 14px; }
+    .section-body { font-size: 13px; }
+  }
+
 </style>
 </head>
 <body>
+
+<!-- MOBILE TOP BAR -->
+<div class="mobile-topbar">
+  <div class="mobile-logo">Step into <span>Crypto</span></div>
+  <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<!-- SIDEBAR BACKDROP -->
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
 <div class="shell">
   <!-- SIDEBAR -->
@@ -1444,26 +1620,49 @@ function updateProgress() {
 
 // SCROLL TRACKING
 const mainEl = document.getElementById('main-content');
-mainEl.addEventListener('scroll', () => {
-  const scrollTop = mainEl.scrollTop;
-  document.getElementById('scroll-top').classList.toggle('visible', scrollTop > 200);
 
-  // Update active nav
+function updateActiveNav() {
+  const navItems = document.querySelectorAll('.nav-item');
+  let activeIdx = 0;
   CHAPTERS.forEach((_, i) => {
     const el = document.getElementById(`chapter-${i}`);
     if (!el) return;
     const rect = el.getBoundingClientRect();
     const mainRect = mainEl.getBoundingClientRect();
-    if (rect.top >= mainRect.top - 100 && rect.top < mainRect.top + 200) {
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      document.querySelectorAll('.nav-item')[i].classList.add('active');
+    // 챕터 상단이 뷰포트 상단 기준 40% 이상 지나쳤으면 활성
+    if (rect.top - mainRect.top <= mainRect.height * 0.4) {
+      activeIdx = i;
     }
   });
+  navItems.forEach(n => n.classList.remove('active'));
+  navItems[activeIdx].classList.add('active');
+
+  // 활성 nav item이 사이드바 내에서 보이도록 스크롤
+  const activeEl = navItems[activeIdx];
+  const sidebar = document.querySelector('.sidebar');
+  const elTop = activeEl.offsetTop;
+  const elBottom = elTop + activeEl.offsetHeight;
+  const sidebarScrollTop = sidebar.scrollTop;
+  const sidebarHeight = sidebar.offsetHeight;
+  if (elTop < sidebarScrollTop + 100) {
+    sidebar.scrollTo({ top: elTop - 100, behavior: 'smooth' });
+  } else if (elBottom > sidebarScrollTop + sidebarHeight - 80) {
+    sidebar.scrollTo({ top: elBottom - sidebarHeight + 80, behavior: 'smooth' });
+  }
+}
+
+mainEl.addEventListener('scroll', () => {
+  document.getElementById('scroll-top').classList.toggle('visible', mainEl.scrollTop > 200);
+  updateActiveNav();
 });
 
 function scrollToChapter(idx) {
   const el = document.getElementById(`chapter-${idx}`);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!el) return;
+  const mainRect = mainEl.getBoundingClientRect();
+  const elRect = el.getBoundingClientRect();
+  const offset = elRect.top - mainRect.top + mainEl.scrollTop - 20;
+  mainEl.scrollTo({ top: offset, behavior: 'smooth' });
 }
 
 document.getElementById('scroll-top').addEventListener('click', () => {
@@ -1538,6 +1737,56 @@ function renderGlossary(filter) {
   const el = document.getElementById('glossary-list');
   const terms = GLOSSARY_TERMS.filter(t => !filter || t.term.includes(filter) || t.def.includes(filter));
   el.innerHTML = terms.map(t => `<div class="glossary-item"><div class="g-term">${t.term}</div><div class="g-def">${t.def}</div></div>`).join('');
+}
+
+// HAMBURGER MENU
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.querySelector('.sidebar');
+const backdrop = document.getElementById('sidebar-backdrop');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  backdrop.classList.add('open');
+  hamburger.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  backdrop.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+});
+
+backdrop.addEventListener('click', closeSidebar);
+
+// 모바일에서 챕터 클릭 시 사이드바 자동 닫기
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    if (window.innerWidth <= 768) closeSidebar();
+  });
+});
+
+// 모바일 스크롤 트래킹은 window 기준으로 전환
+if (window.innerWidth <= 768) {
+  const mainMobile = document.getElementById('main-content');
+  mainMobile.addEventListener('scroll', () => {
+    const scrollTop = mainMobile.scrollTop;
+    document.getElementById('scroll-top').classList.toggle('visible', scrollTop > 200);
+    CHAPTERS.forEach((_, i) => {
+      const el = document.getElementById(`chapter-${i}`);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top >= 52 && rect.top < 250) {
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        document.querySelectorAll('.nav-item')[i].classList.add('active');
+      }
+    });
+  });
 }
 </script>
 </body>
