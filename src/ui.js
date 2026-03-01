@@ -111,6 +111,11 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   const glossaryOverlay = document.getElementById('glossary-overlay');
   const glossarySearch = document.getElementById('glossary-search');
   const glossaryList = document.getElementById('glossary-list');
+  const legalOverlays = {
+    privacy: document.getElementById('legal-privacy-overlay'),
+    terms: document.getElementById('legal-terms-overlay'),
+    contact: document.getElementById('legal-contact-overlay'),
+  };
 
   const isMobile = () => window.innerWidth <= 768;
 
@@ -180,6 +185,21 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
   function closeGlossary() {
     glossaryOverlay.classList.remove('open');
+  }
+
+  function closeAllLegal() {
+    Object.values(legalOverlays).forEach((overlay) => {
+      if (overlay) overlay.classList.remove('open');
+    });
+    document.body.style.overflow = '';
+  }
+
+  function openLegal(type) {
+    closeAllLegal();
+    const target = legalOverlays[type];
+    if (!target) return;
+    target.classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
 
   buildChapters(chapters);
@@ -268,6 +288,23 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   });
 
   backdrop.addEventListener('click', closeSidebar);
+
+  document.querySelectorAll('[data-legal-open]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      openLegal(btn.dataset.legalOpen);
+    });
+  });
+
+  document.querySelectorAll('[data-legal-close]').forEach((btn) => {
+    btn.addEventListener('click', closeAllLegal);
+  });
+
+  Object.values(legalOverlays).forEach((overlay) => {
+    if (!overlay) return;
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeAllLegal();
+    });
+  });
 
   updateProgress();
   updateActiveNav();
