@@ -114,7 +114,7 @@
 
   .sidebar-title {
     font-family: 'Syne', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
     color: var(--text-bright);
     line-height: 1.4;
@@ -388,7 +388,7 @@
     align-items: center;
     gap: 6px;
     font-family: 'Syne', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     color: var(--text-bright);
     border-bottom: 2px solid var(--accent2);
@@ -946,9 +946,9 @@
   /* SUPPORT FLOATING BAR */
   .support-float {
     position: fixed;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 24px;
+    bottom: 86px;
+    transform: none;
     z-index: 805;
     text-decoration: none;
     background: linear-gradient(180deg, rgba(255, 107, 53, 0.92), rgba(255, 107, 53, 0.75));
@@ -956,27 +956,40 @@
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 12px;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
-    padding: 12px 8px;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    letter-spacing: 1px;
-    font-family: 'Syne', sans-serif;
-    font-size: 12px;
+    padding: 10px 12px;
+    width: 206px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    text-align: center;
+    letter-spacing: 0.2px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
     font-weight: 700;
     transition: all 0.2s;
-    white-space: nowrap;
+    line-height: 1.35;
   }
 
   .support-float:hover {
-    right: 18px;
+    right: 20px;
     background: linear-gradient(180deg, rgba(255, 107, 53, 1), rgba(255, 107, 53, 0.86));
     box-shadow: 0 20px 36px rgba(0, 0, 0, 0.42);
   }
 
   .support-float span {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    opacity: 0.9;
+    font-family: 'Noto Sans KR', sans-serif;
+    opacity: 0.96;
+  }
+
+  .support-float-main {
+    font-size: 14px;
+    color: #fff;
+  }
+
+  .support-float-sub {
+    font-size: 14px;
+    color: #fff;
   }
 
   /* FORMULA BOX */
@@ -1359,19 +1372,27 @@
       top: auto;
       right: 16px;
       left: 16px;
-      bottom: 16px;
+      bottom: 68px;
       transform: none;
-      writing-mode: horizontal-tb;
-      text-align: center;
+      width: auto;
       border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 13px;
+      padding: 13px 14px;
+      font-size: 15px;
       letter-spacing: 0.4px;
+      flex-direction: row;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
     }
 
     .support-float:hover {
       right: 16px;
       left: 16px;
+    }
+
+    .support-float-main,
+    .support-float-sub {
+      font-size: 15px;
     }
   }
 
@@ -1559,7 +1580,9 @@
 </div>
 
 <button class="scroll-top" id="scroll-top">↑</button>
-<a class="support-float" href="https://qr.kakaopay.com/Ej7s6I5uQ" target="_blank" rel="noopener noreferrer">제작자에게 라떼 한 잔 보내기 <span>☕</span></a>
+<a class="support-float" href="https://qr.kakaopay.com/Ej7s6I5uQ" target="_blank" rel="noopener noreferrer">
+  <span class="support-float-main">(라떼를 좋아하는 제작자에게) 한 잔 보내기 ☕</span>
+</a>
 
 <script type="module" src="./src/main.js"></script>
 </body>
