@@ -364,6 +364,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
       markCompletion(idx, !currentlyDone);
       saveCompletedSet(completedSet);
       updateProgress();
+      btn.blur();
     });
   });
 
