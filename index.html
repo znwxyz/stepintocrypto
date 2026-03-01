@@ -1357,7 +1357,7 @@
       transform: translateX(-100%);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       width: 280px;
-      padding-bottom: calc(92px + env(safe-area-inset-bottom));
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
       overflow: hidden;
     }
 
@@ -1415,7 +1415,7 @@
     .chapter-header { flex-wrap: wrap; gap: 10px; }
     .chapter-header-right { align-self: flex-end; margin-top: 4px; }
 
-    .scroll-top { bottom: calc(16px + env(safe-area-inset-bottom)); right: 16px; }
+    .scroll-top { bottom: calc(56px + env(safe-area-inset-bottom)); right: 16px; }
 
     .quiz-box {
       width: calc(100vw - 32px);
@@ -1643,17 +1643,17 @@
 
     .support-float {
       top: auto;
-      right: 64px;
+      right: 16px;
       left: auto;
-      bottom: calc(16px + env(safe-area-inset-bottom));
+      bottom: calc(8px + env(safe-area-inset-bottom));
       transform: none;
       width: max-content;
-      max-width: calc(100vw - 120px);
+      max-width: none;
       border-radius: 10px;
       padding: 0 12px;
       height: 42px;
       min-height: 42px;
-      font-size: 13px;
+      font-size: 12px;
       letter-spacing: 0.4px;
       flex-direction: row;
       justify-content: center;
@@ -1664,23 +1664,23 @@
     }
 
     .support-float:hover {
-      right: 64px;
+      right: 16px;
       left: auto;
     }
 
     .support-float-main,
     .support-float-sub {
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1;
     }
 
     .crypto-float {
-      right: calc(64px + 220px + 8px);
+      right: calc(8px + 220px + 8px);
       left: auto;
-      bottom: calc(16px + env(safe-area-inset-bottom));
+      bottom: calc(8px + env(safe-area-inset-bottom));
       width: max-content;
-      max-width: calc(100vw - 120px);
-      font-size: 13px;
+      max-width: none;
+      font-size: 12px;
       padding: 0 12px;
       height: 42px;
       min-height: 42px;
@@ -1693,7 +1693,7 @@
     }
 
     .crypto-float:hover {
-      right: calc(64px + 220px + 8px);
+      right: calc(8px + 220px + 8px);
       left: auto;
     }
 

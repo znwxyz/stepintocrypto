@@ -166,14 +166,13 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
   function syncMobileFloatingButtons() {
     if (!cryptoFloatBtn || !supportFloatLink) return;
-
     if (!isMobile()) {
       cryptoFloatBtn.style.right = '';
       cryptoFloatBtn.style.left = '';
       return;
     }
 
-    const baseRight = 64;
+    const baseRight = 16;
     const gap = 8;
     const supportWidth = Math.ceil(supportFloatLink.getBoundingClientRect().width || 0);
 
