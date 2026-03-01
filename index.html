@@ -1379,6 +1379,11 @@
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: var(--accent); }
 
+  body.glossary-open .mobile-topbar .hamburger {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   /* SIDEBAR OVERLAY (mobile) */
   .sidebar-backdrop {
     display: none;
@@ -1491,8 +1496,13 @@
     }
 
     .hero-bottom .made-by-name {
-      font-size: 17px;
+      font-size: 15px;
       gap: 8px;
+    }
+
+    .sidebar-header-account .made-by-name {
+      font-size: 14px;
+      gap: 6px;
     }
 
     .sidebar { padding-top: 52px; }

@@ -184,9 +184,15 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     const baseRight = 16;
     const gap = 8;
     const supportWidth = Math.ceil(supportFloatLink.getBoundingClientRect().width || 0);
+    const cryptoWidth = Math.ceil(cryptoFloatBtn.getBoundingClientRect().width || 0);
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
 
-    if (supportWidth > 0) {
-      cryptoFloatBtn.style.right = `${baseRight + supportWidth + gap}px`;
+    if (supportWidth > 0 && viewportWidth > 0) {
+      const desiredRight = baseRight + supportWidth + gap;
+      const maxRight = Math.max(baseRight, viewportWidth - cryptoWidth - 8);
+      const safeRight = Math.min(desiredRight, maxRight);
+
+      cryptoFloatBtn.style.right = `${safeRight}px`;
       cryptoFloatBtn.style.left = 'auto';
     }
   }
@@ -273,11 +279,13 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     renderGlossary('');
     document.body.classList.add('glossary-open');
     glossaryOverlay.classList.add('open');
+    syncMobileFloatingButtons();
   }
 
   function closeGlossary() {
     document.body.classList.remove('glossary-open');
     glossaryOverlay.classList.remove('open');
+    syncMobileFloatingButtons();
     updateFloatingVisibility();
   }
 
@@ -346,14 +354,9 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     if (idx >= 0 && idx < chapters.length) markCompletion(idx, true);
   }
 
-  const chaptersRoot = document.getElementById('chapters-root');
-  if (chaptersRoot) {
-    // Single delegated handler avoids duplicate per-button listeners.
-    chaptersRoot.addEventListener('click', (e) => {
-      const btn = e.target.closest('.complete-btn');
-      if (!btn) return;
+  document.querySelectorAll('.complete-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
       e.preventDefault();
-
       const idx = Number.parseInt(btn.dataset.idx, 10);
       if (!Number.isInteger(idx)) return;
 
@@ -362,7 +365,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
       saveCompletedSet(completedSet);
       updateProgress();
     });
-  }
+  });
 
   mainEl.addEventListener('scroll', () => {
     if (isMobile()) return;
