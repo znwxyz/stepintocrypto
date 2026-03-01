@@ -1358,6 +1358,7 @@
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       width: 280px;
       padding-bottom: calc(92px + env(safe-area-inset-bottom));
+      overflow: hidden;
     }
 
     .sidebar.open {
@@ -1395,19 +1396,26 @@
 
     .sidebar { padding-top: 52px; }
 
+    .nav-chapters {
+      padding-bottom: 10px;
+      overflow-y: auto;
+      min-height: 0;
+    }
+
     .sidebar-tools {
-      position: sticky;
-      bottom: 0;
+      position: relative;
+      bottom: auto;
       background: var(--surface);
       z-index: 3;
       padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      box-shadow: none;
     }
 
     .chapter-title { font-size: 18px; }
     .chapter-header { flex-wrap: wrap; gap: 10px; }
     .chapter-header-right { align-self: flex-end; margin-top: 4px; }
 
-    .scroll-top { bottom: calc(78px + env(safe-area-inset-bottom)); right: 16px; }
+    .scroll-top { bottom: calc(16px + env(safe-area-inset-bottom)); right: 16px; }
 
     .quiz-box {
       width: calc(100vw - 32px);
@@ -1637,7 +1645,7 @@
       top: auto;
       right: 64px;
       left: auto;
-      bottom: calc(78px + env(safe-area-inset-bottom));
+      bottom: calc(16px + env(safe-area-inset-bottom));
       transform: none;
       width: max-content;
       max-width: calc(100vw - 120px);
@@ -1669,7 +1677,7 @@
     .crypto-float {
       right: calc(64px + 220px + 8px);
       left: auto;
-      bottom: calc(78px + env(safe-area-inset-bottom));
+      bottom: calc(16px + env(safe-area-inset-bottom));
       width: max-content;
       max-width: calc(100vw - 120px);
       font-size: 13px;
