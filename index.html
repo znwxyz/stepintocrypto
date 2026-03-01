@@ -1011,8 +1011,8 @@
   /* SCROLL TOP */
   .scroll-top {
     position: fixed;
-    bottom: 32px;
-    right: 32px;
+    bottom: 210px;
+    right: 24px;
     width: 40px;
     height: 40px;
     background: var(--surface);
@@ -1038,7 +1038,7 @@
     position: fixed;
     right: 24px;
     bottom: 86px;
-    transform: none;
+    transform: translateY(18px) scale(0.98);
     z-index: 805;
     text-decoration: none;
     background: linear-gradient(180deg, rgba(255, 107, 53, 0.92), rgba(255, 107, 53, 0.75));
@@ -1057,8 +1057,11 @@
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 14px;
     font-weight: 400;
-    transition: all 0.2s;
+    transition: opacity 0.38s ease, transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, right 0.2s ease;
     line-height: 1.35;
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
   }
 
   .crypto-float {
@@ -1081,7 +1084,11 @@
     font-weight: 500;
     cursor: pointer;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
-    transition: all 0.2s;
+    transform: translateY(18px) scale(0.98);
+    transition: opacity 0.38s ease, transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, right 0.2s ease, left 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
   }
 
   .crypto-float:hover {
@@ -1130,6 +1137,13 @@
   }
 
   .donation-overlay.open { display: flex; }
+
+  body.floating-visible .support-float,
+  body.floating-visible .crypto-float {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
 
   .donation-box {
     width: min(540px, 100%);
@@ -1650,7 +1664,7 @@
       right: 16px;
       left: auto;
       bottom: calc(8px + env(safe-area-inset-bottom));
-      transform: none;
+      transform: translateY(18px) scale(0.98);
       width: max-content;
       max-width: none;
       border-radius: 10px;
@@ -1694,6 +1708,7 @@
       align-items: center;
       white-space: nowrap;
       line-height: 1;
+      transform: translateY(18px) scale(0.98);
     }
 
     .crypto-float:hover {
@@ -1719,7 +1734,7 @@
 
   @media (max-width: 430px) {
     .sidebar-tools {
-      padding-bottom: calc(56px + env(safe-area-inset-bottom));
+      padding-bottom: calc(24px + env(safe-area-inset-bottom));
     }
   }
 
@@ -1782,7 +1797,7 @@
       <h1 class="hero-title">Step into<br><span class="hero-crypto-line"><span>Crypto</span><img src="favicon.svg" alt="" class="hero-crypto-logo" /></span></h1>
       <p class="hero-desc" id="hero-desc">
         <span class="hero-para">안녕하세요, 저는 그냥 직장인(브랜드 디자이너)입니다. 현재는 크립토 씬의 어느 팀에 속해 일하고 있어요. 최근 웹2에서 웹3로 이직하게 되면서, 그동안 투자로만 바라봤던 코인의 뒷면에 제가 모르는 게 너무도 많다는 걸 알았습니다. DeFi, Smart Contract, 합의 알고리즘 같은 다양한 기술들을 바탕으로, 많은 빌더들이 끊임없이 이 생태계를 확장해 나가고 있는 이 뒷단에 대해 '제대로 알고 싶다!' 라는 생각이 들었고요.</span>
-        <span class="hero-para">별처럼 많은 코인 이름과 팀들, 오르느냐 내리느냐만 다루는 자극적인 유튜브, 너무 빠른 정보가 쏟아지는 텔레그램과 낯선 트위터, 시끌벅적한 오픈채팅방까지. 코인 투자를 접할 수 있는 채널은 많지만, 정작 조용히 개념을 파고들며 공부할 수 있는 공간이 부족한 게 아쉽고 답답했습니다. 그래서 혼자 공부하던 노션 페이지를 웹페이지로 옮겨봤습니다.</span>
+        <span class="hero-para hero-extra" hidden>별처럼 많은 코인 이름과 팀들, 오르느냐 내리느냐만 다루는 자극적인 유튜브, 너무 빠른 정보가 쏟아지는 텔레그램과 낯선 트위터, 시끌벅적한 오픈채팅방까지. 코인 투자를 접할 수 있는 채널은 많지만, 정작 조용히 개념을 파고들며 공부할 수 있는 공간이 부족한 게 아쉽고 답답했습니다. 그래서 혼자 공부하던 노션 페이지를 웹페이지로 옮겨봤습니다.</span>
         <span class="hero-para hero-extra" hidden>여기 Step into Crypto는 쉬운 기초와 상식부터 특정 내용을 더 깊이 이해하고 싶은 입문자분들을 위해 열어둡니다. 샘플처럼 뚝딱 만든 웹페이지라 내용도 얕고, 퀴즈도 얼마 없는데요. 공부가 덜 되어 못 넣은 부분도 있고, 여기저기서 긁어모으며 정제되지 않은 내용도 있고, 아직 다 때려넣지 않아 콘텐츠가 전반적으로 부실합니다. 다만 천천히 차곡차곡 채우겠습니다. 자주 편하게 놀러오세요.</span>
       </p>
       <button class="hero-more-toggle" id="hero-more-toggle" type="button" aria-expanded="false">더보기</button>

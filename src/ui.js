@@ -107,6 +107,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   const hamburger = document.getElementById('hamburger');
   const sidebar = document.querySelector('.sidebar');
   const backdrop = document.getElementById('sidebar-backdrop');
+  const navChaptersEl = document.getElementById('nav-chapters');
 
   const glossaryOverlay = document.getElementById('glossary-overlay');
   const glossarySearch = document.getElementById('glossary-search');
@@ -150,6 +151,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     backdrop.classList.add('open');
     hamburger.classList.add('open');
     if (isMobile()) lockBackgroundScroll();
+    if (isMobile() && navChaptersEl) navChaptersEl.scrollTop = 0;
     updateActiveNav();
   }
 
@@ -198,6 +200,36 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
     navItems.forEach((n) => n.classList.remove('active'));
     if (navItems[activeIdx]) navItems[activeIdx].classList.add('active');
+  }
+
+  function updateFloatingVisibility() {
+    const shouldShow = getScrollTop() > 160;
+    document.body.classList.toggle('floating-visible', shouldShow);
+  }
+
+  function forwardWheelToMainOnDesktop(e) {
+    if (isMobile()) return;
+    mainEl.scrollTop += e.deltaY;
+    e.preventDefault();
+  }
+
+  function routeDesktopWheelToMain(e) {
+    if (isMobile()) return;
+    if (!mainEl || !sidebar) return;
+
+    const target = e.target;
+    if (!(target instanceof Element)) return;
+
+    // Keep native wheel behavior inside main/sidebar and inside open overlays.
+    if (mainEl.contains(target) || sidebar.contains(target)) return;
+    if (
+      glossaryOverlay?.classList.contains('open')
+      || donationOverlay?.classList.contains('open')
+      || document.querySelector('.legal-overlay.open')
+    ) return;
+
+    mainEl.scrollTop += e.deltaY;
+    e.preventDefault();
   }
 
   function scrollToChapter(idx) {
@@ -312,12 +344,14 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     if (isMobile()) return;
     scrollTopBtn.classList.toggle('visible', mainEl.scrollTop > 200);
     updateActiveNav();
+    updateFloatingVisibility();
   });
 
   window.addEventListener('scroll', () => {
     if (!isMobile()) return;
     scrollTopBtn.classList.toggle('visible', window.scrollY > 200);
     updateActiveNav();
+    updateFloatingVisibility();
   });
 
   window.addEventListener('resize', () => {
@@ -326,7 +360,10 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
       closeSidebar();
     }
     syncMobileFloatingButtons();
+    updateFloatingVisibility();
   });
+
+  document.addEventListener('wheel', routeDesktopWheelToMain, { passive: false });
 
   scrollTopBtn.addEventListener('click', () => {
     if (isMobile()) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -373,7 +410,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
     const syncHeroMoreState = () => {
       if (isMobile()) {
-        // Mobile default is always collapsed: para1+2 visible, para3 hidden.
+        // Mobile default is always collapsed: only paragraph 1 visible.
         applyHeroExpandedState(false);
         heroMoreToggle.hidden = false;
       } else {
@@ -414,6 +451,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
   if (cryptoFloatBtn) {
     cryptoFloatBtn.addEventListener('click', openDonation);
+    cryptoFloatBtn.addEventListener('wheel', forwardWheelToMainOnDesktop, { passive: false });
   }
 
   if (supportFloatLink) {
@@ -421,6 +459,11 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
       e.preventDefault();
       window.open('https://qr.kakaopay.com/Ej7s6I5uQ', '_blank', 'noopener,noreferrer');
     });
+    supportFloatLink.addEventListener('wheel', forwardWheelToMainOnDesktop, { passive: false });
+  }
+
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('wheel', forwardWheelToMainOnDesktop, { passive: false });
   }
 
   // Delegated fallback: keeps working even if button node is replaced later.
@@ -474,6 +517,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
   updateProgress();
   updateActiveNav();
+  updateFloatingVisibility();
 
   return {
     openGlossary,
