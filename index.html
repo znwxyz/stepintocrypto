@@ -76,7 +76,7 @@
     flex: 1;
     height: 100vh;
     overflow-y: auto;
-    padding: 0 40px 80px;
+    padding: 0 40px 20px;
     max-width: 900px;
   }
 
@@ -1113,7 +1113,7 @@
     }
 
     .main {
-      padding: 72px 16px 80px;
+      padding: 72px 16px 20px;
       max-width: 100%;
       height: auto;
       overflow-y: visible;
@@ -1233,7 +1233,7 @@
   /* FOOTER LEGAL */
   .site-footer {
     margin-top: 12px;
-    padding: 28px 0 36px;
+    padding: 20px 0 8px;
     border-top: 1px solid var(--border);
   }
 
@@ -1242,9 +1242,28 @@
     gap: 10px;
     flex-wrap: wrap;
     margin-bottom: 12px;
+    justify-content: flex-end;
+    align-items: center;
   }
 
-  .footer-link-btn {
+  .footer-text-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .footer-text-btn:hover {
+    color: var(--accent);
+  }
+
+  .footer-contact-btn {
     background: var(--surface2);
     border: 1px solid var(--border);
     color: var(--text);
@@ -1256,27 +1275,9 @@
     transition: all 0.2s;
   }
 
-  .footer-link-btn:hover {
+  .footer-contact-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
-  }
-
-  .footer-nfa {
-    font-size: 12px;
-    line-height: 1.7;
-    color: var(--text-muted);
-    border: 1px dashed rgba(255, 107, 53, 0.4);
-    border-radius: 10px;
-    padding: 12px 14px;
-    background: rgba(255, 107, 53, 0.05);
-  }
-
-  .footer-nfa strong {
-    color: var(--accent2);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 1px;
-    margin-right: 8px;
   }
 
   /* LEGAL MODAL */
@@ -1363,8 +1364,8 @@
   }
 
   @media (max-width: 768px) {
-    .site-footer { padding-bottom: 22px; }
-    .footer-links { flex-direction: column; }
+    .site-footer { padding-bottom: calc(86px + env(safe-area-inset-bottom)); }
+    .footer-links { justify-content: flex-end; align-items: center; gap: 12px; }
     .legal-box { padding: 20px 16px 14px; }
     .legal-title { font-size: 20px; padding-right: 28px; }
 
@@ -1494,11 +1495,10 @@
 
     <footer class="site-footer">
       <div class="footer-links">
-        <button class="footer-link-btn" data-legal-open="privacy">개인정보처리방침</button>
-        <button class="footer-link-btn" data-legal-open="terms">이용약관</button>
-        <button class="footer-link-btn" data-legal-open="contact">문의하기</button>
+        <button class="footer-text-btn" data-legal-open="privacy">개인정보처리방침</button>
+        <button class="footer-text-btn" data-legal-open="terms">이용약관</button>
+        <button class="footer-contact-btn" data-legal-open="contact">문의하기</button>
       </div>
-      <div class="footer-nfa"><strong>NFA</strong>본 사이트의 모든 콘텐츠는 교육 및 정보 제공 목적이며, 투자 권유 또는 재무적 조언이 아닙니다. 모든 투자 결정의 책임은 사용자 본인에게 있습니다.</div>
     </footer>
   </main>
 </div>
