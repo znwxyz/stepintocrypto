@@ -1108,6 +1108,9 @@
   .support-float-main {
     font-size: 14px;
     color: #fff;
+    display: inline-block;
+    white-space: normal;
+    text-align: center;
   }
 
   .support-float-sub {
@@ -1353,6 +1356,7 @@
       position: fixed;
       top: 0; left: 0;
       height: 100vh;
+      height: 100dvh;
       z-index: 500;
       transform: translateX(-100%);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1650,7 +1654,7 @@
       width: max-content;
       max-width: none;
       border-radius: 10px;
-      padding: 0 12px;
+      padding: 0 8px;
       height: 42px;
       min-height: 42px;
       font-size: 12px;
@@ -1658,9 +1662,9 @@
       flex-direction: row;
       justify-content: center;
       gap: 6px;
-      white-space: nowrap;
+      white-space: normal;
       align-items: center;
-      line-height: 1;
+      line-height: 1.15;
     }
 
     .support-float:hover {
@@ -1671,7 +1675,7 @@
     .support-float-main,
     .support-float-sub {
       font-size: 12px;
-      line-height: 1;
+      line-height: 1.15;
     }
 
     .crypto-float {
@@ -1681,7 +1685,7 @@
       width: max-content;
       max-width: none;
       font-size: 12px;
-      padding: 0 12px;
+      padding: 0 8px;
       height: 42px;
       min-height: 42px;
       border-radius: 10px;
@@ -1710,6 +1714,12 @@
 
     .donation-wallet {
       width: 100%;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .sidebar-tools {
+      padding-bottom: calc(56px + env(safe-area-inset-bottom));
     }
   }
 
@@ -1903,7 +1913,7 @@
 <button class="scroll-top" id="scroll-top">↑</button>
 <button class="crypto-float" id="crypto-float" type="button"><span class="fox">🦊</span>지갑으로 한 잔 쏘기</button>
 <a class="support-float" id="support-float" href="https://qr.kakaopay.com/Ej7s6I5uQ" target="_blank" rel="noopener noreferrer">
-  <span class="support-float-main">(라떼를 좋아하는 제작자에게) 한 잔 보내기 ☕</span>
+  <span class="support-float-main">(라떼 좋아하는 제작자에게)<br />한 잔 보내기 ☕</span>
 </a>
 
 <div class="donation-overlay" id="donation-overlay">
