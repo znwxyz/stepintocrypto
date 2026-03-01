@@ -1,5 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="7" fill="#050811"/>
-  <polygon points="16,4 26,10 26,22 16,28 6,22 6,10" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
-  <text x="16" y="21" font-family="monospace" font-size="13" font-weight="bold" fill="#00d4ff" text-anchor="middle">S</text>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_330_659)">
+<path d="M49.9092 13C59.7106 18.6588 64.4314 29.7351 62.4773 40.2627L41.2402 38.0171L53.0514 55.9052C44.9393 62.324 33.4128 63.5202 23.9092 58.0333C11.4736 50.8536 7.21288 34.9523 14.3926 22.5167C21.5723 10.0811 37.4736 5.8203 49.9092 13Z" fill="#22CBFB"/>
+<path d="M39.5167 7C49.318 12.6588 54.0388 23.7351 52.0847 34.2627L30.8476 32.0171L42.6588 49.9052C34.5467 56.324 23.0202 57.5202 13.5167 52.0333C1.08105 44.8536 -3.1797 28.9523 4 16.5167C11.1797 4.08105 27.0811 -0.179702 39.5167 7Z" fill="#71FE6A"/>
+</g>
+<defs>
+<clipPath id="clip0_330_659">
+<rect width="64" height="64" fill="white"/>
+</clipPath>
+</defs>
 </svg>
