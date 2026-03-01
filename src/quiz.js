@@ -83,6 +83,7 @@ export function createQuizController({ quizData, chapters }) {
   let quizAnswered = false;
   let resultRecorded = false;
   let activeQuestions = [];
+  let viewMode = 'setup';
 
   let stats = loadStats();
   let prefs = loadPrefs();
@@ -115,6 +116,7 @@ export function createQuizController({ quizData, chapters }) {
   const chapterFilterEl = document.getElementById('quiz-filter-chapter');
   const difficultyFilterEl = document.getElementById('quiz-filter-difficulty');
   const sortEl = document.getElementById('quiz-sort');
+  const toolbarEl = document.getElementById('quiz-toolbar');
 
   const chapterOptions = ['<option value="all">챕터: 전체</option>'];
   chapters.forEach((ch) => {
@@ -125,6 +127,10 @@ export function createQuizController({ quizData, chapters }) {
   function close() {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
+  }
+
+  function setToolbarVisible(visible) {
+    toolbarEl.style.display = visible ? '' : 'none';
   }
 
   function getFilteredQuestions() {
@@ -189,13 +195,39 @@ export function createQuizController({ quizData, chapters }) {
     saveStats(stats);
   }
 
+  function renderSetup() {
+    viewMode = 'setup';
+    setToolbarVisible(true);
+
+    const previewQuestions = getFilteredQuestions();
+
+    progEl.textContent = '퀴즈 설정';
+    qEl.textContent = '';
+    optsEl.innerHTML = '';
+
+    if (previewQuestions.length === 0) {
+      fbEl.textContent = '조건에 맞는 문제가 없습니다. 필터를 조정해 주세요.';
+      nextBtn.textContent = '필터 초기화';
+      nextBtn.disabled = false;
+      return;
+    }
+
+    fbEl.textContent = '10문제가 자동 선택되었습니다.';
+    nextBtn.textContent = '퀴즈 시작 →';
+    nextBtn.disabled = false;
+  }
+
   function renderQuiz() {
+    viewMode = 'quiz';
+    setToolbarVisible(false);
+
     if (activeQuestions.length === 0) {
       progEl.textContent = '문제 0 / 0';
       qEl.textContent = '조건에 맞는 문제가 없습니다.';
       optsEl.innerHTML = '';
       fbEl.textContent = '검색어를 지우거나 챕터/난이도 필터를 조정해 주세요.';
-      nextBtn.textContent = '필터 초기화';
+      nextBtn.textContent = '설정으로 이동';
+      nextBtn.disabled = false;
       return;
     }
 
@@ -211,7 +243,8 @@ export function createQuizController({ quizData, chapters }) {
           : '조금 더 복습해 보세요. 강의 노트를 다시 확인하면 도움이 됩니다.';
 
       fbEl.textContent = `${baseFeedback} (최고 점수: ${stats.bestScore}/${Math.max(activeQuestions.length, 1)}, 누적 시도: ${stats.attempts}회)`;
-      nextBtn.textContent = '다시 시작';
+      nextBtn.textContent = '설정으로 돌아가기';
+      nextBtn.disabled = false;
       progEl.textContent = `결과: ${quizScore} / ${activeQuestions.length}`;
       return;
     }
@@ -226,6 +259,7 @@ export function createQuizController({ quizData, chapters }) {
     qEl.textContent = q.q;
     fbEl.textContent = chapterLabel;
     nextBtn.textContent = '다음 문제 →';
+    nextBtn.disabled = false;
     optsEl.innerHTML = '';
 
     q.opts.forEach((opt, i) => {
@@ -277,8 +311,7 @@ export function createQuizController({ quizData, chapters }) {
     sortEl.value = prefs.sort;
     searchEl.value = prefs.search;
 
-    startSession();
-    renderQuiz();
+    renderSetup();
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -293,22 +326,31 @@ export function createQuizController({ quizData, chapters }) {
     const evt = el === searchEl ? 'input' : 'change';
     el.addEventListener(evt, () => {
       applyPrefsFromControls();
-      startSession();
-      renderQuiz();
+      if (viewMode === 'setup') renderSetup();
     });
   });
 
   nextBtn.addEventListener('click', () => {
-    if (activeQuestions.length === 0) {
-      resetFilters();
+    if (viewMode === 'setup') {
+      applyPrefsFromControls();
+      const previewQuestions = getFilteredQuestions();
+      if (previewQuestions.length === 0) {
+        resetFilters();
+        renderSetup();
+        return;
+      }
       startSession();
       renderQuiz();
       return;
     }
 
+    if (activeQuestions.length === 0) {
+      renderSetup();
+      return;
+    }
+
     if (quizIdx >= activeQuestions.length) {
-      startSession();
-      renderQuiz();
+      renderSetup();
       return;
     }
 

@@ -774,8 +774,12 @@
   .quiz-toolbar {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 18px;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 14px;
+    border: 1px solid rgba(30, 58, 95, 0.6);
+    border-radius: 10px;
+    background: rgba(0, 212, 255, 0.03);
   }
 
   .quiz-search,
@@ -786,9 +790,28 @@
     border-radius: 8px;
     color: var(--text);
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    padding: 10px 12px;
+    font-size: 12px;
+    padding: 13px 14px;
     outline: none;
+  }
+
+  .quiz-select {
+    -webkit-appearance: none;
+    appearance: none;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    padding-right: 34px;
+    min-height: 52px;
+    height: 52px;
+    line-height: 1.2;
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+      linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+    background-position:
+      calc(100% - 16px) calc(50% - 3px),
+      calc(100% - 11px) calc(50% - 3px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
   }
 
   .quiz-search:focus,
@@ -799,7 +822,7 @@
   .quiz-filters {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
+    gap: 10px;
   }
 
   .quiz-q {
