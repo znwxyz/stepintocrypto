@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Step into Crypto — 강의 노트</title>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7750877667877294" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -182,6 +183,45 @@
   .nav-text { line-height: 1.3; }
 
   /* TOOLS SIDEBAR */
+  .sidebar-made {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .sidebar-made a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .sidebar-made a:hover { opacity: 1; }
+
+  .sidebar-made-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .sidebar-made-name {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-bright);
+    border-bottom: 2px solid var(--accent2);
+    padding-bottom: 1px;
+  }
+
+  .sidebar-made-name svg { color: var(--text-muted); transition: color 0.2s; }
+  .sidebar-made a:hover .sidebar-made-name svg { color: var(--accent); }
+
   .sidebar-tools {
     padding: 16px 20px;
     border-top: 1px solid var(--border);
@@ -630,10 +670,9 @@
     position: fixed;
     inset: 0;
     background: rgba(5, 8, 17, 0.95);
-    z-index: 200;
+    z-index: 700;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(4px);
   }
 
   .quiz-overlay.open { display: flex; }
@@ -737,11 +776,19 @@
   .glossary-overlay {
     display: none;
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: rgba(5, 8, 17, 0.9);
-    z-index: 200;
+    z-index: 700;
     justify-content: flex-end;
-    backdrop-filter: blur(2px);
+  }
+
+  @media (max-width: 768px) {
+    .glossary-overlay {
+      top: 52px;
+    }
   }
 
   .glossary-overlay.open { display: flex; }
@@ -838,7 +885,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
-    z-index: 50;
+    z-index: 800;
     opacity: 0;
     pointer-events: none;
   }
@@ -969,8 +1016,8 @@
     .main {
       padding: 72px 16px 80px;
       max-width: 100%;
-      overflow-y: auto;
-      height: 100vh;
+      height: auto;
+      overflow-y: visible;
     }
 
     .hero { padding: 32px 0 32px; }
@@ -1086,7 +1133,7 @@
 
 <!-- MOBILE TOP BAR -->
 <div class="mobile-topbar">
-  <div class="mobile-logo">Step into <span>Crypto</span></div>
+  <div class="mobile-logo" style="cursor:pointer" onclick="history.scrollRestoration='manual';location.reload()">Step into <span>Crypto</span></div>
   <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
     <span></span><span></span><span></span>
   </button>
@@ -1098,7 +1145,7 @@
 <div class="shell">
   <!-- SIDEBAR -->
   <nav class="sidebar">
-    <div class="sidebar-header">
+    <div class="sidebar-header" style="cursor:pointer" onclick="history.scrollRestoration='manual';location.reload()">
       <div class="logo">LECTURE NOTES</div>
       <div class="sidebar-title">Step into<br>Crypto</div>
     </div>
@@ -1115,6 +1162,15 @@
 
     <div class="nav-chapters" id="nav-chapters">
       <!-- injected by JS -->
+    </div>
+
+    <div class="sidebar-made">
+      <a href="https://x.com/znwxyz" target="_blank">
+        <span class="sidebar-made-label">made by</span>
+        <span class="sidebar-made-name">Max8
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </span>
+      </a>
     </div>
 
     <div class="sidebar-tools">
@@ -1194,6 +1250,7 @@
 <button class="scroll-top" id="scroll-top">↑</button>
 
 <script>
+history.scrollRestoration = 'manual';
 const CHAPTERS = [
   {
     num: "00",
@@ -1725,50 +1782,56 @@ function updateProgress() {
 
 // SCROLL TRACKING
 const mainEl = document.getElementById('main-content');
+const isMobile = () => window.innerWidth <= 768;
+
+function getScrollTop() {
+  return isMobile() ? window.scrollY : mainEl.scrollTop;
+}
 
 function updateActiveNav() {
   const navItems = document.querySelectorAll('.nav-item');
-  const scrollPos = mainEl.scrollTop + 160;
+  if (!navItems.length) return;
+  const scrollPos = getScrollTop() + 160;
   let activeIdx = 0;
   CHAPTERS.forEach((_, i) => {
     const el = document.getElementById(`chapter-${i}`);
     if (!el) return;
-    if (el.offsetTop <= scrollPos) activeIdx = i;
+    const elTop = isMobile()
+      ? el.getBoundingClientRect().top + window.scrollY
+      : el.offsetTop;
+    if (elTop <= scrollPos) activeIdx = i;
   });
   navItems.forEach(n => n.classList.remove('active'));
   if (navItems[activeIdx]) navItems[activeIdx].classList.add('active');
-
-  const activeEl = navItems[activeIdx];
-  if (activeEl) {
-    const sidebarEl = document.querySelector('.sidebar');
-    const elTop = activeEl.offsetTop;
-    const elBottom = elTop + activeEl.offsetHeight;
-    const st = sidebarEl.scrollTop;
-    const sh = sidebarEl.offsetHeight;
-    if (elTop < st + 100) sidebarEl.scrollTo({ top: elTop - 100, behavior: 'smooth' });
-    else if (elBottom > st + sh - 80) sidebarEl.scrollTo({ top: elBottom - sh + 80, behavior: 'smooth' });
-  }
 }
 
 mainEl.addEventListener('scroll', () => {
+  if (isMobile()) return;
   document.getElementById('scroll-top').classList.toggle('visible', mainEl.scrollTop > 200);
+  updateActiveNav();
+});
+
+window.addEventListener('scroll', () => {
+  if (!isMobile()) return;
+  document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 200);
   updateActiveNav();
 });
 
 function scrollToChapter(idx) {
   const el = document.getElementById(`chapter-${idx}`);
   if (!el) return;
-  const topPadding = window.innerWidth <= 768 ? 72 : 20;
-  const offset = mainEl.scrollTop + el.getBoundingClientRect().top - mainEl.getBoundingClientRect().top - topPadding;
-  // body overflow 해제 후 즉시 스크롤 (rAF로 paint 이후 적용)
-  requestAnimationFrame(() => {
-    document.body.style.overflow = '';
-    mainEl.scrollTop = offset;
-  });
+  if (isMobile()) {
+    const targetTop = el.getBoundingClientRect().top + window.scrollY - 72;
+    closeSidebar();
+    setTimeout(() => window.scrollTo({ top: targetTop, behavior: 'smooth' }), 320);
+  } else {
+    mainEl.scrollTop = el.offsetTop - 20;
+  }
 }
 
 document.getElementById('scroll-top').addEventListener('click', () => {
-  mainEl.scrollTo({ top: 0, behavior: 'smooth' });
+  if (isMobile()) window.scrollTo({ top: 0, behavior: 'smooth' });
+  else mainEl.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 // QUIZ
@@ -1777,11 +1840,31 @@ const shuffled = [...QUIZ_DATA].sort(() => Math.random() - 0.5);
 
 document.getElementById('btn-quiz').addEventListener('click', () => {
   if (window.innerWidth <= 768) closeSidebar();
+  document.getElementById('glossary-overlay').classList.remove('open');
   quizIdx = 0; quizScore = 0;
   renderQuiz();
   document.getElementById('quiz-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
 });
-document.getElementById('quiz-close').addEventListener('click', () => document.getElementById('quiz-overlay').classList.remove('open'));
+document.getElementById('quiz-close').addEventListener('click', () => {
+  document.getElementById('quiz-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+});
+
+// 퀴즈 overlay 바깥(배경) 클릭 시 닫기
+document.getElementById('quiz-overlay').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('quiz-overlay')) {
+    document.getElementById('quiz-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+
+// 용어집 overlay 바깥(어두운 영역) 클릭 시 닫기
+document.getElementById('glossary-overlay').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('glossary-overlay')) {
+    document.getElementById('glossary-overlay').classList.remove('open');
+  }
+});
 
 function renderQuiz() {
   if (quizIdx >= shuffled.length) {
@@ -1831,6 +1914,7 @@ document.getElementById('quiz-next').addEventListener('click', () => {
 // GLOSSARY
 document.getElementById('btn-glossary').addEventListener('click', () => {
   if (window.innerWidth <= 768) closeSidebar();
+  document.getElementById('quiz-overlay').classList.remove('open');
   renderGlossary('');
   document.getElementById('glossary-overlay').classList.add('open');
 });
@@ -1845,11 +1929,14 @@ function renderGlossary(filter) {
 
 // BOTTOM CTA
 document.getElementById('cta-quiz').addEventListener('click', () => {
+  document.getElementById('glossary-overlay').classList.remove('open');
   quizIdx = 0; quizScore = 0;
   renderQuiz();
   document.getElementById('quiz-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
 });
 document.getElementById('cta-glossary').addEventListener('click', () => {
+  document.getElementById('quiz-overlay').classList.remove('open');
   renderGlossary('');
   document.getElementById('glossary-overlay').classList.add('open');
 });
@@ -1863,7 +1950,6 @@ function openSidebar() {
   sidebar.classList.add('open');
   backdrop.classList.add('open');
   hamburger.classList.add('open');
-  document.body.style.overflow = 'hidden';
   updateActiveNav();
 }
 
@@ -1871,7 +1957,6 @@ function closeSidebar() {
   sidebar.classList.remove('open');
   backdrop.classList.remove('open');
   hamburger.classList.remove('open');
-  document.body.style.overflow = '';
 }
 
 hamburger.addEventListener('click', () => {
@@ -1880,12 +1965,7 @@ hamburger.addEventListener('click', () => {
 
 backdrop.addEventListener('click', closeSidebar);
 
-// 모바일에서 챕터 클릭 시 사이드바 자동 닫기
-document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    if (window.innerWidth <= 768) closeSidebar();
-  });
-});
+// 모바일에서 챕터 클릭 시 closeSidebar는 scrollToChapter 내부에서 처리
 </script>
 </body>
 </html>
