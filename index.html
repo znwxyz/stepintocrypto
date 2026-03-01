@@ -943,6 +943,42 @@
   .scroll-top.visible { opacity: 1; pointer-events: all; }
   .scroll-top:hover { border-color: var(--accent); color: var(--accent); }
 
+  /* SUPPORT FLOATING BAR */
+  .support-float {
+    position: fixed;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 805;
+    text-decoration: none;
+    background: linear-gradient(180deg, rgba(255, 107, 53, 0.92), rgba(255, 107, 53, 0.75));
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+    padding: 12px 8px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 1px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .support-float:hover {
+    right: 18px;
+    background: linear-gradient(180deg, rgba(255, 107, 53, 1), rgba(255, 107, 53, 0.86));
+    box-shadow: 0 20px 36px rgba(0, 0, 0, 0.42);
+  }
+
+  .support-float span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    opacity: 0.9;
+  }
+
   /* FORMULA BOX */
   .formula {
     font-family: 'IBM Plex Mono', monospace;
@@ -1318,6 +1354,25 @@
     .footer-links { flex-direction: column; }
     .legal-box { padding: 20px 16px 14px; }
     .legal-title { font-size: 20px; padding-right: 28px; }
+
+    .support-float {
+      top: auto;
+      right: 16px;
+      left: 16px;
+      bottom: 16px;
+      transform: none;
+      writing-mode: horizontal-tb;
+      text-align: center;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      letter-spacing: 0.4px;
+    }
+
+    .support-float:hover {
+      right: 16px;
+      left: 16px;
+    }
   }
 
 </style>
@@ -1504,6 +1559,7 @@
 </div>
 
 <button class="scroll-top" id="scroll-top">↑</button>
+<a class="support-float" href="https://qr.kakaopay.com/Ej7s6I5uQ" target="_blank" rel="noopener noreferrer">제작자에게 라떼 한 잔 보내기 <span>☕</span></a>
 
 <script type="module" src="./src/main.js"></script>
 </body>
