@@ -114,11 +114,27 @@
   }
 
   .sidebar-title {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
     font-family: 'Syne', sans-serif;
     font-size: 14px;
     font-weight: 800;
     color: var(--text-bright);
     line-height: 1.4;
+  }
+
+  .sidebar-title-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .sidebar-title-icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    transform: translateY(1px);
   }
 
   /* PROGRESS */
@@ -177,7 +193,7 @@
     border-left-color: var(--accent);
     color: var(--accent);
     background: rgba(0, 212, 255, 0.08);
-    font-weight: 600;
+    font-weight: 400;
     font-size: 13px;
   }
   .nav-item.done { color: var(--accent3); }
@@ -233,7 +249,7 @@
     gap: 5px;
     font-family: 'Syne', sans-serif;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--text-bright);
     border-bottom: 2px solid var(--accent2);
     padding-bottom: 1px;
@@ -324,6 +340,20 @@
   }
 
   .hero-title span { color: var(--accent); }
+
+  .hero-crypto-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-crypto-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    transform: translateY(1px);
+    filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.25));
+  }
 
   .hero-desc {
     font-size: 14px;
@@ -1026,9 +1056,42 @@
     letter-spacing: 0.2px;
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 400;
     transition: all 0.2s;
     line-height: 1.35;
+  }
+
+  .crypto-float {
+    position: fixed;
+    right: 24px;
+    bottom: 148px;
+    z-index: 805;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(127, 255, 107, 0.95), rgba(127, 255, 107, 0.78));
+    color: #fff;
+    padding: 10px 12px;
+    width: 206px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
+    transition: all 0.2s;
+  }
+
+  .crypto-float:hover {
+    right: 20px;
+    background: linear-gradient(180deg, rgba(127, 255, 107, 1), rgba(127, 255, 107, 0.86));
+  }
+
+  .crypto-float .fox {
+    font-size: 15px;
+    transform: translateY(-1px);
   }
 
   .support-float:hover {
@@ -1050,6 +1113,118 @@
   .support-float-sub {
     font-size: 14px;
     color: #fff;
+  }
+
+  .donation-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 8, 17, 0.92);
+    z-index: 1300;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+  }
+
+  .donation-overlay.open { display: flex; }
+
+  .donation-box {
+    width: min(540px, 100%);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    position: relative;
+  }
+
+  .donation-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  .donation-close:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  .donation-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+
+  .donation-sub {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+
+  .donation-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .donation-qr {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    object-fit: contain;
+    padding: 8px;
+  }
+
+  .donation-wallet {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .wallet-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .wallet-address {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text-bright);
+    word-break: break-all;
+    margin-bottom: 10px;
+  }
+
+  .wallet-copy {
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: rgba(0, 212, 255, 0.08);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  .wallet-copy:hover { background: rgba(0, 212, 255, 0.14); }
+
+  .wallet-networks {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
   }
 
   /* FORMULA BOX */
@@ -1088,6 +1263,9 @@
   }
 
   .mobile-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-family: 'Syne', sans-serif;
     font-size: 14px;
     font-weight: 800;
@@ -1095,6 +1273,13 @@
   }
 
   .mobile-logo span { color: var(--accent); }
+
+  .mobile-logo-icon {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    transform: translateY(1px);
+  }
 
   .hamburger {
     width: 36px;
@@ -1143,7 +1328,8 @@
   }
 
   body.sidebar-open-mobile .support-float,
-  body.sidebar-open-mobile .scroll-top {
+  body.sidebar-open-mobile .scroll-top,
+  body.sidebar-open-mobile .crypto-float {
     opacity: 0;
     pointer-events: none;
   }
@@ -1221,7 +1407,7 @@
     .chapter-header { flex-wrap: wrap; gap: 10px; }
     .chapter-header-right { align-self: flex-end; margin-top: 4px; }
 
-    .scroll-top { bottom: 20px; right: 16px; }
+    .scroll-top { bottom: calc(78px + env(safe-area-inset-bottom)); right: 16px; }
 
     .quiz-box {
       width: calc(100vw - 32px);
@@ -1451,18 +1637,22 @@
       top: auto;
       right: 64px;
       left: auto;
-      bottom: 20px;
+      bottom: calc(78px + env(safe-area-inset-bottom));
       transform: none;
       width: max-content;
       max-width: calc(100vw - 120px);
       border-radius: 10px;
-      padding: 10px 12px;
+      padding: 0 12px;
+      height: 42px;
+      min-height: 42px;
       font-size: 13px;
       letter-spacing: 0.4px;
       flex-direction: row;
       justify-content: center;
       gap: 6px;
       white-space: nowrap;
+      align-items: center;
+      line-height: 1;
     }
 
     .support-float:hover {
@@ -1473,6 +1663,45 @@
     .support-float-main,
     .support-float-sub {
       font-size: 13px;
+      line-height: 1;
+    }
+
+    .crypto-float {
+      right: calc(64px + 220px + 8px);
+      left: auto;
+      bottom: calc(78px + env(safe-area-inset-bottom));
+      width: max-content;
+      max-width: calc(100vw - 120px);
+      font-size: 13px;
+      padding: 0 12px;
+      height: 42px;
+      min-height: 42px;
+      border-radius: 10px;
+      gap: 6px;
+      justify-content: center;
+      align-items: center;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .crypto-float:hover {
+      right: calc(64px + 220px + 8px);
+      left: auto;
+    }
+
+    .crypto-float .fox {
+      font-size: 13px;
+      line-height: 1;
+      transform: none;
+    }
+
+    .donation-grid {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+
+    .donation-wallet {
+      width: 100%;
     }
   }
 
@@ -1482,7 +1711,7 @@
 
 <!-- MOBILE TOP BAR -->
 <div class="mobile-topbar">
-  <div class="mobile-logo" style="cursor:pointer" onclick="history.scrollRestoration='manual';location.reload()">Step into <span>Crypto</span></div>
+  <div class="mobile-logo" style="cursor:pointer" onclick="history.scrollRestoration='manual';location.reload()">Step into <span>Crypto</span><img src="favicon.svg" alt="" class="mobile-logo-icon" /></div>
   <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
     <span></span><span></span><span></span>
   </button>
@@ -1496,7 +1725,7 @@
   <nav class="sidebar">
     <div class="sidebar-header" style="cursor:pointer" onclick="history.scrollRestoration='manual';location.reload()">
       <div class="logo">LECTURE NOTES</div>
-      <div class="sidebar-title">Step into<br>Crypto</div>
+      <div class="sidebar-title"><span>Step into</span><span class="sidebar-title-line">Crypto <img src="favicon.svg" alt="" class="sidebar-title-icon" /></span></div>
     </div>
 
     <div class="progress-wrap">
@@ -1532,7 +1761,7 @@
   <main class="main" id="main-content">
     <div class="hero">
       <div class="hero-tag">// BUSINESS EDUCATION</div>
-      <h1 class="hero-title">Step into<br><span>Crypto</span></h1>
+      <h1 class="hero-title">Step into<br><span class="hero-crypto-line"><span>Crypto</span><img src="favicon.svg" alt="" class="hero-crypto-logo" /></span></h1>
       <p class="hero-desc" id="hero-desc">
         <span class="hero-para">안녕하세요, 저는 그냥 직장인(브랜드 디자이너)입니다. 현재는 크립토 씬의 어느 팀에 속해 일하고 있어요. 최근 웹2에서 웹3로 이직하게 되면서, 그동안 투자로만 바라봤던 코인의 뒷면에 제가 모르는 게 너무도 많다는 걸 알았습니다. DeFi, Smart Contract, 합의 알고리즘 같은 다양한 기술들을 바탕으로, 많은 빌더들이 끊임없이 이 생태계를 확장해 나가고 있는 이 뒷단에 대해 '제대로 알고 싶다!' 라는 생각이 들었고요.</span>
         <span class="hero-para">별처럼 많은 코인 이름과 팀들, 오르느냐 내리느냐만 다루는 자극적인 유튜브, 너무 빠른 정보가 쏟아지는 텔레그램과 낯선 트위터, 시끌벅적한 오픈채팅방까지. 코인 투자를 접할 수 있는 채널은 많지만, 정작 조용히 개념을 파고들며 공부할 수 있는 공간이 부족한 게 아쉽고 답답했습니다. 그래서 혼자 공부하던 노션 페이지를 웹페이지로 옮겨봤습니다.</span>
@@ -1664,9 +1893,34 @@
 </div>
 
 <button class="scroll-top" id="scroll-top">↑</button>
-<a class="support-float" href="https://qr.kakaopay.com/Ej7s6I5uQ" target="_blank" rel="noopener noreferrer">
+<button class="crypto-float" id="crypto-float" type="button"><span class="fox">🦊</span>지갑으로 한 잔 쏘기</button>
+<a class="support-float" id="support-float" href="https://qr.kakaopay.com/Ej7s6I5uQ" target="_blank" rel="noopener noreferrer">
   <span class="support-float-main">(라떼를 좋아하는 제작자에게) 한 잔 보내기 ☕</span>
 </a>
+
+<div class="donation-overlay" id="donation-overlay">
+  <div class="donation-box">
+    <button class="donation-close" id="donation-close" type="button">✕</button>
+    <div class="donation-title">Crypto Support</div>
+    <p class="donation-sub">EVM 주소로 후원하실 수 있어요. 전송 전 네트워크를 꼭 확인해 주세요.</p>
+    <div class="donation-grid">
+      <img
+        class="donation-qr"
+        alt="EVM Wallet QR"
+        src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=0xC66cA0C21Bf179D00EcE779d9657073e8399f130"
+      />
+      <div class="donation-wallet">
+        <div class="wallet-label">EVM ADDRESS</div>
+        <div class="wallet-address" id="wallet-address">0xC66cA0C21Bf179D00EcE779d9657073e8399f130</div>
+        <button class="wallet-copy" id="wallet-copy" type="button">주소 복사</button>
+        <div class="wallet-networks">
+          대표 EVM 네트워크 예시: Ethereum, Base, Arbitrum, Optimism, Polygon<br />
+          * EVM 네트워크 전용 주소입니다.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="module" src="./src/main.js"></script>
 </body>

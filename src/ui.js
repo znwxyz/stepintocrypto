@@ -111,6 +111,12 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   const glossaryOverlay = document.getElementById('glossary-overlay');
   const glossarySearch = document.getElementById('glossary-search');
   const glossaryList = document.getElementById('glossary-list');
+  const cryptoFloatBtn = document.getElementById('crypto-float');
+  const supportFloatLink = document.getElementById('support-float');
+  const donationOverlay = document.getElementById('donation-overlay');
+  const donationCloseBtn = document.getElementById('donation-close');
+  const walletCopyBtn = document.getElementById('wallet-copy');
+  const walletAddressEl = document.getElementById('wallet-address');
   const heroDesc = document.getElementById('hero-desc');
   const heroMoreToggle = document.getElementById('hero-more-toggle');
   const legalOverlays = {
@@ -156,6 +162,25 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
   function getScrollTop() {
     return isMobile() ? window.scrollY : mainEl.scrollTop;
+  }
+
+  function syncMobileFloatingButtons() {
+    if (!cryptoFloatBtn || !supportFloatLink) return;
+
+    if (!isMobile()) {
+      cryptoFloatBtn.style.right = '';
+      cryptoFloatBtn.style.left = '';
+      return;
+    }
+
+    const baseRight = 64;
+    const gap = 8;
+    const supportWidth = Math.ceil(supportFloatLink.getBoundingClientRect().width || 0);
+
+    if (supportWidth > 0) {
+      cryptoFloatBtn.style.right = `${baseRight + supportWidth + gap}px`;
+      cryptoFloatBtn.style.left = 'auto';
+    }
   }
 
   function updateActiveNav() {
@@ -207,6 +232,23 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
   function closeGlossary() {
     glossaryOverlay.classList.remove('open');
+  }
+
+  function openDonation() {
+    if (!donationOverlay) return;
+    closeGlossary();
+    closeSidebar();
+    closeAllLegal();
+    donationOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDonation() {
+    if (!donationOverlay) return;
+    donationOverlay.classList.remove('open');
+    if (!document.getElementById('quiz-overlay').classList.contains('open')) {
+      document.body.style.overflow = '';
+    }
   }
 
   function closeAllLegal() {
@@ -284,6 +326,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
       unlockBackgroundScroll();
       closeSidebar();
     }
+    syncMobileFloatingButtons();
   });
 
   scrollTopBtn.addEventListener('click', () => {
@@ -369,6 +412,66 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
       if (e.target === overlay) closeAllLegal();
     });
   });
+
+  if (cryptoFloatBtn) {
+    cryptoFloatBtn.addEventListener('click', openDonation);
+  }
+
+  if (supportFloatLink) {
+    supportFloatLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.open('https://qr.kakaopay.com/Ej7s6I5uQ', '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  // Delegated fallback: keeps working even if button node is replaced later.
+  document.addEventListener('click', (e) => {
+    const openBtn = e.target.closest('#crypto-float');
+    if (openBtn) {
+      openDonation();
+      return;
+    }
+
+    const supportBtn = e.target.closest('#support-float');
+    if (supportBtn) {
+      e.preventDefault();
+      window.open('https://qr.kakaopay.com/Ej7s6I5uQ', '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    const closeBtn = e.target.closest('#donation-close');
+    if (closeBtn) {
+      closeDonation();
+    }
+  });
+
+  if (donationCloseBtn) {
+    donationCloseBtn.addEventListener('click', closeDonation);
+  }
+
+  if (donationOverlay) {
+    donationOverlay.addEventListener('click', (e) => {
+      if (e.target === donationOverlay) closeDonation();
+    });
+  }
+
+  if (walletCopyBtn && walletAddressEl) {
+    walletCopyBtn.addEventListener('click', async () => {
+      const addr = walletAddressEl.textContent?.trim() || '';
+      if (!addr) return;
+      try {
+        await navigator.clipboard.writeText(addr);
+        walletCopyBtn.textContent = '복사 완료!';
+      } catch {
+        walletCopyBtn.textContent = '복사 실패';
+      }
+      setTimeout(() => {
+        walletCopyBtn.textContent = '주소 복사';
+      }, 1400);
+    });
+  }
+
+  syncMobileFloatingButtons();
 
   updateProgress();
   updateActiveNav();
