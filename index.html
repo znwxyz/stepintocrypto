@@ -176,7 +176,7 @@
     border-left-color: var(--accent);
     color: var(--accent);
     background: rgba(0, 212, 255, 0.08);
-    font-weight: 700;
+    font-weight: 600;
     font-size: 13px;
   }
   .nav-item.done { color: var(--accent3); }
@@ -1370,29 +1370,30 @@
 
     .support-float {
       top: auto;
-      right: 16px;
-      left: 16px;
-      bottom: 68px;
+      right: 64px;
+      left: auto;
+      bottom: 20px;
       transform: none;
-      width: auto;
+      width: max-content;
+      max-width: calc(100vw - 120px);
       border-radius: 10px;
-      padding: 13px 14px;
-      font-size: 15px;
+      padding: 10px 12px;
+      font-size: 13px;
       letter-spacing: 0.4px;
       flex-direction: row;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       white-space: nowrap;
     }
 
     .support-float:hover {
-      right: 16px;
-      left: 16px;
+      right: 64px;
+      left: auto;
     }
 
     .support-float-main,
     .support-float-sub {
-      font-size: 15px;
+      font-size: 13px;
     }
   }
 
