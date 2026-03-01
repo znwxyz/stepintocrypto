@@ -111,6 +111,8 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   const glossaryOverlay = document.getElementById('glossary-overlay');
   const glossarySearch = document.getElementById('glossary-search');
   const glossaryList = document.getElementById('glossary-list');
+  const heroDesc = document.getElementById('hero-desc');
+  const heroMoreToggle = document.getElementById('hero-more-toggle');
   const legalOverlays = {
     privacy: document.getElementById('legal-privacy-overlay'),
     terms: document.getElementById('legal-terms-overlay'),
@@ -118,11 +120,30 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   };
 
   const isMobile = () => window.innerWidth <= 768;
+  let lockedScrollY = 0;
+
+  function lockBackgroundScroll() {
+    lockedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    document.body.classList.add('sidebar-open-mobile');
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${lockedScrollY}px`;
+    document.body.style.width = '100%';
+  }
+
+  function unlockBackgroundScroll() {
+    if (!document.body.classList.contains('sidebar-open-mobile')) return;
+    document.body.classList.remove('sidebar-open-mobile');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, lockedScrollY);
+  }
 
   function openSidebar() {
     sidebar.classList.add('open');
     backdrop.classList.add('open');
     hamburger.classList.add('open');
+    if (isMobile()) lockBackgroundScroll();
     updateActiveNav();
   }
 
@@ -130,6 +151,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     sidebar.classList.remove('open');
     backdrop.classList.remove('open');
     hamburger.classList.remove('open');
+    unlockBackgroundScroll();
   }
 
   function getScrollTop() {
@@ -257,6 +279,13 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     updateActiveNav();
   });
 
+  window.addEventListener('resize', () => {
+    if (!isMobile()) {
+      unlockBackgroundScroll();
+      closeSidebar();
+    }
+  });
+
   scrollTopBtn.addEventListener('click', () => {
     if (isMobile()) window.scrollTo({ top: 0, behavior: 'smooth' });
     else mainEl.scrollTo({ top: 0, behavior: 'smooth' });
@@ -288,6 +317,41 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   });
 
   backdrop.addEventListener('click', closeSidebar);
+
+  if (heroDesc && heroMoreToggle) {
+    const heroExtras = heroDesc.querySelectorAll('.hero-extra');
+    const applyHeroExpandedState = (expanded) => {
+      heroDesc.classList.toggle('expanded', expanded);
+      heroExtras.forEach((el) => {
+        el.hidden = !expanded;
+      });
+      heroMoreToggle.textContent = expanded ? '접기' : '더보기';
+      heroMoreToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    };
+
+    const syncHeroMoreState = () => {
+      if (isMobile()) {
+        // Mobile default is always collapsed: para1+2 visible, para3 hidden.
+        applyHeroExpandedState(false);
+        heroMoreToggle.hidden = false;
+      } else {
+        heroExtras.forEach((el) => {
+          el.hidden = false;
+        });
+        heroMoreToggle.hidden = true;
+        heroDesc.classList.remove('expanded');
+        heroMoreToggle.setAttribute('aria-expanded', 'false');
+      }
+    };
+
+    heroMoreToggle.addEventListener('click', () => {
+      const expanded = !heroDesc.classList.contains('expanded');
+      applyHeroExpandedState(expanded);
+    });
+
+    syncHeroMoreState();
+    window.addEventListener('resize', syncHeroMoreState);
+  }
 
   document.querySelectorAll('[data-legal-open]').forEach((btn) => {
     btn.addEventListener('click', () => {
