@@ -110,6 +110,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   const navChaptersEl = document.getElementById('nav-chapters');
 
   const glossaryOverlay = document.getElementById('glossary-overlay');
+  const glossaryPanel = glossaryOverlay?.querySelector('.glossary-panel') ?? null;
   const glossarySearch = document.getElementById('glossary-search');
   const glossaryList = document.getElementById('glossary-list');
   const cryptoFloatBtn = document.getElementById('crypto-float');
@@ -160,6 +161,12 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     backdrop.classList.remove('open');
     hamburger.classList.remove('open');
     unlockBackgroundScroll();
+  }
+
+  function isGlossaryOpen() {
+    if (!glossaryOverlay) return false;
+    if (glossaryOverlay.classList.contains('open')) return true;
+    return getComputedStyle(glossaryOverlay).display !== 'none';
   }
 
   function getScrollTop() {
@@ -237,9 +244,15 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     if (!el) return;
 
     if (isMobile()) {
-      const targetTop = el.getBoundingClientRect().top + window.scrollY - 72;
       closeSidebar();
-      setTimeout(() => window.scrollTo({ top: targetTop, behavior: 'smooth' }), 320);
+      setTimeout(() => {
+        const targetEl = document.getElementById(`chapter-${idx}`);
+        if (!targetEl) return;
+        const mobileTopbar = document.querySelector('.mobile-topbar');
+        const topOffset = (mobileTopbar?.offsetHeight ?? 52) + 12;
+        const targetTop = Math.max(0, targetEl.getBoundingClientRect().top + window.scrollY - topOffset);
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+      }, 340);
     } else {
       mainEl.scrollTop = el.offsetTop - 20;
     }
@@ -258,11 +271,14 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   function openGlossary() {
     glossarySearch.value = '';
     renderGlossary('');
+    document.body.classList.add('glossary-open');
     glossaryOverlay.classList.add('open');
   }
 
   function closeGlossary() {
+    document.body.classList.remove('glossary-open');
     glossaryOverlay.classList.remove('open');
+    updateFloatingVisibility();
   }
 
   function openDonation() {
@@ -330,15 +346,22 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     if (idx >= 0 && idx < chapters.length) markCompletion(idx, true);
   }
 
-  document.querySelectorAll('.complete-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
+  const chaptersRoot = document.getElementById('chapters-root');
+  if (chaptersRoot) {
+    // Single delegated handler avoids duplicate per-button listeners.
+    chaptersRoot.addEventListener('click', (e) => {
+      const btn = e.target.closest('.complete-btn');
+      if (!btn) return;
+
       const idx = Number.parseInt(btn.dataset.idx, 10);
+      if (!Number.isInteger(idx)) return;
+
       const done = !completedSet.has(idx);
       markCompletion(idx, done);
       saveCompletedSet(completedSet);
       updateProgress();
     });
-  });
+  }
 
   mainEl.addEventListener('scroll', () => {
     if (isMobile()) return;
@@ -365,7 +388,13 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
   document.addEventListener('wheel', routeDesktopWheelToMain, { passive: false });
 
-  scrollTopBtn.addEventListener('click', () => {
+  scrollTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (isGlossaryOpen() && glossaryPanel) {
+      glossaryPanel.scrollTo({ top: 0, behavior: 'smooth' });
+      glossaryPanel.scrollTop = 0;
+      return;
+    }
     if (isMobile()) window.scrollTo({ top: 0, behavior: 'smooth' });
     else mainEl.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -399,6 +428,9 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
   if (heroDesc && heroMoreToggle) {
     const heroExtras = heroDesc.querySelectorAll('.hero-extra');
+    let mobileHeroExpanded = false;
+    let wasMobileViewport = isMobile();
+
     const applyHeroExpandedState = (expanded) => {
       heroDesc.classList.toggle('expanded', expanded);
       heroExtras.forEach((el) => {
@@ -409,9 +441,12 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     };
 
     const syncHeroMoreState = () => {
-      if (isMobile()) {
-        // Mobile default is always collapsed: only paragraph 1 visible.
-        applyHeroExpandedState(false);
+      const mobileViewport = isMobile();
+
+      if (mobileViewport) {
+        // Keep current mobile toggle state on resize; only reset when entering mobile.
+        if (!wasMobileViewport) mobileHeroExpanded = false;
+        applyHeroExpandedState(mobileHeroExpanded);
         heroMoreToggle.hidden = false;
       } else {
         heroExtras.forEach((el) => {
@@ -421,10 +456,13 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
         heroDesc.classList.remove('expanded');
         heroMoreToggle.setAttribute('aria-expanded', 'false');
       }
+
+      wasMobileViewport = mobileViewport;
     };
 
     heroMoreToggle.addEventListener('click', () => {
       const expanded = !heroDesc.classList.contains('expanded');
+      if (isMobile()) mobileHeroExpanded = expanded;
       applyHeroExpandedState(expanded);
     });
 
