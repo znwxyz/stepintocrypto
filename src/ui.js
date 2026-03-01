@@ -352,12 +352,13 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     chaptersRoot.addEventListener('click', (e) => {
       const btn = e.target.closest('.complete-btn');
       if (!btn) return;
+      e.preventDefault();
 
       const idx = Number.parseInt(btn.dataset.idx, 10);
       if (!Number.isInteger(idx)) return;
 
-      const done = !completedSet.has(idx);
-      markCompletion(idx, done);
+      const currentlyDone = btn.classList.contains('done');
+      markCompletion(idx, !currentlyDone);
       saveCompletedSet(completedSet);
       updateProgress();
     });

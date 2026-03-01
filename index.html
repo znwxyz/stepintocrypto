@@ -151,29 +151,18 @@
     font-size: 13px;
     font-weight: 400;
     color: var(--text-bright);
-    border-bottom: 2px solid var(--accent2);
-    padding-bottom: 1px;
+    border-bottom: none;
+    padding-bottom: 0;
     opacity: 0.78;
     transition: opacity 0.2s, color 0.2s;
   }
 
-  .sidebar-header-account-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 7.5px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
+  .sidebar-header-account .made-by-label,
+  .sidebar-header-account .made-by-name {
     line-height: 1;
   }
 
-  .sidebar-header-account-name {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    line-height: 1;
-  }
-
-  .sidebar-header-account svg {
+  .sidebar-header-account .made-by-name svg {
     color: var(--text-muted);
     transition: color 0.2s;
   }
@@ -182,7 +171,7 @@
     opacity: 1;
   }
 
-  .sidebar-header-account:hover svg {
+  .sidebar-header-account:hover .made-by-name svg {
     color: var(--accent);
   }
 
@@ -295,13 +284,13 @@
   .sidebar-made-name {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 700;
     color: var(--text-bright);
-    border-bottom: 2px solid var(--accent2);
-    padding-bottom: 1px;
+    border-bottom: 3px double var(--accent2);
+    padding-bottom: 2px;
   }
 
   .sidebar-made-name svg { color: var(--text-muted); transition: color 0.2s; }
@@ -493,21 +482,21 @@
 
   .made-by-label {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
+    font-size: 10px;
     color: var(--text-muted);
-    letter-spacing: 2px;
+    letter-spacing: 2.2px;
     text-transform: uppercase;
   }
 
   .made-by-name {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     font-family: 'Syne', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text-bright);
-    border-bottom: 2px solid var(--accent2);
+    border-bottom: 3px double var(--accent2);
     padding-bottom: 2px;
   }
 
@@ -1459,18 +1448,51 @@
     .hero { padding: 32px 0 32px; }
     .hero-title { font-size: 26px; }
     .hero::after { display: none; }
-    .hero-desc { font-size: 13px; }
-    .hero-more-toggle { display: flex; max-width: 100%; }
-
-    .hero-bottom {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
+    .hero-desc {
+      font-size: 13px;
+      margin-top: 0;
+    }
+    .hero-desc .hero-para:first-child {
+      margin-top: 20px;
+      margin-bottom: 24px;
+    }
+    .hero-desc.expanded .hero-para:first-child {
+      margin-bottom: 12px;
+    }
+    .hero-desc.expanded {
+      margin-bottom: 0;
+    }
+    .hero-desc.expanded + .hero-more-toggle {
+      margin-top: 24px !important;
+    }
+    .hero-more-toggle {
+      display: flex;
+      max-width: 100%;
+      margin-top: 12px;
     }
 
-    .made-by {
+    .hero-bottom {
+      flex-direction: row;
       align-items: flex-end;
-      align-self: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .hero-bottom .made-by {
+      align-items: flex-end;
+      align-self: auto;
+      gap: 5px;
+    }
+
+    .hero-bottom .made-by-label {
+      font-size: 11px;
+      letter-spacing: 2.4px;
+    }
+
+    .hero-bottom .made-by-name {
+      font-size: 17px;
+      gap: 8px;
     }
 
     .sidebar { padding-top: 52px; }
@@ -1839,8 +1861,8 @@
       <div class="sidebar-header-row">
         <div class="sidebar-title" style="cursor:pointer" onclick="history.scrollRestoration='manual';location.reload()"><span>Step into</span><span class="sidebar-title-line">Crypto <img src="favicon.svg" alt="" class="sidebar-title-icon" /></span></div>
         <a class="sidebar-header-account" href="https://x.com/znwxyz" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
-          <span class="sidebar-header-account-label">made by</span>
-          <span class="sidebar-header-account-name">Max8
+          <span class="made-by-label">made by</span>
+          <span class="made-by-name">Max8
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </span>
         </a>
