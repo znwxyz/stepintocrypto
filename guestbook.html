@@ -664,7 +664,20 @@
       }
     }
 
-    throw new Error(`삭제 실패 (${lastStatus || 404})`);
+    const fallbackEndpoint = `${CONFIG.supabaseUrl}/rest/v1/${TABLE}?id=eq.${encodeURIComponent(id)}`;
+    const fallbackRes = await fetch(fallbackEndpoint, {
+      method: 'DELETE',
+      headers: {
+        ...getHeaders(),
+        'x-admin-password': password
+      }
+    });
+
+    if (fallbackRes.ok) {
+      return;
+    }
+
+    throw new Error(`삭제 실패 (${fallbackRes.status || lastStatus || 404})`);
   }
 
   function fmtDate(iso) {
