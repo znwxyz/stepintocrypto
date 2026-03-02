@@ -156,13 +156,6 @@
     margin-bottom: 8px;
   }
 
-  .panel .lead {
-    color: var(--text-muted);
-    font-size: 13px;
-    line-height: 1.8;
-    margin-bottom: 12px;
-  }
-
   .swatch-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -293,7 +286,7 @@
 
   .logo-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
   }
 
@@ -317,6 +310,31 @@
   .logo-demo span { color: var(--accent); }
 
   .logo-demo img {
+    width: 22px;
+    height: 22px;
+    transform: translateY(1px);
+  }
+
+  .logo-demo-stack {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    font-family: 'DinaChaumontDisplayBold', 'Syne', sans-serif;
+    font-size: 30px;
+    color: var(--text-bright);
+    line-height: 1.03;
+    margin-bottom: 10px;
+  }
+
+  .logo-demo-stack .logo-line-crypto {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+  }
+
+  .logo-demo-stack img {
     width: 22px;
     height: 22px;
     transform: translateY(1px);
@@ -409,14 +427,13 @@
 
     <section class="hero">
       <div class="hero-tag">// BRAND ASSET LIBRARY</div>
-      <h1 class="hero-title">Step into Crypto 디자인 시스템</h1>
+      <h1 class="hero-title">Design System</h1>
       <p class="hero-sub">브랜드 색상, 컴포넌트 스타일, 폰트 사용, 로고 가이드를 한 곳에 모은 페이지입니다. 외주 전달, 배너 제작, 신규 페이지 제작 시 이 기준으로 맞춰 사용하세요.</p>
     </section>
 
     <div class="grid">
       <section class="panel">
         <h2>Color Palette</h2>
-        <p class="lead">다크 기반 배경 위에 네온 포인트를 사용합니다. 기능성 액션은 cyan, 경고/수정 동작은 orange, 완료/긍정 상태는 lime입니다.</p>
         <div class="swatch-grid">
           <article class="swatch"><div class="swatch-chip" style="background:#050811"></div><div class="meta-name">Background</div><div class="meta-value">--bg · #050811</div></article>
           <article class="swatch"><div class="swatch-chip" style="background:#0d1520"></div><div class="meta-name">Surface</div><div class="meta-value">--surface · #0d1520</div></article>
@@ -431,7 +448,6 @@
 
       <section class="panel">
         <h2>Component Examples</h2>
-        <p class="lead">버튼, 카드, 입력창은 아래 스타일을 기본으로 통일합니다.</p>
         <div class="component-grid">
           <article class="component-box">
             <div class="component-title">Buttons</div>
@@ -463,7 +479,6 @@
 
       <section class="panel">
         <h2>Typography</h2>
-        <p class="lead">한글 본문 가독성은 Noto Sans KR, 브랜드 무드는 Display/Heading 폰트로 분리합니다.</p>
         <div class="type-stack">
           <article class="type-sample"><div class="type-label">DISPLAY · DinaChaumontDisplayBold</div><div class="type-display">Step into Crypto</div></article>
           <article class="type-sample"><div class="type-label">HEADING · Syne</div><div class="type-heading">Design System Section Title</div></article>
@@ -474,12 +489,19 @@
 
       <section class="panel">
         <h2>Logo Usage</h2>
-        <p class="lead">로고는 기본적으로 워드마크 + 아이콘 조합을 우선 사용합니다. 배경 대비가 낮을 경우 밝은 텍스트/포인트 컬러를 유지하세요.</p>
         <div class="logo-grid">
           <article class="logo-box">
             <div class="meta-name" style="margin-bottom:10px;">Primary Lockup</div>
             <div class="logo-demo">Step into <span>Crypto</span><img src="favicon.svg" alt=""></div>
             <div class="meta-value">권장 최소 높이: 24px / 좌우 여백: 아이콘 너비의 1.5배</div>
+          </article>
+          <article class="logo-box">
+            <div class="meta-name" style="margin-bottom:10px;">Stacked Lockup (Main Hero)</div>
+            <div class="logo-demo-stack">
+              <span>Step into</span>
+              <span class="logo-line-crypto">Crypto <img src="favicon.svg" alt=""></span>
+            </div>
+            <div class="meta-value">메인 히어로처럼 줄바꿈된 로고 버전</div>
           </article>
           <article class="logo-box">
             <div class="meta-name" style="margin-bottom:10px;">Icon Only</div>
