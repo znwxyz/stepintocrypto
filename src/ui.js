@@ -100,7 +100,14 @@ function buildChapters(chapters) {
   });
 }
 
-export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) {
+export function initUI({
+  chapters,
+  glossaryTerms,
+  onOpenQuiz,
+  onOpenGlossary,
+  onOpenAI,
+  onAskAI,
+}) {
   const mainEl = document.getElementById('main-content');
   const scrollTopBtn = document.getElementById('scroll-top');
 
@@ -113,6 +120,12 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   const glossaryPanel = glossaryOverlay?.querySelector('.glossary-panel') ?? null;
   const glossarySearch = document.getElementById('glossary-search');
   const glossaryList = document.getElementById('glossary-list');
+  const aiOverlay = document.getElementById('ai-overlay');
+  const aiMessages = document.getElementById('ai-messages');
+  const aiForm = document.getElementById('ai-form');
+  const aiInput = document.getElementById('ai-input');
+  const aiClose = document.getElementById('ai-close');
+  const aiSend = document.getElementById('ai-send');
   const cryptoFloatBtn = document.getElementById('crypto-float');
   const supportFloatLink = document.getElementById('support-float');
   const donationOverlay = document.getElementById('donation-overlay');
@@ -167,6 +180,12 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     if (!glossaryOverlay) return false;
     if (glossaryOverlay.classList.contains('open')) return true;
     return getComputedStyle(glossaryOverlay).display !== 'none';
+  }
+
+  function isAIOpen() {
+    if (!aiOverlay) return false;
+    if (aiOverlay.classList.contains('open')) return true;
+    return getComputedStyle(aiOverlay).display !== 'none';
   }
 
   function getScrollTop() {
@@ -237,6 +256,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     if (mainEl.contains(target) || sidebar.contains(target)) return;
     if (
       glossaryOverlay?.classList.contains('open')
+      || aiOverlay?.classList.contains('open')
       || donationOverlay?.classList.contains('open')
       || document.querySelector('.legal-overlay.open')
     ) return;
@@ -277,6 +297,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   function openGlossary() {
     glossarySearch.value = '';
     renderGlossary('');
+    closeAI();
     document.body.classList.add('glossary-open');
     glossaryOverlay.classList.add('open');
     syncMobileFloatingButtons();
@@ -289,9 +310,71 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
     updateFloatingVisibility();
   }
 
+  function appendAIMessage(role, text) {
+    if (!aiMessages) return;
+    const div = document.createElement('div');
+    div.className = `ai-msg ${role === 'user' ? 'ai-msg-user' : 'ai-msg-assistant'}`;
+    div.textContent = text;
+    aiMessages.appendChild(div);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+  }
+
+  async function handleAISubmit() {
+    if (!aiInput || !onAskAI) return;
+    const question = aiInput.value.trim();
+    if (!question) return;
+
+    appendAIMessage('user', question);
+    aiInput.value = '';
+    if (aiSend) aiSend.disabled = true;
+    aiInput.disabled = true;
+
+    try {
+      const result = await onAskAI(question);
+      const answer = typeof result === 'string' ? result : result?.text;
+      appendAIMessage('assistant', answer || '답변을 생성하지 못했어요. 다시 질문해 주세요.');
+    } catch {
+      appendAIMessage('assistant', '오류가 발생했어요. 잠시 후 다시 시도해 주세요.');
+    } finally {
+      if (aiSend) aiSend.disabled = false;
+      aiInput.disabled = false;
+      aiInput.focus();
+    }
+  }
+
+  function openAI() {
+    if (!aiOverlay || !aiMessages || !aiInput) return;
+    closeGlossary();
+    document.body.classList.add('ai-open');
+    aiOverlay.classList.add('open');
+
+    if (!aiMessages.dataset.seeded) {
+      appendAIMessage(
+        'assistant',
+        '사이트 내용(챕터/용어집) 기준으로 답해드려요. 궁금한 개념을 질문해 주세요.',
+      );
+      aiMessages.dataset.seeded = 'true';
+    }
+
+    requestAnimationFrame(() => {
+      aiInput.focus();
+      aiMessages.scrollTop = aiMessages.scrollHeight;
+    });
+    syncMobileFloatingButtons();
+  }
+
+  function closeAI() {
+    if (!aiOverlay) return;
+    document.body.classList.remove('ai-open');
+    aiOverlay.classList.remove('open');
+    syncMobileFloatingButtons();
+    updateFloatingVisibility();
+  }
+
   function openDonation() {
     if (!donationOverlay) return;
     closeGlossary();
+    closeAI();
     closeSidebar();
     closeAllLegal();
     donationOverlay.classList.add('open');
@@ -314,6 +397,7 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   }
 
   function openLegal(type) {
+    closeAI();
     closeAllLegal();
     const target = legalOverlays[type];
     if (!target) return;
@@ -400,6 +484,11 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
       glossaryPanel.scrollTop = 0;
       return;
     }
+    if (isAIOpen() && aiMessages) {
+      aiMessages.scrollTo({ top: 0, behavior: 'smooth' });
+      aiMessages.scrollTop = 0;
+      return;
+    }
     if (isMobile()) window.scrollTo({ top: 0, behavior: 'smooth' });
     else mainEl.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -418,12 +507,37 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
 
   document.getElementById('cta-glossary').addEventListener('click', onOpenGlossary);
 
+  const aiBtn = document.getElementById('btn-ai');
+  if (aiBtn && onOpenAI) {
+    aiBtn.addEventListener('click', () => {
+      if (isMobile()) closeSidebar();
+      onOpenAI();
+    });
+  }
+
   document.getElementById('glossary-close').addEventListener('click', closeGlossary);
   glossarySearch.addEventListener('input', (e) => renderGlossary(e.target.value));
 
   glossaryOverlay.addEventListener('click', (e) => {
     if (e.target === glossaryOverlay) closeGlossary();
   });
+
+  if (aiClose) {
+    aiClose.addEventListener('click', closeAI);
+  }
+
+  if (aiOverlay) {
+    aiOverlay.addEventListener('click', (e) => {
+      if (e.target === aiOverlay) closeAI();
+    });
+  }
+
+  if (aiForm) {
+    aiForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      handleAISubmit();
+    });
+  }
 
   hamburger.addEventListener('click', () => {
     sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
@@ -563,6 +677,8 @@ export function initUI({ chapters, glossaryTerms, onOpenQuiz, onOpenGlossary }) 
   updateFloatingVisibility();
 
   return {
+    openAI,
+    closeAI,
     openGlossary,
     closeGlossary,
     closeSidebar,
