@@ -364,15 +364,6 @@
     background: rgba(127, 255, 107, 0.1);
   }
 
-  #btn-ai {
-    border-color: var(--accent2);
-    color: var(--accent2);
-  }
-
-  #btn-ai:hover {
-    background: rgba(255, 107, 53, 0.1);
-  }
-
   /* HERO */
   .hero {
     padding: 60px 0 48px;
@@ -501,6 +492,67 @@
     align-items: flex-end;
     justify-content: space-between;
     margin-top: 28px;
+  }
+
+  .hero-ai-wrap {
+    width: 100%;
+    max-width: none;
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+
+  .hero-ai-launch {
+    margin-top: 24px;
+    width: 100%;
+    height: 52px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 212, 255, 0.34);
+    background: rgba(0, 212, 255, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 14px;
+    cursor: text;
+    transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+  }
+
+  .hero-ai-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(30, 58, 95, 0.9), rgba(30, 58, 95, 0.2));
+  }
+
+  .hero-ai-launch:hover {
+    border-color: rgba(0, 212, 255, 0.6);
+    background: rgba(0, 212, 255, 0.12);
+  }
+
+  .hero-ai-launch:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.16);
+  }
+
+  .hero-ai-icon {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .hero-ai-launch-input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-bright);
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    pointer-events: none;
+  }
+
+  .hero-ai-launch-input::placeholder {
+    color: rgba(200, 223, 245, 0.72);
   }
 
   .made-by {
@@ -1705,6 +1757,27 @@
       width: 100%;
     }
 
+    .hero-ai-wrap {
+      max-width: 100%;
+      margin-top: 16px;
+      margin-bottom: 6px;
+    }
+
+    .hero-ai-launch {
+      height: 48px;
+      margin-top: 20px;
+      border-radius: 10px;
+      padding: 0 12px;
+    }
+
+    .hero-ai-divider {
+      margin-top: 0;
+    }
+
+    .hero-ai-launch-input {
+      font-size: 13px;
+    }
+
     .hero-bottom .made-by {
       align-items: flex-end;
       align-self: auto;
@@ -2141,7 +2214,6 @@
     <div class="sidebar-tools">
       <button class="tool-btn" id="btn-quiz">퀴즈</button>
       <button class="tool-btn" id="btn-glossary">용어집</button>
-      <button class="tool-btn" id="btn-ai">AI</button>
     </div>
   </nav>
 
@@ -2178,6 +2250,19 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </span>
         </a>
+      </div>
+      <div class="hero-ai-wrap">
+        <div class="hero-ai-divider" aria-hidden="true"></div>
+        <div class="hero-ai-launch" id="hero-ai-launch" role="button" tabindex="0" aria-label="AI 도우미 열기">
+          <span class="hero-ai-icon" aria-hidden="true">🔎</span>
+          <input
+            class="hero-ai-launch-input"
+            id="hero-ai-launch-input"
+            type="text"
+            readonly
+            placeholder="궁금한 개념을 질문해보세요. (예: CBDC를 쉽게 설명해줘)"
+          />
+        </div>
       </div>
     </div>
 
@@ -2332,7 +2417,7 @@
   </div>
 </div>
 
-<script src="./guestbook-config.js?v=20260302c"></script>
-<script type="module" src="./src/main.js?v=20260302c"></script>
+<script src="./guestbook-config.js?v=20260302d"></script>
+<script type="module" src="./src/main.js?v=20260302d"></script>
 </body>
 </html>

@@ -126,6 +126,8 @@ export function initUI({
   const aiInput = document.getElementById('ai-input');
   const aiClose = document.getElementById('ai-close');
   const aiSend = document.getElementById('ai-send');
+  const heroAILaunch = document.getElementById('hero-ai-launch');
+  const heroAILaunchInput = document.getElementById('hero-ai-launch-input');
   const cryptoFloatBtn = document.getElementById('crypto-float');
   const supportFloatLink = document.getElementById('support-float');
   const donationOverlay = document.getElementById('donation-overlay');
@@ -351,7 +353,7 @@ export function initUI({
     if (!aiMessages.dataset.seeded) {
       appendAIMessage(
         'assistant',
-        '사이트 내용(챕터/용어집) 기준으로 답해드려요. 궁금한 개념을 질문해 주세요.',
+        'Step into Crypto 에 아직 없는 내용은 ai가 답 해드립니다. 궁금한 개념을 물어보세요. (단, 답변은 서로 이어지지 않습니다.)',
       );
       aiMessages.dataset.seeded = 'true';
     }
@@ -512,6 +514,24 @@ export function initUI({
     aiBtn.addEventListener('click', () => {
       if (isMobile()) closeSidebar();
       onOpenAI();
+    });
+  }
+
+  if (heroAILaunch) {
+    heroAILaunch.addEventListener('click', () => {
+      openAI();
+    });
+
+    heroAILaunch.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      openAI();
+    });
+  }
+
+  if (heroAILaunchInput) {
+    heroAILaunchInput.addEventListener('focus', () => {
+      openAI();
     });
   }
 

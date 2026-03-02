@@ -1,7 +1,7 @@
-import { initUI } from './ui.js?v=20260302c';
-import { createQuizController } from './quiz.js?v=20260302c';
-import { loadContent } from './content.js?v=20260302c';
-import { createAssistant } from './assistant.js?v=20260302c';
+import { initUI } from './ui.js?v=20260302d';
+import { createQuizController } from './quiz.js?v=20260302d';
+import { loadContent } from './content.js?v=20260302d';
+import { createAssistant } from './assistant.js?v=20260302d';
 
 history.scrollRestoration = 'manual';
 
