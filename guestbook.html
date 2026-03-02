@@ -669,12 +669,22 @@
       method: 'DELETE',
       headers: {
         ...getHeaders(),
+        Prefer: 'return=representation',
         'x-admin-password': password
       }
     });
 
     if (fallbackRes.ok) {
-      return;
+      let deletedRows = [];
+      try {
+        deletedRows = await fallbackRes.json();
+      } catch {
+        deletedRows = [];
+      }
+      if (Array.isArray(deletedRows) && deletedRows.length > 0) {
+        return;
+      }
+      throw new Error('비밀번호가 틀렸거나 삭제 권한이 없습니다.');
     }
 
     throw new Error(`삭제 실패 (${fallbackRes.status || lastStatus || 404})`);
