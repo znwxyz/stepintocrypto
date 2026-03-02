@@ -1,0 +1,87 @@
+:root {
+  /* Color */
+  --color-bg: #050811;
+  --color-surface: #0d1520;
+  --color-surface-2: #111d2e;
+  --color-border: #1e3a5f;
+  --color-text: #c8dff5;
+  --color-text-muted: #5a7a9a;
+  --color-text-bright: #f0f8ff;
+
+  /* Brand accents */
+  --color-accent-cyan: #00d4ff;
+  --color-accent-orange: #ff6b35;
+  --color-accent-lime: #7fff6b;
+
+  /* Semantic */
+  --color-success: var(--color-accent-lime);
+  --color-warning: var(--color-accent-orange);
+  --color-info: var(--color-accent-cyan);
+
+  /* Typography */
+  --font-display: 'DinaChaumontDisplayBold', 'Syne', sans-serif;
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Noto Sans KR', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Type scale */
+  --fs-10: 10px;
+  --fs-11: 11px;
+  --fs-12: 12px;
+  --fs-13: 13px;
+  --fs-14: 14px;
+  --fs-16: 16px;
+  --fs-18: 18px;
+  --fs-22: 22px;
+  --fs-24: 24px;
+  --fs-30: 30px;
+
+  /* Spacing */
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+
+  /* Radius */
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-14: 14px;
+  --radius-pill: 999px;
+
+  /* Border */
+  --border-thin: 1px solid var(--color-border);
+  --border-hairline: 0.5px solid var(--color-border);
+
+  /* Motion */
+  --ease-fast: 0.2s;
+  --ease-base: 0.3s;
+
+  /* Effects */
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-pop: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Optional aliases for legacy pages */
+:root {
+  --bg: var(--color-bg);
+  --surface: var(--color-surface);
+  --surface2: var(--color-surface-2);
+  --border: var(--color-border);
+  --accent: var(--color-accent-cyan);
+  --accent2: var(--color-accent-orange);
+  --accent3: var(--color-accent-lime);
+  --text: var(--color-text);
+  --text-muted: var(--color-text-muted);
+  --text-bright: var(--color-text-bright);
+}

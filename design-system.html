@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>디자인 시스템 | Step into Crypto</title>
+<meta name="description" content="Step into Crypto 디자인 시스템 문서">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'DinaChaumontDisplayBold';
+    src: url('fonts/DinaChaumont-DisplayBold.otf') format('opentype');
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+  }
+
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --surface2: #111d2e;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-muted: #5a7a9a;
+    --text-bright: #f0f8ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 26px 40px 60px;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .logo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    text-decoration: none;
+    color: var(--text-bright);
+    font-family: 'DinaChaumontDisplayBold', 'Syne', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.04;
+  }
+
+  .logo-crypto {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+  }
+
+  .logo img {
+    width: 22px;
+    height: 22px;
+    transform: translateY(1px);
+  }
+
+  .back {
+    text-decoration: none;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    background: rgba(0, 212, 255, 0.08);
+    border-radius: 8px;
+    height: 36px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .hero {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 18px;
+  }
+
+  .hero-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+
+  .hero-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+
+  .panel h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+  }
+
+  .panel p, .panel li {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .panel ul {
+    padding-left: 18px;
+  }
+
+  .token-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .token-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .token-chip {
+    width: 100%;
+    height: 34px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin-bottom: 8px;
+  }
+
+  .token-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+
+  .token-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  .site-footer {
+    margin-top: 12px;
+    padding: 20px 0 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .footer-text-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .footer-text-btn:hover { color: var(--accent); }
+
+  .footer-contact-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .footer-contact-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .token-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .wrap { padding: 18px 16px 48px; max-width: 100%; }
+    .logo { font-size: 28px; }
+    .hero-title { font-size: 26px; }
+    .token-grid { grid-template-columns: 1fr; }
+    .footer-links { justify-content: flex-end; align-items: center; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <a class="logo" href="index.html"><span>Step into</span><span class="logo-crypto">Crypto <img src="favicon.svg" alt=""></span></a>
+      <a class="back" href="index.html">메인으로</a>
+    </div>
+
+    <section class="hero">
+      <div class="hero-tag">// DESIGN SYSTEM</div>
+      <h1 class="hero-title">Step into Crypto 디자인 시스템</h1>
+      <p class="hero-desc">현재 사이트에서 쓰고 있는 색상, 타이포그래피, 컴포넌트 패턴을 한 페이지에서 확인할 수 있도록 정리한 문서입니다. 화면을 확장하거나 새 페이지를 만들 때 이 기준을 따라가면 톤이 흔들리지 않습니다.</p>
+    </section>
+
+    <section class="panel">
+      <h2>1) 컬러 토큰</h2>
+      <p>핵심 다크 배경 + 네온 포인트 조합입니다. 정보성은 cyan, 경고/액션은 orange, 성공/완료는 lime을 사용합니다.</p>
+      <div class="token-grid">
+        <div class="token-card"><div class="token-chip" style="background:#050811"></div><div class="token-name">--bg</div><div class="token-value">#050811</div></div>
+        <div class="token-card"><div class="token-chip" style="background:#0d1520"></div><div class="token-name">--surface</div><div class="token-value">#0d1520</div></div>
+        <div class="token-card"><div class="token-chip" style="background:#111d2e"></div><div class="token-name">--surface2</div><div class="token-value">#111d2e</div></div>
+        <div class="token-card"><div class="token-chip" style="background:#1e3a5f"></div><div class="token-name">--border</div><div class="token-value">#1e3a5f</div></div>
+        <div class="token-card"><div class="token-chip" style="background:#00d4ff"></div><div class="token-name">--accent</div><div class="token-value">#00d4ff</div></div>
+        <div class="token-card"><div class="token-chip" style="background:#ff6b35"></div><div class="token-name">--accent2</div><div class="token-value">#ff6b35</div></div>
+        <div class="token-card"><div class="token-chip" style="background:#7fff6b"></div><div class="token-name">--accent3</div><div class="token-value">#7fff6b</div></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>2) 타이포그래피</h2>
+      <ul>
+        <li>Display/로고: <code>DinaChaumontDisplayBold + Syne</code></li>
+        <li>헤딩: <code>Syne</code></li>
+        <li>본문: <code>Noto Sans KR</code></li>
+        <li>숫자/유틸: <code>IBM Plex Mono</code></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>3) 컴포넌트 규칙</h2>
+      <ul>
+        <li>Panel: <code>background: var(--surface)</code> + <code>1px border</code> + <code>12px radius</code></li>
+        <li>Input: <code>background: var(--surface2)</code> + <code>1px border</code> + <code>8px radius</code></li>
+        <li>버튼: 기본은 mono 타입, 강조는 cyan, 위험 동작은 orange</li>
+        <li>호버/전환: 0.2s 내외로 짧고 또렷하게</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>4) 파일 위치</h2>
+      <ul>
+        <li><code>design-system/tokens.css</code>: 재사용 토큰</li>
+        <li><code>design-system/README.md</code>: 운영 가이드</li>
+        <li><code>index.html</code>, <code>guestbook.html</code>: 적용 대상</li>
+      </ul>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-links">
+        <a class="footer-text-btn" href="design-system.html">디자인 시스템</a>
+        <button class="footer-text-btn" type="button" onclick="location.href='index.html#privacy'">개인정보처리방침</button>
+        <button class="footer-text-btn" type="button" onclick="location.href='index.html#terms'">이용약관</button>
+        <a class="footer-contact-btn" href="mailto:znwxyz@gmail.com">문의하기</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

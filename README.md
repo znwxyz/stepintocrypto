@@ -1,6 +1,11 @@
 # stepintocrypto
 step into crypto
 
+## Design System
+
+- `design-system/README.md`
+- `design-system/tokens.css`
+
 ## Guestbook DB (Supabase)
 
 1. Supabase SQL editor에서 `supabase/guestbook.sql` 실행
