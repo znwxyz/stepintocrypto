@@ -28,6 +28,7 @@
     --text: #c8dff5;
     --text-muted: #5a7a9a;
     --text-bright: #f0f8ff;
+    --tracking-base: 0.2px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,6 +37,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'Noto Sans KR', sans-serif;
+    letter-spacing: var(--tracking-base);
     min-height: 100vh;
   }
 
@@ -557,7 +559,7 @@
         <div class="type-stack">
           <article class="type-sample"><div class="type-label">DISPLAY · DinaChaumontDisplayBold</div><div class="type-display">Step into Crypto</div></article>
           <article class="type-sample"><div class="type-label">HEADING · Syne</div><div class="type-heading">Design System Section Title</div></article>
-          <article class="type-sample"><div class="type-label">BODY · Noto Sans KR</div><div class="type-body">콘텐츠 본문은 길게 읽히기 때문에 가독성을 우선합니다. 한국어 문장은 자간을 과하게 벌리지 않고 1.7~1.8 line-height를 유지합니다.</div></article>
+          <article class="type-sample"><div class="type-label">BODY · Noto Sans KR</div><div class="type-body">본문은 편하게 읽히는 흐름을 우선합니다. 문장 길이에 맞춰 줄 간격을 안정적으로 유지하고, 과한 장식 없이 또렷하게 전달하는 것을 기본 원칙으로 합니다.</div></article>
           <article class="type-sample"><div class="type-label">MONO · IBM Plex Mono</div><div class="type-mono">TOKEN_NAME = #00d4ff</div></article>
         </div>
       </section>
@@ -603,7 +605,7 @@
 
     <footer class="site-footer">
       <div class="footer-links">
-        <a class="footer-text-btn" href="design-system.html">디자인 시스템</a>
+        <a class="footer-text-btn" href="design-system.html">디자인시스템</a>
         <button class="footer-text-btn" type="button" onclick="location.href='index.html#privacy'">개인정보처리방침</button>
         <button class="footer-text-btn" type="button" onclick="location.href='index.html#terms'">이용약관</button>
         <a class="footer-contact-btn" href="mailto:znwxyz@gmail.com">문의하기</a>
