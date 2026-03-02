@@ -38,7 +38,10 @@ async function askRemoteAI({ question, contextSnippets }) {
     let detailMessage = detailText;
     try {
       const parsed = JSON.parse(detailText);
-      detailMessage = parsed?.error || parsed?.message || parsed?.detail || detailText;
+      const detailFirst = parsed?.detail ?? parsed?.message ?? parsed?.error;
+      if (typeof detailFirst === 'string') detailMessage = detailFirst;
+      else if (detailFirst) detailMessage = JSON.stringify(detailFirst);
+      else detailMessage = detailText;
     } catch {
       // Keep raw response text.
     }
