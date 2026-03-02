@@ -179,6 +179,15 @@
     line-height: 1;
   }
 
+  .made-by-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    object-fit: cover;
+    display: inline-block;
+    border: 1px solid rgba(0, 212, 255, 0.35);
+  }
+
   .sidebar-header-account .made-by-name svg {
     color: var(--text-muted);
     transition: color 0.2s;
@@ -306,8 +315,6 @@
     font-size: 14px;
     font-weight: 700;
     color: var(--text-bright);
-    border-bottom: 3px double var(--accent2);
-    padding-bottom: 2px;
   }
 
   .sidebar-made-name svg { color: var(--text-muted); transition: color 0.2s; }
@@ -513,8 +520,12 @@
     font-size: 16px;
     font-weight: 700;
     color: var(--text-bright);
+  }
+
+  .made-by-text {
     border-bottom: 3px double var(--accent2);
     padding-bottom: 2px;
+    line-height: 1;
   }
 
   .made-by-name svg {
@@ -1567,6 +1578,11 @@
       gap: 6px;
     }
 
+    .sidebar-header-account .made-by-avatar {
+      width: 32px;
+      height: 32px;
+    }
+
     .sidebar { padding-top: 52px; }
 
     .sidebar-header-row {
@@ -1943,7 +1959,7 @@
         <div class="sidebar-title" style="cursor:pointer" onclick="history.scrollRestoration='manual';location.reload()"><span>Step into</span><span class="sidebar-title-line">Crypto <img src="favicon.svg" alt="" class="sidebar-title-icon" /></span></div>
         <a class="sidebar-header-account" href="https://x.com/znwxyz" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">
           <span class="made-by-label">made by</span>
-          <span class="made-by-name">Max8
+          <span class="made-by-name"><img class="made-by-avatar" src="https://unavatar.io/x/znwxyz" alt="Max8 profile photo" loading="lazy" decoding="async" /><span class="made-by-text">Max8</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </span>
         </a>
@@ -1967,7 +1983,7 @@
     <div class="sidebar-made">
       <a href="https://x.com/znwxyz" target="_blank">
         <span class="sidebar-made-label">made by</span>
-        <span class="sidebar-made-name">Max8
+        <span class="sidebar-made-name"><img class="made-by-avatar" src="https://unavatar.io/x/znwxyz" alt="Max8 profile photo" loading="lazy" decoding="async" /><span class="made-by-text">Max8</span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </span>
       </a>
@@ -2008,7 +2024,7 @@
         </div>
         <a href="https://x.com/znwxyz" target="_blank" class="made-by">
           <span class="made-by-label">made by</span>
-          <span class="made-by-name">Max8
+          <span class="made-by-name"><img class="made-by-avatar" src="https://unavatar.io/x/znwxyz" alt="Max8 profile photo" loading="lazy" decoding="async" /><span class="made-by-text">Max8</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </span>
         </a>
