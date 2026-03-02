@@ -161,8 +161,10 @@ export function createAssistant({ chapters, glossaryTerms, remoteAsk }) {
           if (remote && typeof remote === 'string' && remote.trim()) {
             return remote.trim();
           }
-        } catch {
-          // Fallback to local answer if remote LLM fails.
+        } catch (err) {
+          const reason = err instanceof Error ? err.message : '원격 AI 연결 실패';
+          const local = buildAnswer(query, ranked);
+          return `원격 AI 연결에 실패해 임시 로컬 모드로 답변합니다.\n사유: ${reason}\n\n${local}`;
         }
       }
 

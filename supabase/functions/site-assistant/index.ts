@@ -31,9 +31,8 @@ Deno.serve(async (req) => {
   try {
     const OPENAI_API_KEY = Deno.env.get('OPENAI_API_KEY');
     const OPENAI_MODEL = Deno.env.get('OPENAI_MODEL') || 'gpt-4o-mini';
-    if (!OPENAI_API_KEY) {
-      return jsonResponse(500, { error: 'OPENAI_API_KEY is not set' });
-    }
+    const HF_API_KEY = Deno.env.get('HF_API_KEY');
+    const HF_MODEL = Deno.env.get('HF_MODEL') || 'HuggingFaceH4/zephyr-7b-beta';
 
     const payload = await req.json().catch(() => ({}));
     const question = String(payload?.question || '').trim();
@@ -68,34 +67,82 @@ Deno.serve(async (req) => {
       contextText || '제공된 컨텍스트 없음',
     ].join('\n');
 
-    const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: OPENAI_MODEL,
-        temperature: 0.3,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt },
-        ],
-      }),
+    if (OPENAI_API_KEY) {
+      const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: OPENAI_MODEL,
+          temperature: 0.3,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: userPrompt },
+          ],
+        }),
+      });
+
+      if (!openaiRes.ok) {
+        const detail = await openaiRes.text().catch(() => '');
+        return jsonResponse(502, { error: 'OpenAI request failed', detail });
+      }
+
+      const result = await openaiRes.json();
+      const answer = result?.choices?.[0]?.message?.content;
+      if (!answer || typeof answer !== 'string') {
+        return jsonResponse(502, { error: 'Invalid OpenAI response' });
+      }
+      return jsonResponse(200, { answer: answer.trim(), provider: 'openai' });
+    }
+
+    if (HF_API_KEY) {
+      const hfPrompt = [
+        `[SYSTEM]\n${systemPrompt}`,
+        `[USER]\n${userPrompt}`,
+        '[ASSISTANT]\n',
+      ].join('\n\n');
+
+      const hfRes = await fetch(`https://api-inference.huggingface.co/models/${HF_MODEL}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${HF_API_KEY}`,
+        },
+        body: JSON.stringify({
+          inputs: hfPrompt,
+          parameters: {
+            temperature: 0.3,
+            max_new_tokens: 320,
+            return_full_text: false,
+          },
+        }),
+      });
+
+      const hfJson = await hfRes.json().catch(() => ({}));
+      if (!hfRes.ok) {
+        return jsonResponse(502, { error: 'Hugging Face request failed', detail: hfJson });
+      }
+
+      let answer = '';
+      if (Array.isArray(hfJson) && typeof hfJson[0]?.generated_text === 'string') {
+        answer = hfJson[0].generated_text;
+      } else if (typeof hfJson?.generated_text === 'string') {
+        answer = hfJson.generated_text;
+      }
+
+      if (!answer.trim()) {
+        return jsonResponse(502, { error: 'Invalid Hugging Face response', detail: hfJson });
+      }
+
+      return jsonResponse(200, { answer: answer.trim(), provider: 'huggingface' });
+    }
+
+    return jsonResponse(500, {
+      error: 'No AI provider configured',
+      detail: 'Set OPENAI_API_KEY or HF_API_KEY in Edge Function secrets.',
     });
-
-    if (!openaiRes.ok) {
-      const detail = await openaiRes.text().catch(() => '');
-      return jsonResponse(502, { error: 'OpenAI request failed', detail });
-    }
-
-    const result = await openaiRes.json();
-    const answer = result?.choices?.[0]?.message?.content;
-    if (!answer || typeof answer !== 'string') {
-      return jsonResponse(502, { error: 'Invalid OpenAI response' });
-    }
-
-    return jsonResponse(200, { answer: answer.trim() });
   } catch (err) {
     return jsonResponse(500, {
       error: 'Unhandled error',
