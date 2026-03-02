@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>디자인 시스템 | Step into Crypto</title>
-<meta name="description" content="Step into Crypto 디자인 시스템 문서">
+<title>Brand Asset Library | Step into Crypto</title>
+<meta name="description" content="Step into Crypto 브랜드 에셋 라이브러리">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
@@ -54,16 +54,16 @@
   .wrap {
     position: relative;
     z-index: 1;
-    max-width: 980px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 26px 40px 60px;
+    padding: 26px 40px 72px;
   }
 
   .top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
   }
 
   .logo {
@@ -75,8 +75,7 @@
     color: var(--text-bright);
     font-family: 'DinaChaumontDisplayBold', 'Syne', sans-serif;
     font-size: 34px;
-    font-weight: 800;
-    line-height: 1.04;
+    line-height: 1.03;
   }
 
   .logo-crypto {
@@ -108,11 +107,11 @@
   }
 
   .hero {
-    background: var(--surface);
+    background: linear-gradient(140deg, rgba(13, 21, 32, 0.96), rgba(17, 29, 46, 0.88));
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px;
-    margin-bottom: 18px;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 16px;
   }
 
   .hero-tag {
@@ -120,7 +119,7 @@
     font-size: 10px;
     letter-spacing: 2px;
     color: var(--accent);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   .hero-title {
@@ -130,10 +129,17 @@
     margin-bottom: 8px;
   }
 
-  .hero-desc {
+  .hero-sub {
     color: var(--text-muted);
     font-size: 14px;
     line-height: 1.8;
+    max-width: 780px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .panel {
@@ -141,60 +147,204 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 20px;
-    margin-bottom: 14px;
   }
 
   .panel h2 {
     font-family: 'Syne', sans-serif;
     font-size: 20px;
     color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+
+  .panel .lead {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.8;
     margin-bottom: 12px;
   }
 
-  .panel p, .panel li {
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.75;
-  }
-
-  .panel ul {
-    padding-left: 18px;
-  }
-
-  .token-grid {
+  .swatch-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 10px;
-    margin-top: 10px;
   }
 
-  .token-card {
+  .swatch {
     background: var(--surface2);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 10px;
   }
 
-  .token-chip {
-    width: 100%;
-    height: 34px;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+  .swatch-chip {
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
     margin-bottom: 8px;
   }
 
-  .token-name {
+  .meta-name {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     color: var(--text-bright);
-    margin-bottom: 4px;
+    margin-bottom: 3px;
   }
 
-  .token-value {
+  .meta-value {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     color: var(--text-muted);
   }
+
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .component-box {
+    background: rgba(17, 29, 46, 0.65);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .component-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    letter-spacing: 0.8px;
+  }
+
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .btn-sample {
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    cursor: default;
+  }
+
+  .btn-cyan { border: 1px solid var(--accent); color: var(--accent); background: rgba(0, 212, 255, 0.08); }
+  .btn-orange { border: 1px solid var(--accent2); color: #ffd8c8; background: rgba(255, 107, 53, 0.15); }
+  .btn-lime { border: 1px solid var(--accent3); color: var(--accent3); background: rgba(127, 255, 107, 0.08); }
+
+  .card-sample {
+    border: 1px solid rgba(30, 58, 95, 0.7);
+    background: rgba(13, 21, 32, 0.82);
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+
+  .card-body {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .input-sample {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 10px 12px;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .type-stack {
+    display: grid;
+    gap: 10px;
+  }
+
+  .type-sample {
+    background: rgba(17, 29, 46, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .type-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+
+  .type-display { font-family: 'DinaChaumontDisplayBold', 'Syne', sans-serif; font-size: 32px; color: var(--text-bright); }
+  .type-heading { font-family: 'Syne', sans-serif; font-size: 24px; color: var(--text-bright); }
+  .type-body { font-family: 'Noto Sans KR', sans-serif; font-size: 14px; color: var(--text); line-height: 1.8; }
+  .type-mono { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--accent); }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .logo-box {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    background: rgba(17, 29, 46, 0.62);
+  }
+
+  .logo-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DinaChaumontDisplayBold', 'Syne', sans-serif;
+    font-size: 30px;
+    color: var(--text-bright);
+    margin-bottom: 10px;
+  }
+
+  .logo-demo span { color: var(--accent); }
+
+  .logo-demo img {
+    width: 22px;
+    height: 22px;
+    transform: translateY(1px);
+  }
+
+  .rule-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .rule-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    background: rgba(13, 21, 32, 0.8);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .rule-item strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    margin-right: 6px;
+  }
+
+  .do strong { color: var(--accent3); }
+  .dont strong { color: var(--accent2); }
 
   .site-footer {
     margin-top: 12px;
@@ -234,26 +384,18 @@
     padding: 9px 12px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
-    cursor: pointer;
-    transition: all 0.2s;
+    text-decoration: none;
   }
 
-  .footer-contact-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  @media (max-width: 900px) {
-    .token-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  @media (max-width: 980px) {
+    .swatch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .component-grid, .logo-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 768px) {
     .wrap { padding: 18px 16px 48px; max-width: 100%; }
     .logo { font-size: 28px; }
     .hero-title { font-size: 26px; }
-    .token-grid { grid-template-columns: 1fr; }
     .footer-links { justify-content: flex-end; align-items: center; gap: 12px; }
   }
 </style>
@@ -266,53 +408,93 @@
     </div>
 
     <section class="hero">
-      <div class="hero-tag">// DESIGN SYSTEM</div>
+      <div class="hero-tag">// BRAND ASSET LIBRARY</div>
       <h1 class="hero-title">Step into Crypto 디자인 시스템</h1>
-      <p class="hero-desc">현재 사이트에서 쓰고 있는 색상, 타이포그래피, 컴포넌트 패턴을 한 페이지에서 확인할 수 있도록 정리한 문서입니다. 화면을 확장하거나 새 페이지를 만들 때 이 기준을 따라가면 톤이 흔들리지 않습니다.</p>
+      <p class="hero-sub">브랜드 색상, 컴포넌트 스타일, 폰트 사용, 로고 가이드를 한 곳에 모은 페이지입니다. 외주 전달, 배너 제작, 신규 페이지 제작 시 이 기준으로 맞춰 사용하세요.</p>
     </section>
 
-    <section class="panel">
-      <h2>1) 컬러 토큰</h2>
-      <p>핵심 다크 배경 + 네온 포인트 조합입니다. 정보성은 cyan, 경고/액션은 orange, 성공/완료는 lime을 사용합니다.</p>
-      <div class="token-grid">
-        <div class="token-card"><div class="token-chip" style="background:#050811"></div><div class="token-name">--bg</div><div class="token-value">#050811</div></div>
-        <div class="token-card"><div class="token-chip" style="background:#0d1520"></div><div class="token-name">--surface</div><div class="token-value">#0d1520</div></div>
-        <div class="token-card"><div class="token-chip" style="background:#111d2e"></div><div class="token-name">--surface2</div><div class="token-value">#111d2e</div></div>
-        <div class="token-card"><div class="token-chip" style="background:#1e3a5f"></div><div class="token-name">--border</div><div class="token-value">#1e3a5f</div></div>
-        <div class="token-card"><div class="token-chip" style="background:#00d4ff"></div><div class="token-name">--accent</div><div class="token-value">#00d4ff</div></div>
-        <div class="token-card"><div class="token-chip" style="background:#ff6b35"></div><div class="token-name">--accent2</div><div class="token-value">#ff6b35</div></div>
-        <div class="token-card"><div class="token-chip" style="background:#7fff6b"></div><div class="token-name">--accent3</div><div class="token-value">#7fff6b</div></div>
-      </div>
-    </section>
+    <div class="grid">
+      <section class="panel">
+        <h2>Color Palette</h2>
+        <p class="lead">다크 기반 배경 위에 네온 포인트를 사용합니다. 기능성 액션은 cyan, 경고/수정 동작은 orange, 완료/긍정 상태는 lime입니다.</p>
+        <div class="swatch-grid">
+          <article class="swatch"><div class="swatch-chip" style="background:#050811"></div><div class="meta-name">Background</div><div class="meta-value">--bg · #050811</div></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#0d1520"></div><div class="meta-name">Surface</div><div class="meta-value">--surface · #0d1520</div></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#111d2e"></div><div class="meta-name">Surface 2</div><div class="meta-value">--surface2 · #111d2e</div></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#1e3a5f"></div><div class="meta-name">Border</div><div class="meta-value">--border · #1e3a5f</div></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#00d4ff"></div><div class="meta-name">Primary Accent</div><div class="meta-value">--accent · #00d4ff</div></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#ff6b35"></div><div class="meta-name">Danger Accent</div><div class="meta-value">--accent2 · #ff6b35</div></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#7fff6b"></div><div class="meta-name">Success Accent</div><div class="meta-value">--accent3 · #7fff6b</div></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#f0f8ff"></div><div class="meta-name">Bright Text</div><div class="meta-value">--text-bright · #f0f8ff</div></article>
+        </div>
+      </section>
 
-    <section class="panel">
-      <h2>2) 타이포그래피</h2>
-      <ul>
-        <li>Display/로고: <code>DinaChaumontDisplayBold + Syne</code></li>
-        <li>헤딩: <code>Syne</code></li>
-        <li>본문: <code>Noto Sans KR</code></li>
-        <li>숫자/유틸: <code>IBM Plex Mono</code></li>
-      </ul>
-    </section>
+      <section class="panel">
+        <h2>Component Examples</h2>
+        <p class="lead">버튼, 카드, 입력창은 아래 스타일을 기본으로 통일합니다.</p>
+        <div class="component-grid">
+          <article class="component-box">
+            <div class="component-title">Buttons</div>
+            <div class="btn-row">
+              <button class="btn-sample btn-cyan" type="button">Primary</button>
+              <button class="btn-sample btn-orange" type="button">Danger</button>
+              <button class="btn-sample btn-lime" type="button">Success</button>
+            </div>
+          </article>
+          <article class="component-box">
+            <div class="component-title">Inputs</div>
+            <input class="input-sample" type="text" value="이름 입력" readonly>
+            <input class="input-sample" type="text" value="메시지 입력" readonly>
+          </article>
+          <article class="component-box">
+            <div class="component-title">Content Card</div>
+            <div class="card-sample">
+              <div class="card-title">Chapter Preview</div>
+              <div class="card-body">핵심 개념을 짧고 명확하게 전달하는 카드 형태. 정보 밀도를 높이되 가독성을 유지합니다.</div>
+            </div>
+          </article>
+          <article class="component-box">
+            <div class="component-title">Notification Tone</div>
+            <div class="card-sample" style="border-color: rgba(127, 255, 107, 0.6); background: rgba(127, 255, 107, 0.08); margin-bottom: 8px;">완료 메시지에는 lime 계열을 사용</div>
+            <div class="card-sample" style="border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.1);">경고/주의 메시지에는 orange 계열을 사용</div>
+          </article>
+        </div>
+      </section>
 
-    <section class="panel">
-      <h2>3) 컴포넌트 규칙</h2>
-      <ul>
-        <li>Panel: <code>background: var(--surface)</code> + <code>1px border</code> + <code>12px radius</code></li>
-        <li>Input: <code>background: var(--surface2)</code> + <code>1px border</code> + <code>8px radius</code></li>
-        <li>버튼: 기본은 mono 타입, 강조는 cyan, 위험 동작은 orange</li>
-        <li>호버/전환: 0.2s 내외로 짧고 또렷하게</li>
-      </ul>
-    </section>
+      <section class="panel">
+        <h2>Typography</h2>
+        <p class="lead">한글 본문 가독성은 Noto Sans KR, 브랜드 무드는 Display/Heading 폰트로 분리합니다.</p>
+        <div class="type-stack">
+          <article class="type-sample"><div class="type-label">DISPLAY · DinaChaumontDisplayBold</div><div class="type-display">Step into Crypto</div></article>
+          <article class="type-sample"><div class="type-label">HEADING · Syne</div><div class="type-heading">Design System Section Title</div></article>
+          <article class="type-sample"><div class="type-label">BODY · Noto Sans KR</div><div class="type-body">콘텐츠 본문은 길게 읽히기 때문에 가독성을 우선합니다. 한국어 문장은 자간을 과하게 벌리지 않고 1.7~1.8 line-height를 유지합니다.</div></article>
+          <article class="type-sample"><div class="type-label">MONO · IBM Plex Mono</div><div class="type-mono">TOKEN_NAME = #00d4ff</div></article>
+        </div>
+      </section>
 
-    <section class="panel">
-      <h2>4) 파일 위치</h2>
-      <ul>
-        <li><code>design-system/tokens.css</code>: 재사용 토큰</li>
-        <li><code>design-system/README.md</code>: 운영 가이드</li>
-        <li><code>index.html</code>, <code>guestbook.html</code>: 적용 대상</li>
-      </ul>
-    </section>
+      <section class="panel">
+        <h2>Logo Usage</h2>
+        <p class="lead">로고는 기본적으로 워드마크 + 아이콘 조합을 우선 사용합니다. 배경 대비가 낮을 경우 밝은 텍스트/포인트 컬러를 유지하세요.</p>
+        <div class="logo-grid">
+          <article class="logo-box">
+            <div class="meta-name" style="margin-bottom:10px;">Primary Lockup</div>
+            <div class="logo-demo">Step into <span>Crypto</span><img src="favicon.svg" alt=""></div>
+            <div class="meta-value">권장 최소 높이: 24px / 좌우 여백: 아이콘 너비의 1.5배</div>
+          </article>
+          <article class="logo-box">
+            <div class="meta-name" style="margin-bottom:10px;">Icon Only</div>
+            <img src="favicon.svg" alt="Step into Crypto icon" style="width:56px;height:56px;display:block;margin-bottom:10px;">
+            <div class="meta-value">파비콘, 앱 아이콘, 소형 배지에 사용</div>
+          </article>
+        </div>
+        <div class="rule-list" style="margin-top:12px;">
+          <div class="rule-item do"><strong>DO</strong> 다크 배경에서 cyan 포인트 유지, 로고 주변 충분한 여백 확보</div>
+          <div class="rule-item do"><strong>DO</strong> 워드마크/아이콘 비율 유지, 임의 왜곡 금지</div>
+          <div class="rule-item dont"><strong>DON'T</strong> 로고 색상을 임의로 교체하거나 그라디언트/그림자 과다 적용</div>
+          <div class="rule-item dont"><strong>DON'T</strong> 배경 대비가 낮은 곳에 무테로 사용</div>
+        </div>
+      </section>
+    </div>
 
     <footer class="site-footer">
       <div class="footer-links">
