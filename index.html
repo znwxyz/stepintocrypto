@@ -92,6 +92,8 @@
     overflow-y: auto;
     padding: 0 40px 20px;
     max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
   }
 
   /* SIDEBAR */
@@ -1372,6 +1374,33 @@
     transform: translateY(1px);
   }
 
+  .guestbook-link {
+    position: absolute;
+    top: 100px;
+    right: 0;
+    z-index: 3;
+    height: 36px;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    background: rgba(0, 212, 255, 0.12);
+    color: var(--accent);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+
+  .guestbook-link:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: #6fe8ff;
+    color: #9eeeff;
+  }
+
   .hamburger {
     width: 36px;
     height: 36px;
@@ -1444,6 +1473,15 @@
   /* Mobile: 768px 이하 — 햄버거 모드 */
   @media (max-width: 768px) {
     .mobile-topbar { display: flex; }
+    .guestbook-link {
+      position: fixed;
+      top: 8px;
+      right: 60px;
+      height: 34px;
+      padding: 0 10px;
+      font-size: 10px;
+      z-index: 605;
+    }
 
     .sidebar {
       position: fixed;
@@ -1944,6 +1982,7 @@
   <!-- MAIN -->
   <main class="main" id="main-content">
     <div class="hero">
+      <a class="guestbook-link" href="guestbook.html">방명록</a>
       <div class="hero-tag">// WEB3 FUNDAMENTALS</div>
       <h1 class="hero-title">Step into<br><span class="hero-crypto-line"><span>Crypto</span><img src="favicon.svg" alt="" class="hero-crypto-logo" /></span></h1>
       <p class="hero-desc" id="hero-desc">

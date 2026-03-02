@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>방명록 | Step into Crypto</title>
+<meta name="description" content="Step into Crypto 방명록 페이지">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  @font-face {
+    font-family: 'DinaChaumontDisplayBold';
+    src: url('fonts/DinaChaumont-DisplayBold.otf') format('opentype');
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+  }
+
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --surface2: #111d2e;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --text: #c8dff5;
+    --text-muted: #5a7a9a;
+    --text-bright: #f0f8ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 26px 40px 60px;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .logo {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    text-decoration: none;
+    color: var(--text-bright);
+    font-family: 'DinaChaumontDisplayBold', 'Syne', sans-serif;
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.04;
+  }
+
+  .logo-line {
+    display: inline-block;
+  }
+
+  .logo-crypto {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+  }
+
+  .logo img {
+    width: 22px;
+    height: 22px;
+    transform: translateY(1px);
+  }
+
+  .back {
+    text-decoration: none;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    background: rgba(0, 212, 255, 0.08);
+    border-radius: 8px;
+    height: 36px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+
+  .title {
+    font-family: 'Syne', sans-serif;
+    font-size: 30px;
+    color: var(--text-bright);
+    margin-bottom: 10px;
+  }
+
+  .desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .field {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 12px 14px;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  textarea.field {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .btn {
+    border: 1px solid #7fff6b;
+    background: rgba(127, 255, 107, 0.12);
+    color: #d9ffd2;
+    border-radius: 8px;
+    height: 38px;
+    padding: 0 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+
+  .entry {
+    border: 1px solid rgba(30, 58, 95, 0.6);
+    background: rgba(17, 29, 46, 0.65);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+
+  .entry-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+
+  .entry-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    color: var(--text-bright);
+  }
+
+  .entry-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+
+  .entry-msg {
+    font-size: 14px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+
+  .empty {
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 12px 2px;
+  }
+
+  @media (max-width: 768px) {
+    .wrap { padding: 18px 16px 48px; max-width: 100%; }
+    .logo { font-size: 28px; }
+    .title { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <a class="logo" href="index.html"><span class="logo-line">Step into</span><span class="logo-line logo-crypto">Crypto <img src="favicon.svg" alt=""></span></a>
+      <a class="back" href="index.html">메인으로</a>
+    </div>
+
+    <section class="panel">
+      <h1 class="title">방명록</h1>
+      <p class="desc">방문 흔적을 남겨 주세요. 이 방명록은 현재 브라우저에 저장됩니다.</p>
+      <input id="guest-name" class="field" type="text" maxlength="20" placeholder="이름 (최대 20자)">
+      <textarea id="guest-message" class="field" maxlength="300" placeholder="메시지 (최대 300자)"></textarea>
+      <div class="actions">
+        <button id="guest-submit" class="btn" type="button">남기기</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div id="guest-list"></div>
+    </section>
+  </div>
+
+<script>
+(() => {
+  const KEY = 'sic_guestbook_v1';
+  const nameEl = document.getElementById('guest-name');
+  const msgEl = document.getElementById('guest-message');
+  const submitBtn = document.getElementById('guest-submit');
+  const listEl = document.getElementById('guest-list');
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function save(data) {
+    localStorage.setItem(KEY, JSON.stringify(data.slice(0, 100)));
+  }
+
+  function fmtDate(iso) {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return '';
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+  }
+
+  function render() {
+    const items = load();
+    if (!items.length) {
+      listEl.innerHTML = '<p class="empty">아직 남겨진 글이 없습니다. 첫 번째로 메시지를 남겨보세요.</p>';
+      return;
+    }
+
+    listEl.innerHTML = '';
+    items.forEach((item) => {
+      const card = document.createElement('article');
+      card.className = 'entry';
+
+      const head = document.createElement('div');
+      head.className = 'entry-head';
+
+      const name = document.createElement('strong');
+      name.className = 'entry-name';
+      name.textContent = item.name;
+
+      const date = document.createElement('span');
+      date.className = 'entry-date';
+      date.textContent = fmtDate(item.createdAt);
+
+      const msg = document.createElement('p');
+      msg.className = 'entry-msg';
+      msg.textContent = item.message;
+
+      head.appendChild(name);
+      head.appendChild(date);
+      card.appendChild(head);
+      card.appendChild(msg);
+      listEl.appendChild(card);
+    });
+  }
+
+  submitBtn.addEventListener('click', () => {
+    const name = nameEl.value.trim();
+    const message = msgEl.value.trim();
+
+    if (!name || !message) {
+      alert('이름과 메시지를 입력해 주세요.');
+      return;
+    }
+
+    const next = [{ name, message, createdAt: new Date().toISOString() }, ...load()];
+    save(next);
+    nameEl.value = '';
+    msgEl.value = '';
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
