@@ -634,30 +634,39 @@
   }
 
   async function deleteEntry(id, password) {
-    const fallbackEndpoint = `${CONFIG.supabaseUrl}/rest/v1/${TABLE}?id=eq.${encodeURIComponent(id)}`;
-    const fallbackRes = await fetch(fallbackEndpoint, {
-      method: 'DELETE',
-      headers: {
-        ...getHeaders(),
-        Prefer: 'return=representation',
-        'x-admin-password': password
-      }
-    });
+    const endpoint = `${CONFIG.supabaseUrl}/rest/v1/rpc/delete_guestbook_entry`;
+    const payloads = [
+      { p_id: id, p_password: password },
+      { id: id, password: password }
+    ];
 
-    if (fallbackRes.ok) {
-      let deletedRows = [];
+    let lastStatus = 0;
+    for (const payload of payloads) {
+      let res;
       try {
-        deletedRows = await fallbackRes.json();
+        res = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            ...getHeaders()
+          },
+          body: JSON.stringify(payload)
+        });
       } catch {
-        deletedRows = [];
+        throw new Error('네트워크 요청이 차단되었습니다. 잠시 후 다시 시도해 주세요.');
       }
-      if (Array.isArray(deletedRows) && deletedRows.length > 0) {
-        return;
+
+      if (!res.ok) {
+        lastStatus = res.status;
+        if (res.status === 404) continue;
+        throw new Error(`삭제 실패 (${res.status})`);
       }
-      throw new Error('비밀번호가 틀렸거나 삭제 권한이 없습니다.');
+
+      const data = await res.json();
+      if (data === true) return;
+      throw new Error('비밀번호가 틀렸거나 삭제 대상이 없습니다.');
     }
 
-    throw new Error(`삭제 실패 (${fallbackRes.status || 0})`);
+    throw new Error(`삭제 실패 (${lastStatus || 404})`);
   }
 
   function fmtDate(iso) {
