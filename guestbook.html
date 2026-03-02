@@ -183,6 +183,12 @@
     gap: 8px;
   }
 
+  .entry-head-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .entry-name {
     font-family: 'Syne', sans-serif;
     font-size: 18px;
@@ -199,6 +205,22 @@
     font-size: 14px;
     line-height: 1.7;
     white-space: pre-wrap;
+  }
+
+  .entry-delete {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0.6;
+  }
+
+  .entry-delete:hover {
+    color: #ff9d9d;
+    opacity: 1;
   }
 
   .empty {
@@ -223,10 +245,227 @@
     cursor: not-allowed;
   }
 
+  .admin-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    background: rgba(5, 8, 17, 0.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .admin-modal.open {
+    display: flex;
+  }
+
+  .admin-modal-card {
+    width: min(420px, 100%);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  }
+
+  .admin-modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+
+  .admin-modal-desc {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .admin-modal-error {
+    margin-top: 8px;
+    color: #ff9d9d;
+    font-size: 12px;
+    min-height: 18px;
+  }
+
+  .admin-modal-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .modal-btn-cancel {
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text-muted);
+    border-radius: 8px;
+    height: 36px;
+    padding: 0 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+  }
+
+  .modal-btn-delete {
+    border: 1px solid rgba(255, 107, 53, 0.65);
+    background: rgba(255, 107, 53, 0.15);
+    color: #ffd8c8;
+    border-radius: 8px;
+    height: 36px;
+    padding: 0 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+  }
+
+  .site-footer {
+    margin-top: 12px;
+    padding: 20px 0 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .footer-text-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .footer-text-btn:hover {
+    color: var(--accent);
+  }
+
+  .footer-contact-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .footer-contact-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .legal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 8, 17, 0.92);
+    z-index: 40;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .legal-overlay.open { display: flex; }
+
+  .legal-box {
+    width: min(860px, 100%);
+    max-height: min(88vh, 860px);
+    overflow-y: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 24px 18px;
+    position: relative;
+  }
+
+  .legal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+
+  .legal-close:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  .legal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    color: var(--text-bright);
+    margin-bottom: 16px;
+  }
+
+  .legal-title-en {
+    margin-left: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    color: var(--accent);
+    letter-spacing: 0.4px;
+    font-weight: 400;
+  }
+
+  .legal-sec {
+    margin-bottom: 14px;
+    padding: 14px;
+    border: 1px solid rgba(30, 58, 95, 0.5);
+    border-radius: 10px;
+    background: rgba(17, 29, 46, 0.6);
+  }
+
+  .legal-sec h4 {
+    margin-bottom: 8px;
+    font-family: 'Syne', sans-serif;
+    color: var(--text-bright);
+    font-size: 16px;
+  }
+
+  .legal-sec p, .legal-sec li {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .legal-sec ul {
+    padding-left: 18px;
+  }
+
+  .legal-nfa {
+    border-color: rgba(255, 107, 53, 0.5);
+    background: rgba(255, 107, 53, 0.08);
+  }
+
   @media (max-width: 768px) {
     .wrap { padding: 18px 16px 48px; max-width: 100%; }
     .logo { font-size: 28px; }
     .title { font-size: 24px; }
+    .footer-links { justify-content: flex-end; align-items: center; gap: 12px; }
+    .legal-box { padding: 20px 16px 14px; }
+    .legal-title { font-size: 20px; padding-right: 28px; }
   }
 </style>
 </head>
@@ -239,7 +478,7 @@
 
     <section class="panel">
       <h1 class="title">방명록</h1>
-      <p class="desc">방문 흔적을 남겨 주세요. 메시지는 외부 데이터베이스에 저장됩니다.</p>
+      <p class="desc">방문 흔적을 남겨 주세요. 또한 콘텐츠 내용 및 아이디어 제안, 제휴 문의, 오류/버그 등 개선점 제보, 이외 기타 궁금하신 점이 있다면 아래 연락처로 편하게 문의해 주세요. 어떤 의견도 감사히 받습니다. 배너에 들어갈 광고도 환영입니다!</p>
       <input id="guest-name" class="field" type="text" maxlength="20" placeholder="이름 (최대 20자)">
       <textarea id="guest-message" class="field" maxlength="300" placeholder="메시지 (최대 300자)"></textarea>
       <div class="actions">
@@ -251,6 +490,79 @@
     <section class="panel">
       <div id="guest-list"></div>
     </section>
+
+    <footer class="site-footer">
+      <div class="footer-links">
+        <button class="footer-text-btn" data-legal-open="privacy">개인정보처리방침</button>
+        <button class="footer-text-btn" data-legal-open="terms">이용약관</button>
+        <button class="footer-contact-btn" data-legal-open="contact">문의하기</button>
+      </div>
+    </footer>
+  </div>
+
+  <div class="legal-overlay" id="legal-privacy-overlay">
+    <div class="legal-box">
+      <button class="legal-close" data-legal-close>✕</button>
+      <div class="legal-title">개인정보처리방침 <span class="legal-title-en">Privacy Policy</span></div>
+      <section class="legal-sec">
+        <h4>1. 개인정보의 처리 목적</h4>
+        <p>'Step into Crypto'(이하 '본 사이트')는 사용자의 개인정보를 중요시하며, 서비스 제공을 위해 필요한 최소한의 정보만을 처리합니다. 본 사이트는 회원가입 없이 누구나 무료로 이용할 수 있으며, 사용자의 민감한 개인정보를 직접 수집하지 않습니다.</p>
+      </section>
+      <section class="legal-sec">
+        <h4>2. 쿠키(Cookie)의 사용 및 광고 게재</h4>
+        <p>본 사이트는 사용자 경험 향상과 맞춤형 광고(Google AdSense 등) 제공을 위해 쿠키를 사용할 수 있습니다. 제3자 공급업체(Google 등)는 쿠키를 사용하여 사용자가 본 사이트 또는 다른 웹사이트를 방문한 기록을 기반으로 광고를 게재합니다. 사용자는 웹 브라우저의 옵션을 설정하여 쿠키 저장을 거부할 수 있습니다.</p>
+      </section>
+      <section class="legal-sec">
+        <h4>3. 개인정보 보호 문의</h4>
+        <p>개인정보 처리와 관련한 문의 사항이 있으신 경우, 사이트 하단의 '문의하기'를 통해 연락해 주시기 바랍니다.</p>
+      </section>
+    </div>
+  </div>
+
+  <div class="legal-overlay" id="legal-terms-overlay">
+    <div class="legal-box">
+      <button class="legal-close" data-legal-close>✕</button>
+      <div class="legal-title">이용약관 <span class="legal-title-en">Terms of Service</span></div>
+      <section class="legal-sec">
+        <h4>1. 서비스의 목적</h4>
+        <p>본 사이트는 블록체인, 암호화폐, DeFi 등 웹3.0 생태계에 대한 일반적인 지식과 교육적 정보를 제공하는 것을 목적으로 합니다.</p>
+      </section>
+      <section class="legal-sec legal-nfa">
+        <h4>2. 투자 면책 조항 (Not Financial Advice)</h4>
+        <p>본 사이트에서 제공하는 모든 텍스트, 용어 설명, 퀴즈 및 링크는 오직 '교육 및 정보 제공' 목적입니다. 어떠한 내용도 특정 암호화폐나 가상자산의 매수/매도, 투자 권유, 재무적 조언으로 해석될 수 없습니다. 암호화폐 투자는 본질적으로 높은 위험을 수반하며, 모든 투자 결정에 대한 책임은 전적으로 사용자 본인에게 있습니다. 본 사이트는 사용자의 투자 결과에 대해 어떠한 법적 책임도 지지 않습니다.</p>
+      </section>
+      <section class="legal-sec">
+        <h4>3. 저작권</h4>
+        <p>본 사이트에서 제공하는 강의 노트, 용어집, 퀴즈 콘텐츠의 저작권은 사이트 운영자([Max8])에게 있습니다. 무단 복제 및 상업적 도용을 금합니다.</p>
+      </section>
+    </div>
+  </div>
+
+  <div class="legal-overlay" id="legal-contact-overlay">
+    <div class="legal-box">
+      <button class="legal-close" data-legal-close>✕</button>
+      <div class="legal-title">문의하기 <span class="legal-title-en">Contact</span></div>
+      <section class="legal-sec">
+        <p>어떤 의견도 감사히 받습니다. 콘텐츠 내용 및 아이디어 제안, 제휴 문의, 오류/버그 등 개선점 제보, 이외 기타 궁금하신 점이 있다면 아래 연락처로 편하게 문의해 주세요. 배너에 들어갈 광고도 환영입니다!</p>
+        <ul>
+          <li>Email: <a href="mailto:znwxyz@gmail.com" style="color:var(--accent)">znwxyz@gmail.com</a></li>
+          <li>X (Twitter): <a href="https://x.com/znwxyz" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">@znwxyz</a></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <div id="admin-modal" class="admin-modal" aria-hidden="true">
+    <div class="admin-modal-card" role="dialog" aria-modal="true" aria-labelledby="admin-modal-title">
+      <h2 id="admin-modal-title" class="admin-modal-title">관리자 확인</h2>
+      <p class="admin-modal-desc">삭제하려면 관리자 비밀번호를 입력하세요.</p>
+      <input id="admin-password" class="field" type="password" placeholder="관리자 비밀번호">
+      <p id="admin-modal-error" class="admin-modal-error" role="alert"></p>
+      <div class="admin-modal-actions">
+        <button id="admin-cancel" type="button" class="modal-btn-cancel">취소</button>
+        <button id="admin-confirm" type="button" class="modal-btn-delete">삭제</button>
+      </div>
+    </div>
   </div>
 
 <script src="guestbook-config.js"></script>
@@ -267,6 +579,15 @@
   const submitBtn = document.getElementById('guest-submit');
   const listEl = document.getElementById('guest-list');
   const statusEl = document.getElementById('guest-status');
+  const adminModalEl = document.getElementById('admin-modal');
+  const adminPasswordEl = document.getElementById('admin-password');
+  const adminModalErrorEl = document.getElementById('admin-modal-error');
+  const adminCancelBtn = document.getElementById('admin-cancel');
+  const adminConfirmBtn = document.getElementById('admin-confirm');
+  const legalOpenBtns = document.querySelectorAll('[data-legal-open]');
+  const legalCloseBtns = document.querySelectorAll('[data-legal-close]');
+  const legalOverlays = document.querySelectorAll('.legal-overlay');
+  let pendingDeleteId = '';
 
   function setStatus(text, isError = false) {
     statusEl.textContent = text;
@@ -286,7 +607,7 @@
   }
 
   async function fetchEntries() {
-    const endpoint = `${CONFIG.supabaseUrl}/rest/v1/${TABLE}?select=name,message,created_at&order=created_at.desc&limit=${LIST_LIMIT}`;
+    const endpoint = `${CONFIG.supabaseUrl}/rest/v1/${TABLE}?select=id,name,message,created_at&order=created_at.desc&limit=${LIST_LIMIT}`;
     const res = await fetch(endpoint, {
       method: 'GET',
       headers: getHeaders()
@@ -309,6 +630,27 @@
     });
     if (!res.ok) {
       throw new Error(`등록 실패 (${res.status})`);
+    }
+  }
+
+  async function deleteEntry(id, password) {
+    const endpoint = `${CONFIG.supabaseUrl}/rest/v1/rpc/delete_guestbook_entry`;
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        ...getHeaders()
+      },
+      body: JSON.stringify({
+        p_id: id,
+        p_password: password
+      })
+    });
+    if (!res.ok) {
+      throw new Error(`삭제 실패 (${res.status})`);
+    }
+    const data = await res.json();
+    if (!data) {
+      throw new Error('비밀번호가 틀렸거나 삭제 대상이 없습니다.');
     }
   }
 
@@ -344,12 +686,41 @@
       msg.className = 'entry-msg';
       msg.textContent = item.message;
 
+      const delBtn = document.createElement('button');
+      delBtn.className = 'entry-delete';
+      delBtn.type = 'button';
+      delBtn.textContent = '×';
+      delBtn.setAttribute('aria-label', '방명록 삭제');
+      delBtn.dataset.id = item.id;
+
+      const right = document.createElement('div');
+      right.className = 'entry-head-right';
+      right.appendChild(delBtn);
+      right.appendChild(date);
+
       head.appendChild(name);
-      head.appendChild(date);
+      head.appendChild(right);
       card.appendChild(head);
       card.appendChild(msg);
       listEl.appendChild(card);
     });
+  }
+
+  function openAdminModal(entryId) {
+    pendingDeleteId = entryId;
+    adminModalErrorEl.textContent = '';
+    adminPasswordEl.value = '';
+    adminModalEl.classList.add('open');
+    adminModalEl.setAttribute('aria-hidden', 'false');
+    adminPasswordEl.focus();
+  }
+
+  function closeAdminModal() {
+    pendingDeleteId = '';
+    adminPasswordEl.value = '';
+    adminModalErrorEl.textContent = '';
+    adminModalEl.classList.remove('open');
+    adminModalEl.setAttribute('aria-hidden', 'true');
   }
 
   async function reloadEntries() {
@@ -385,6 +756,89 @@
     } finally {
       submitBtn.disabled = false;
     }
+  });
+
+  listEl.addEventListener('click', async (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+    if (!target.classList.contains('entry-delete')) return;
+
+    const entryId = target.dataset.id;
+    if (!entryId) return;
+    openAdminModal(entryId);
+  });
+
+  adminCancelBtn.addEventListener('click', () => {
+    closeAdminModal();
+  });
+
+  adminModalEl.addEventListener('click', (event) => {
+    if (event.target === adminModalEl) {
+      closeAdminModal();
+    }
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && adminModalEl.classList.contains('open')) {
+      closeAdminModal();
+    }
+  });
+
+  adminConfirmBtn.addEventListener('click', async () => {
+    if (!pendingDeleteId) return;
+    const password = adminPasswordEl.value.trim();
+    if (!password) {
+      adminModalErrorEl.textContent = '비밀번호를 입력해 주세요.';
+      adminPasswordEl.focus();
+      return;
+    }
+
+    adminConfirmBtn.disabled = true;
+    adminCancelBtn.disabled = true;
+    setStatus('삭제 중...');
+    try {
+      await deleteEntry(pendingDeleteId, password);
+      await reloadEntries();
+      setStatus('삭제되었습니다.');
+      closeAdminModal();
+    } catch (err) {
+      const reason = err instanceof Error ? err.message : '알 수 없는 오류';
+      adminModalErrorEl.textContent = `삭제 실패: ${reason}`;
+      setStatus(`삭제에 실패했습니다. ${reason}`, true);
+    } finally {
+      adminConfirmBtn.disabled = false;
+      adminCancelBtn.disabled = false;
+    }
+  });
+
+  function openLegalModal(type) {
+    const overlay = document.getElementById(`legal-${type}-overlay`);
+    if (!overlay) return;
+    overlay.classList.add('open');
+  }
+
+  function closeLegalModal(overlay) {
+    overlay.classList.remove('open');
+  }
+
+  legalOpenBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const type = btn.getAttribute('data-legal-open');
+      if (type) openLegalModal(type);
+    });
+  });
+
+  legalCloseBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const overlay = btn.closest('.legal-overlay');
+      if (overlay) closeLegalModal(overlay);
+    });
+  });
+
+  legalOverlays.forEach((overlay) => {
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) closeLegalModal(overlay);
+    });
   });
 
   async function init() {
