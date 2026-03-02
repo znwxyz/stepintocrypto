@@ -136,24 +136,36 @@
     max-width: 780px;
   }
 
+  .library-frame {
+    background: rgba(13, 21, 32, 0.78);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+    backdrop-filter: blur(2px);
+  }
+
   .grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 20px;
   }
 
   .panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
+    padding: 4px 2px 0;
+    border-bottom: 1px dashed rgba(30, 58, 95, 0.7);
+    padding-bottom: 18px;
   }
 
   .panel h2 {
     font-family: 'Syne', sans-serif;
     font-size: 20px;
     color: var(--text-bright);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+  }
+
+  .panel:last-child {
+    border-bottom: none;
+    padding-bottom: 2px;
   }
 
   .swatch-grid {
@@ -163,7 +175,8 @@
   }
 
   .swatch {
-    background: var(--surface2);
+    position: relative;
+    background: rgba(13, 21, 32, 0.86);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 10px;
@@ -189,6 +202,56 @@
     color: var(--text-muted);
   }
 
+  .asset-download {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border);
+    background: rgba(0, 212, 255, 0.08);
+    color: var(--accent);
+    border-radius: 7px;
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .asset-download svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .copy-color-btn {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--border);
+    background: rgba(0, 212, 255, 0.08);
+    color: var(--accent);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .copy-color-btn:hover {
+    border-color: var(--accent);
+  }
+
   .component-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -196,7 +259,7 @@
   }
 
   .component-box {
-    background: rgba(17, 29, 46, 0.65);
+    background: rgba(13, 21, 32, 0.88);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 12px;
@@ -230,7 +293,7 @@
 
   .card-sample {
     border: 1px solid rgba(30, 58, 95, 0.7);
-    background: rgba(13, 21, 32, 0.82);
+    background: rgba(17, 29, 46, 0.56);
     border-radius: 10px;
     padding: 12px;
   }
@@ -254,9 +317,20 @@
     background: var(--surface2);
     border-radius: 8px;
     color: var(--text);
-    padding: 10px 12px;
-    font-size: 13px;
-    margin-bottom: 8px;
+    padding: 7px 10px;
+    font-size: 12px;
+    line-height: 1.45;
+    margin-bottom: 6px;
+  }
+
+  .tone-sample {
+    border: 1px solid rgba(30, 58, 95, 0.7);
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 12px;
+    line-height: 1.45;
+    margin-bottom: 6px;
+    color: var(--text);
   }
 
   .type-stack {
@@ -265,7 +339,7 @@
   }
 
   .type-sample {
-    background: rgba(17, 29, 46, 0.6);
+    background: rgba(13, 21, 32, 0.88);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 12px;
@@ -291,10 +365,11 @@
   }
 
   .logo-box {
+    position: relative;
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 14px;
-    background: rgba(17, 29, 46, 0.62);
+    padding: 14px 14px 44px;
+    background: rgba(13, 21, 32, 0.88);
   }
 
   .logo-demo {
@@ -349,7 +424,7 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 10px;
-    background: rgba(13, 21, 32, 0.8);
+    background: rgba(17, 29, 46, 0.62);
     font-size: 13px;
     line-height: 1.7;
   }
@@ -428,21 +503,21 @@
     <section class="hero">
       <div class="hero-tag">// BRAND ASSET LIBRARY</div>
       <h1 class="hero-title">Design System</h1>
-      <p class="hero-sub">브랜드 색상, 컴포넌트 스타일, 폰트 사용, 로고 가이드를 한 곳에 모은 페이지입니다. 외주 전달, 배너 제작, 신규 페이지 제작 시 이 기준으로 맞춰 사용하세요.</p>
     </section>
 
-    <div class="grid">
+    <div class="library-frame">
+      <div class="grid">
       <section class="panel">
         <h2>Color Palette</h2>
         <div class="swatch-grid">
-          <article class="swatch"><div class="swatch-chip" style="background:#050811"></div><div class="meta-name">Background</div><div class="meta-value">--bg · #050811</div></article>
-          <article class="swatch"><div class="swatch-chip" style="background:#0d1520"></div><div class="meta-name">Surface</div><div class="meta-value">--surface · #0d1520</div></article>
-          <article class="swatch"><div class="swatch-chip" style="background:#111d2e"></div><div class="meta-name">Surface 2</div><div class="meta-value">--surface2 · #111d2e</div></article>
-          <article class="swatch"><div class="swatch-chip" style="background:#1e3a5f"></div><div class="meta-name">Border</div><div class="meta-value">--border · #1e3a5f</div></article>
-          <article class="swatch"><div class="swatch-chip" style="background:#00d4ff"></div><div class="meta-name">Primary Accent</div><div class="meta-value">--accent · #00d4ff</div></article>
-          <article class="swatch"><div class="swatch-chip" style="background:#ff6b35"></div><div class="meta-name">Danger Accent</div><div class="meta-value">--accent2 · #ff6b35</div></article>
-          <article class="swatch"><div class="swatch-chip" style="background:#7fff6b"></div><div class="meta-name">Success Accent</div><div class="meta-value">--accent3 · #7fff6b</div></article>
-          <article class="swatch"><div class="swatch-chip" style="background:#f0f8ff"></div><div class="meta-name">Bright Text</div><div class="meta-value">--text-bright · #f0f8ff</div></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#050811"></div><div class="meta-name">Background</div><div class="meta-value">--bg · #050811</div><button class="copy-color-btn" type="button" data-color="#050811" aria-label="색상 복사">⧉</button></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#0d1520"></div><div class="meta-name">Surface</div><div class="meta-value">--surface · #0d1520</div><button class="copy-color-btn" type="button" data-color="#0d1520" aria-label="색상 복사">⧉</button></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#111d2e"></div><div class="meta-name">Surface 2</div><div class="meta-value">--surface2 · #111d2e</div><button class="copy-color-btn" type="button" data-color="#111d2e" aria-label="색상 복사">⧉</button></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#1e3a5f"></div><div class="meta-name">Border</div><div class="meta-value">--border · #1e3a5f</div><button class="copy-color-btn" type="button" data-color="#1e3a5f" aria-label="색상 복사">⧉</button></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#00d4ff"></div><div class="meta-name">Primary Accent</div><div class="meta-value">--accent · #00d4ff</div><button class="copy-color-btn" type="button" data-color="#00d4ff" aria-label="색상 복사">⧉</button></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#ff6b35"></div><div class="meta-name">Danger Accent</div><div class="meta-value">--accent2 · #ff6b35</div><button class="copy-color-btn" type="button" data-color="#ff6b35" aria-label="색상 복사">⧉</button></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#7fff6b"></div><div class="meta-name">Success Accent</div><div class="meta-value">--accent3 · #7fff6b</div><button class="copy-color-btn" type="button" data-color="#7fff6b" aria-label="색상 복사">⧉</button></article>
+          <article class="swatch"><div class="swatch-chip" style="background:#f0f8ff"></div><div class="meta-name">Bright Text</div><div class="meta-value">--text-bright · #f0f8ff</div><button class="copy-color-btn" type="button" data-color="#f0f8ff" aria-label="색상 복사">⧉</button></article>
         </div>
       </section>
 
@@ -471,8 +546,8 @@
           </article>
           <article class="component-box">
             <div class="component-title">Notification Tone</div>
-            <div class="card-sample" style="border-color: rgba(127, 255, 107, 0.6); background: rgba(127, 255, 107, 0.08); margin-bottom: 8px;">완료 메시지에는 lime 계열을 사용</div>
-            <div class="card-sample" style="border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.1);">경고/주의 메시지에는 orange 계열을 사용</div>
+            <div class="tone-sample" style="border-color: rgba(127, 255, 107, 0.6); background: rgba(127, 255, 107, 0.08);">완료 메시지에는 lime 계열을 사용</div>
+            <div class="tone-sample" style="border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.1);">경고/주의 메시지에는 orange 계열을 사용</div>
           </article>
         </div>
       </section>
@@ -494,6 +569,9 @@
             <div class="meta-name" style="margin-bottom:10px;">Primary Lockup</div>
             <div class="logo-demo">Step into <span>Crypto</span><img src="favicon.svg" alt=""></div>
             <div class="meta-value">권장 최소 높이: 24px / 좌우 여백: 아이콘 너비의 1.5배</div>
+            <a class="asset-download" href="brand-assets/logo-primary.svg" download aria-label="Primary Lockup SVG 다운로드">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11"/><path d="m7 10 5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>
+            </a>
           </article>
           <article class="logo-box">
             <div class="meta-name" style="margin-bottom:10px;">Stacked Lockup (Main Hero)</div>
@@ -502,20 +580,25 @@
               <span class="logo-line-crypto">Crypto <img src="favicon.svg" alt=""></span>
             </div>
             <div class="meta-value">메인 히어로처럼 줄바꿈된 로고 버전</div>
+            <a class="asset-download" href="brand-assets/logo-stacked.svg" download aria-label="Stacked Lockup SVG 다운로드">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11"/><path d="m7 10 5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>
+            </a>
           </article>
           <article class="logo-box">
             <div class="meta-name" style="margin-bottom:10px;">Icon Only</div>
             <img src="favicon.svg" alt="Step into Crypto icon" style="width:56px;height:56px;display:block;margin-bottom:10px;">
             <div class="meta-value">파비콘, 앱 아이콘, 소형 배지에 사용</div>
+            <a class="asset-download" href="brand-assets/logo-icon.svg" download aria-label="Icon SVG 다운로드">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11"/><path d="m7 10 5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>
+            </a>
           </article>
         </div>
         <div class="rule-list" style="margin-top:12px;">
-          <div class="rule-item do"><strong>DO</strong> 다크 배경에서 cyan 포인트 유지, 로고 주변 충분한 여백 확보</div>
-          <div class="rule-item do"><strong>DO</strong> 워드마크/아이콘 비율 유지, 임의 왜곡 금지</div>
-          <div class="rule-item dont"><strong>DON'T</strong> 로고 색상을 임의로 교체하거나 그라디언트/그림자 과다 적용</div>
-          <div class="rule-item dont"><strong>DON'T</strong> 배경 대비가 낮은 곳에 무테로 사용</div>
+          <div class="rule-item do"><strong>DO</strong> 다크 배경에서 cyan 포인트를 유지하고, 로고 주변에 충분한 여백을 확보하며, 워드마크/아이콘 비율을 고정해 사용합니다.</div>
+          <div class="rule-item dont"><strong>DON'T</strong> 로고 색상을 임의로 교체하거나 과한 그라디언트/그림자를 적용하지 말고, 배경 대비가 낮은 곳에는 무테로 사용하지 않습니다.</div>
         </div>
       </section>
+      </div>
     </div>
 
     <footer class="site-footer">
@@ -527,5 +610,31 @@
       </div>
     </footer>
   </div>
+  <script>
+    (() => {
+      const copyButtons = document.querySelectorAll('.copy-color-btn');
+      copyButtons.forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const color = btn.getAttribute('data-color') || '';
+          if (!color) return;
+
+          try {
+            await navigator.clipboard.writeText(color);
+          } catch {
+            const temp = document.createElement('textarea');
+            temp.value = color;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            temp.remove();
+          }
+
+          const prev = btn.textContent;
+          btn.textContent = '✓';
+          window.setTimeout(() => { btn.textContent = prev; }, 800);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
