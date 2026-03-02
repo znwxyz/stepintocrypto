@@ -634,43 +634,32 @@
   }
 
   async function deleteEntry(id, password) {
-    const endpoints = [
-      `${CONFIG.supabaseUrl}/rest/v1/rpc/delete_guestbook_entry_v2`,
-      `${CONFIG.supabaseUrl}/rest/v1/rpc/delete_guestbook_entry`
-    ];
-    const payloads = [
-      { p_id: id, p_password: password },
-      { id: id, password: password }
-    ];
-
-    let lastStatus = 0;
-    for (const endpoint of endpoints) {
-      for (const payload of payloads) {
-        let res;
-        try {
-          res = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-              ...getHeaders()
-            },
-            body: JSON.stringify(payload)
-          });
-        } catch {
-          throw new Error('네트워크 요청이 차단되었습니다. 잠시 후 다시 시도해 주세요.');
-        }
-
-        if (!res.ok) {
-          lastStatus = res.status;
-          if (res.status === 404) continue;
-          throw new Error(`삭제 실패 (${res.status})`);
-        }
-
-        const data = await res.json();
-        if (data === true) return;
-      }
+    const endpoint = `${CONFIG.supabaseUrl}/rest/v1/rpc/delete_guestbook_entry_v3`;
+    let res;
+    try {
+      res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          ...getHeaders()
+        },
+        body: JSON.stringify({
+          payload: {
+            id,
+            password
+          }
+        })
+      });
+    } catch {
+      throw new Error('네트워크 요청이 차단되었습니다. 잠시 후 다시 시도해 주세요.');
     }
 
-    throw new Error(`삭제 실패 (${lastStatus || 404}) - URL: ${CONFIG.supabaseUrl}`);
+    if (!res.ok) {
+      throw new Error(`삭제 실패 (${res.status}) - URL: ${CONFIG.supabaseUrl}`);
+    }
+
+    const data = await res.json();
+    if (data === true) return;
+    throw new Error('비밀번호가 틀렸거나 삭제 대상이 없습니다.');
   }
 
   function fmtDate(iso) {
