@@ -140,6 +140,7 @@
     font-weight: 800;
     color: var(--text-bright);
     line-height: 1.1;
+    text-decoration: none;
   }
 
   .sidebar-title-line {
@@ -1946,13 +1947,6 @@
     margin-bottom: 6px;
   }
 
-  .chapter-library-desc {
-    color: var(--text-muted);
-    font-size: 13px;
-    line-height: 1.7;
-    margin-bottom: 14px;
-  }
-
   .chapter-library-links {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1977,11 +1971,6 @@
     border-color: var(--accent);
     color: var(--accent);
     background: rgba(0, 212, 255, 0.08);
-  }
-
-  .chapter-library-hub {
-    margin-top: 12px;
-    font-size: 13px;
   }
 
   @media (max-width: 768px) {
@@ -2330,8 +2319,7 @@
     <div id="chapters-root"></div>
 
     <section class="chapter-library" aria-labelledby="chapter-library-title">
-      <h2 class="chapter-library-title" id="chapter-library-title">텍스트 챕터 페이지 (검색엔진용)</h2>
-      <p class="chapter-library-desc">아래 링크는 챕터 내용을 정적 HTML로 제공하는 페이지입니다. 검색엔진/애드센스 봇이 자바스크립트 없이도 본문을 직접 읽을 수 있습니다.</p>
+      <h2 class="chapter-library-title" id="chapter-library-title">Index</h2>
       <ul class="chapter-library-links">
         <li><a href="/chapter-00">CH 00 · 머리말</a></li>
         <li><a href="/chapter-01">CH 01 · 비트코인</a></li>
@@ -2350,9 +2338,6 @@
         <li><a href="/chapter-14">CH 14 · 양자 내성</a></li>
         <li><a href="/chapter-15">CH 15 · 예측 시장</a></li>
       </ul>
-      <div class="chapter-library-hub">
-        <a href="/chapters">전체 챕터 허브 페이지 보기</a>
-      </div>
     </section>
 
     <!-- BOTTOM CTA -->
