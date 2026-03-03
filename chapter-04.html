@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 04 L1 아키텍처 | Step into Crypto</title>
+  <meta name="description" content="모든 블록체인은 네 가지 기능을 담당합니다: 실행 (거래 처리), 정산 (최종 확정), 합의 (순서 결정), 데이터 가용성 (장부 보관). 모놀리식 아키텍처 는 이 모든 것을 하나의 체인에서 처리하고, 모듈러 아키텍처 는 기능을 분리해 각각 최적화합니다." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-04" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 04 L1 아키텍처 | Step into Crypto" />
+  <meta property="og:description" content="모든 블록체인은 네 가지 기능을 담당합니다: 실행 (거래 처리), 정산 (최종 확정), 합의 (순서 결정), 데이터 가용성 (장부 보관). 모놀리식 아키텍처 는 이 모든 것을 하나의 체인에서 처리하고, 모듈러 아키텍처 는 기능을 분리해 각각 최적화합니다." />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-04" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 04 L1 아키텍처 | Step into Crypto" />
+  <meta name="twitter:description" content="모든 블록체인은 네 가지 기능을 담당합니다: 실행 (거래 처리), 정산 (최종 확정), 합의 (순서 결정), 데이터 가용성 (장부 보관). 모놀리식 아키텍처 는 이 모든 것을 하나의 체인에서 처리하고, 모듈러 아키텍처 는 기능을 분리해 각각 최적화합니다." />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"L1 아키텍처 - Step into Crypto","description":"모든 블록체인은 네 가지 기능을 담당합니다: 실행 (거래 처리), 정산 (최종 확정), 합의 (순서 결정), 데이터 가용성 (장부 보관). 모놀리식 아키텍처 는 이 모든 것을 하나의 체인에서 처리하고, 모듈러 아키텍처 는 기능을 분리해 각각 최적화합니다.","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-04","url":"https://stepintocrypto.xyz/chapter-04","position":5,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 04</span>
+      <h1>L1 아키텍처</h1>
+      <p class="subtitle">블록체인 트릴레마와 설계 철학</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">블록체인의 4대 기능과 아키텍처</a></li><li><a href="#sec-2">완결성(Finality)의 세 가지 유형</a></li><li><a href="#sec-3">크로스체인 브릿지의 딜레마</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>트릴레마: 탈중앙화·보안·확장성 중 2개만 극대화 가능</li><li>모놀리식(솔라나) vs 모듈러(이더리움) — 각자 다른 트레이드오프</li><li>완결성: 확률적(비트코인) vs 경제적(이더리움) vs 결정론적(코스모스)</li><li>크로스체인 브릿지 = 크립토에서 가장 취약한 인프라</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>블록체인의 4대 기능과 아키텍처</h2>
+        <div class="section-body">모든 블록체인은 네 가지 기능을 담당합니다: <b style="color:var(--text-bright)">실행</b>(거래 처리), <b style="color:var(--text-bright)">정산</b>(최종 확정), <b style="color:var(--text-bright)">합의</b>(순서 결정), <b style="color:var(--text-bright)">데이터 가용성</b>(장부 보관). <span class="term">모놀리식 아키텍처<span class="term-tip">비트코인·솔라나처럼 네 기능을 하나의 체인에서 모두 처리. 원자적 결합성 유리하나 확장 시 탈중앙화 훼손</span></span>는 이 모든 것을 하나의 체인에서 처리하고, <span class="term">모듈러 아키텍처<span class="term-tip">이더리움처럼 각 기능을 분리해 전문화. 실행은 L2 롤업에 외주, L1은 보안·데이터 보관에 집중</span></span>는 기능을 분리해 각각 최적화합니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>완결성(Finality)의 세 가지 유형</h2>
+        <div class="section-body"><span class="term">확률적 완결성<span class="term-tip">비트코인 PoW 방식. 블록이 쌓일수록 뒤집을 확률이 줄어들지만 수학적으로 0이 되지는 않음</span></span>은 비트코인, <span class="term">경제적 완결성<span class="term-tip">이더리움 PoS. 약 12.8분 후 수십조 원의 ETH를 불태워야 뒤집을 수 있어 사실상 확정</span></span>은 이더리움, <span class="term">결정론적 완결성<span class="term-tip">텐더민트(코스모스) 기반. 블록 생성 즉시 100% 확정. 네트워크 불안정 시 안전을 위해 체인이 아예 멈춤</span></span>은 코스모스 등 텐더민트 기반 체인에서 사용됩니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-3">
+        <h2>크로스체인 브릿지의 딜레마</h2>
+        <div class="section-body"><span class="term">크로스체인 브릿지<span class="term-tip">서로 다른 블록체인 간에 자산을 이동시키는 인프라. 이더리움에 잠금(Lock), 솔라나에 발행(Mint) 방식으로 작동</span></span>는 크립토에서 가장 취약한 인프라입니다. 이더리움 검증자는 솔라나 상황을 모르고, 그 반대도 마찬가지이기 때문입니다. <span class="term">웜홀(Wormhole)<span class="term-tip">다중 서명 기반 크로스체인 브릿지. 관리자 키 탈취로 수천억 원 해킹 피해 발생</span></span>, 로닌 같은 다중 서명 브릿지들은 관리자 키가 털리며 수천억 원 피해를 입었습니다.</div>
+        
+        <div class="card warn">
+            <h3>핵심 교훈</h3>
+            <div>블록체인 내부 보안(51% 공격 불가)도 외부 데이터를 가져오는 브릿지의 취약한 신뢰 앞에선 무용지물입니다.</div>
+          </div>
+        
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-03">← CH 03 솔라나</a>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-05">CH 05 자산 보관 →</a>
+    </nav>
+  </main>
+</body>
+</html>

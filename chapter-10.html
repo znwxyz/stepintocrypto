@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 10 하이퍼리퀴드 | Step into Crypto</title>
+  <meta name="description" content="dYdX는 막대한 수수료 수익을 회사가 독식하고 토큰 홀더에게 가치가 없어 붕괴했습니다. 하이퍼리퀴드는 이 빈틈을 파고들어 수수료의 99%를 HYPE 바이백·소각 에 투자했습니다. 출시 초 2달러 토큰이 단기간에 60달러로 치솟으며 강력한 선순환을 만들었습니다." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-10" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 10 하이퍼리퀴드 | Step into Crypto" />
+  <meta property="og:description" content="dYdX는 막대한 수수료 수익을 회사가 독식하고 토큰 홀더에게 가치가 없어 붕괴했습니다. 하이퍼리퀴드는 이 빈틈을 파고들어 수수료의 99%를 HYPE 바이백·소각 에 투자했습니다. 출시 초 2달러 토큰이 단기간에 60달러로 치솟으며 강력한 선순환을 만들었습니다." />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-10" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 10 하이퍼리퀴드 | Step into Crypto" />
+  <meta name="twitter:description" content="dYdX는 막대한 수수료 수익을 회사가 독식하고 토큰 홀더에게 가치가 없어 붕괴했습니다. 하이퍼리퀴드는 이 빈틈을 파고들어 수수료의 99%를 HYPE 바이백·소각 에 투자했습니다. 출시 초 2달러 토큰이 단기간에 60달러로 치솟으며 강력한 선순환을 만들었습니다." />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"하이퍼리퀴드 - Step into Crypto","description":"dYdX는 막대한 수수료 수익을 회사가 독식하고 토큰 홀더에게 가치가 없어 붕괴했습니다. 하이퍼리퀴드는 이 빈틈을 파고들어 수수료의 99%를 HYPE 바이백·소각 에 투자했습니다. 출시 초 2달러 토큰이 단기간에 60달러로 치솟으며 강력한 선순환을 만들었습니다.","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-10","url":"https://stepintocrypto.xyz/chapter-10","position":11,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 10</span>
+      <h1>하이퍼리퀴드</h1>
+      <p class="subtitle">DEX 시장을 장악한 성공 방정식</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">dYdX 몰락과 하이퍼리퀴드의 부상</a></li><li><a href="#sec-2">기술적 혁신과 한계</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>VC 없이 100% 커뮤니티 에어드랍 + 수수료 99% HYPE 바이백·소각</li><li>온체인 오더북 + 0.2초 완결성으로 CEX 수준의 UX 구현</li><li>HLP: 커뮤니티 소유 마켓 메이커 금고 — 편리하지만 손실도 커뮤니티가 부담</li><li>약점: 재단이 검증자 80% 통제, 코드 비공개, 중앙화 API 의존</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>dYdX 몰락과 하이퍼리퀴드의 부상</h2>
+        <div class="section-body">dYdX는 막대한 수수료 수익을 회사가 독식하고 토큰 홀더에게 가치가 없어 붕괴했습니다. 하이퍼리퀴드는 이 빈틈을 파고들어 수수료의 99%를 <span class="term">HYPE 바이백·소각<span class="term-tip">거래소 수수료로 시장에서 자사 토큰을 매수해 영구 소각. 토큰 희소성을 지속적으로 높이는 구조</span></span>에 투자했습니다. 출시 초 2달러 토큰이 단기간에 60달러로 치솟으며 강력한 선순환을 만들었습니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>기술적 혁신과 한계</h2>
+        <div class="section-body"><span class="term">하이퍼BFT<span class="term-tip">텐더민트를 개조한 자체 합의 알고리즘. 0.2초 완결성, 초당 20만 건 처리</span></span>로 0.2초 완결성과 초당 20만 건 처리를 달성했습니다. <span class="term">HLP (Hyperliquidity Provider)<span class="term-tip">커뮤니티 소유의 유동성 금고. 예치자들이 마켓 메이킹 수익을 받지만, 청산 손실도 공동 부담</span></span>는 커뮤니티가 마켓 메이킹 역할을 하는 혁신이지만, 대폭락장에서 막대한 손실을 예치자들이 떠안는 리스크가 있습니다.</div>
+        
+        <div class="card warn">
+            <h3>중앙화 리스크</h3>
+            <div>검증자 지분 80%+를 재단이 통제, 노드 코드 비공개(검증자들이 자신이 실행하는 코드를 검증 못 함), 중앙화 API 서버 과부하 시 수십 분 먹통 발생.</div>
+          </div>
+        
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-09">← CH 09 스테이블코인 &amp; RWA</a>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-11">CH 11 NFT →</a>
+    </nav>
+  </main>
+</body>
+</html>

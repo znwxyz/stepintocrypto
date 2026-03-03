@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 07 탈중앙화 금융 (DeFi) | Step into Crypto</title>
+  <meta name="description" content="유니스왑이 발명한 AMM (자동화된 마켓 메이커) 의 핵심 공식은:" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-07" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 07 탈중앙화 금융 (DeFi) | Step into Crypto" />
+  <meta property="og:description" content="유니스왑이 발명한 AMM (자동화된 마켓 메이커) 의 핵심 공식은:" />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-07" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 07 탈중앙화 금융 (DeFi) | Step into Crypto" />
+  <meta name="twitter:description" content="유니스왑이 발명한 AMM (자동화된 마켓 메이커) 의 핵심 공식은:" />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"탈중앙화 금융 (DeFi) - Step into Crypto","description":"유니스왑이 발명한 AMM (자동화된 마켓 메이커) 의 핵심 공식은:","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-07","url":"https://stepintocrypto.xyz/chapter-07","position":8,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 07</span>
+      <h1>탈중앙화 금융 (DeFi)</h1>
+      <p class="subtitle">스마트 컨트랙트로 돌아가는 병렬 금융</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">AMM과 x*y=k 공식</a></li><li><a href="#sec-2">대출 프로토콜과 자동 청산</a></li><li><a href="#sec-3">오라클과 플래시론의 위험</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>AMM 공식 x*y=k: 구슬 비유로 이해하는 유동성 풀</li><li>슬리피지가 오히려 안전장치 — 유동성 고갈을 수학적으로 방지</li><li>에이브(Aave): 초과 담보 대출, 건강 지수 1 미만 시 자동 청산</li><li>오라클 + 플래시론 조합 = 디파이 최대 취약점</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>AMM과 x*y=k 공식</h2>
+        <div class="section-body">유니스왑이 발명한 <span class="term">AMM (자동화된 마켓 메이커)<span class="term-tip">호가창 없이 수학 공식으로 자동으로 가격을 결정하는 탈중앙화 거래 방식</span></span>의 핵심 공식은:</div>
+        <div class="formula">x × y = k (불변의 상수)</div><div class="formula-note">유동성 풀에 이더리움(x)과 USDC(y)의 곱은 항상 k로 유지됩니다. 이더리움을 많이 사면 이더리움이 희귀해져 가격이 기하급수적으로 올라갑니다. 이 가격 충격을 <span class="term">슬리피지 (Slippage)<span class="term-tip">대량 거래 시 AMM 공식에 의해 발생하는 예상보다 불리한 가격 변동. 오히려 풀 고갈을 막는 안전장치 역할</span></span>라고 하며, 뱅크런을 수학적으로 방지합니다.</div>
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>대출 프로토콜과 자동 청산</h2>
+        <div class="section-body"><span class="term">에이브 (Aave)<span class="term-tip">이더리움 기반 대표 대출 프로토콜. 초과 담보 원칙으로 운영. 담보 가치가 대출액에 근접하면 자동 청산</span></span> 같은 프로토콜은 신용 평가 없이 <span class="term">초과 담보<span class="term-tip">빌리는 금액보다 더 많은 가치의 담보를 맡겨야 하는 구조. 무허가 대출을 가능하게 하는 핵심</span></span>만으로 대출을 제공합니다. 담보 가치 하락 시 건강 지수가 1 미만이 되면, 스마트 컨트랙트가 자동으로 담보를 시장가 5~10% 할인해 청산합니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-3">
+        <h2>오라클과 플래시론의 위험</h2>
+        <div class="section-body"><span class="term">오라클 (Oracle)<span class="term-tip">체인링크·파스 등. 현실 세계의 가격 데이터를 블록체인으로 가져오는 통로. 조작 시 프로토콜 전체 붕괴</span></span>은 현실 가격을 블록체인으로 가져오는 통로입니다. 해커들은 <span class="term">플래시 론 (Flash Loan)<span class="term-tip">단일 트랜잭션 내에서 담보 없이 수백억 원을 빌려 차익을 내고 즉시 갚는 디파이 특유의 기능. 선악 양용</span></span>으로 수백억 원을 순식간에 빌려 얕은 풀 가격을 조작하고, 오라클이 이를 진짜 가격으로 착각하도록 유도해 프로토콜의 모든 자금을 탈취합니다.</div>
+        
+        <div class="card warn">
+            <h3>공격 패턴</h3>
+            <div>플래시론 → 얕은 DEX 풀 가격 100배 조작 → 오라클이 조작 가격 전달 → 부풀려진 담보로 대출 풀 전액 탈취 → 플래시론 상환 → 이익만 챙겨 도주</div>
+          </div>
+        
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-06">← CH 06 시장 구조와 트레이딩</a>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-08">CH 08 MEV →</a>
+    </nav>
+  </main>
+</body>
+</html>

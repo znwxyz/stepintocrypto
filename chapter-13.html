@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 13 DePIN | Step into Crypto</title>
+  <meta name="description" content="DePIN 은 통신사가 수조 원을 투자해 인프라를 깔던 방식을 뒤집습니다. 헬륨 (Helium) 은 일반인들에게 토큰을 지급해 글로벌 IoT 통신망을 만들었고, 하이브매퍼 (Hivemapper) 는 우버 기사들의 대시캠으로 구글 스트리트뷰를 위협합니다." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-13" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 13 DePIN | Step into Crypto" />
+  <meta property="og:description" content="DePIN 은 통신사가 수조 원을 투자해 인프라를 깔던 방식을 뒤집습니다. 헬륨 (Helium) 은 일반인들에게 토큰을 지급해 글로벌 IoT 통신망을 만들었고, 하이브매퍼 (Hivemapper) 는 우버 기사들의 대시캠으로 구글 스트리트뷰를 위협합니다." />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-13" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 13 DePIN | Step into Crypto" />
+  <meta name="twitter:description" content="DePIN 은 통신사가 수조 원을 투자해 인프라를 깔던 방식을 뒤집습니다. 헬륨 (Helium) 은 일반인들에게 토큰을 지급해 글로벌 IoT 통신망을 만들었고, 하이브매퍼 (Hivemapper) 는 우버 기사들의 대시캠으로 구글 스트리트뷰를 위협합니다." />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DePIN - Step into Crypto","description":"DePIN 은 통신사가 수조 원을 투자해 인프라를 깔던 방식을 뒤집습니다. 헬륨 (Helium) 은 일반인들에게 토큰을 지급해 글로벌 IoT 통신망을 만들었고, 하이브매퍼 (Hivemapper) 는 우버 기사들의 대시캠으로 구글 스트리트뷰를 위협합니다.","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-13","url":"https://stepintocrypto.xyz/chapter-13","position":14,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 13</span>
+      <h1>DePIN</h1>
+      <p class="subtitle">토큰으로 현실 인프라를 깔다</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">DePIN의 역발상</a></li><li><a href="#sec-2">콜드 스타트와 지속 가능성</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>Top-down(통신사) → Bottom-up(개인+토큰 보상) 인프라 구축 패러다임 전환</li><li>헬륨: 일반인 공유기로 200개국 100만+ IoT 통신망 구축</li><li>콜드 스타트 문제 = 토큰 인플레이션 보상으로 해결 (→ 실제 매출로 연결 필수)</li><li>파일코인: 복제 증명 + 시공간 증명으로 법정 소송 없이 계약 강제</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>DePIN의 역발상</h2>
+        <div class="section-body"><span class="term">DePIN<span class="term-tip">Decentralized Physical Infrastructure Networks. 토큰 인센티브로 개인들이 실제 물리적 인프라(통신망, 저장소, 지도 등)를 구축하는 모델</span></span>은 통신사가 수조 원을 투자해 인프라를 깔던 방식을 뒤집습니다. <span class="term">헬륨 (Helium)<span class="term-tip">일반인들이 거실에 무선 공유기를 설치하면 HNT 토큰을 지급. 단기간에 전 세계 200개국 100만+ IoT 통신망 구축</span></span>은 일반인들에게 토큰을 지급해 글로벌 IoT 통신망을 만들었고, <span class="term">하이브매퍼 (Hivemapper)<span class="term-tip">택시·우버 기사들의 대시캠 영상으로 구글 스트리트뷰보다 빠른 속도로 전 세계 도로 지도 제작</span></span>는 우버 기사들의 대시캠으로 구글 스트리트뷰를 위협합니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>콜드 스타트와 지속 가능성</h2>
+        <div class="section-body">토큰 보상이 초기 인프라 구축 보조금 역할을 하지만, 장기적으로는 실제 B2B 고객의 유료 사용(Real Revenue)이 필요합니다. <span class="term">파일코인 (Filecoin)<span class="term-tip">분산 클라우드 저장소 DePIN. 복제 증명과 시공간 증명으로 데이터 보관을 암호학적으로 강제</span></span>는 복제 증명과 시공간 증명으로 데이터 보관을 코드로 강제합니다. 위치 조작(GPS Spoofing) 악성 유저 탐지가 최대 기술 과제입니다.</div>
+        
+        
+        
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-12">← CH 12 DAO와 토큰 경제학</a>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-14">CH 14 양자 내성 →</a>
+    </nav>
+  </main>
+</body>
+</html>

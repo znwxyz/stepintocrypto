@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 15 예측 시장 | Step into Crypto</title>
+  <meta name="description" content="폴리마켓 (Polymarket) 같은 플랫폼에서 &quot;A 후보 당선 토큰&quot;이 45센트에 거래된다면, 시장은 당선 확률을 45%로 본 것입니다. 전화 여론조사 응답률이 5% 미만인 현실에서, 자신의 돈을 걸면 사람들은 더 정직하고 날카롭게 정보를 활용합니다. 학계 연구도 돈" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-15" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 15 예측 시장 | Step into Crypto" />
+  <meta property="og:description" content="폴리마켓 (Polymarket) 같은 플랫폼에서 &quot;A 후보 당선 토큰&quot;이 45센트에 거래된다면, 시장은 당선 확률을 45%로 본 것입니다. 전화 여론조사 응답률이 5% 미만인 현실에서, 자신의 돈을 걸면 사람들은 더 정직하고 날카롭게 정보를 활용합니다. 학계 연구도 돈" />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-15" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 15 예측 시장 | Step into Crypto" />
+  <meta name="twitter:description" content="폴리마켓 (Polymarket) 같은 플랫폼에서 &quot;A 후보 당선 토큰&quot;이 45센트에 거래된다면, 시장은 당선 확률을 45%로 본 것입니다. 전화 여론조사 응답률이 5% 미만인 현실에서, 자신의 돈을 걸면 사람들은 더 정직하고 날카롭게 정보를 활용합니다. 학계 연구도 돈" />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"예측 시장 - Step into Crypto","description":"폴리마켓 (Polymarket) 같은 플랫폼에서 \"A 후보 당선 토큰\"이 45센트에 거래된다면, 시장은 당선 확률을 45%로 본 것입니다. 전화 여론조사 응답률이 5% 미만인 현실에서, 자신의 돈을 걸면 사람들은 더 정직하고 날카롭게 정보를 활용합니다. 학계 연구도 돈이 걸린 예측 시장","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-15","url":"https://stepintocrypto.xyz/chapter-15","position":16,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 15</span>
+      <h1>예측 시장</h1>
+      <p class="subtitle">돈이 걸리면 거짓말하지 않는다</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">대중의 지혜와 시장 메커니즘</a></li><li><a href="#sec-2">왜 탈중앙화인가</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>폴리마켓: 실제 돈 베팅 → 전문가 분석·여론조사보다 정확한 확률 제공</li><li>토큰 가격 = 확률 (45센트 = 45% 당선 확률)</li><li>탈중앙화 예측 시장 = 운영자 신뢰 불필요 + 검열 저항성</li><li>단순 도박이 아닌 실시간 확률 정보 인프라로서의 사회적 가치</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>대중의 지혜와 시장 메커니즘</h2>
+        <div class="section-body"><span class="term">폴리마켓 (Polymarket)<span class="term-tip">탈중앙화 예측 시장 플랫폼. 선거·금리·스포츠 등 다양한 이벤트에 실제 자금을 베팅해 확률을 형성</span></span> 같은 플랫폼에서 "A 후보 당선 토큰"이 45센트에 거래된다면, 시장은 당선 확률을 45%로 본 것입니다. 전화 여론조사 응답률이 5% 미만인 현실에서, 자신의 돈을 걸면 사람들은 더 정직하고 날카롭게 정보를 활용합니다. 학계 연구도 돈이 걸린 예측 시장이 전문가 분석보다 더 정확함을 지속적으로 확인합니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>왜 탈중앙화인가</h2>
+        <div class="section-body">사설 베팅 사이트는 운영자가 돈을 들고 도망치거나 정부 압력으로 민감한 이슈 베팅을 강제로 닫을 수 있습니다. 탈중앙화 예측 시장은 <span class="term">오라클<span class="term-tip">결과를 외부에서 검증해 스마트 컨트랙트가 자동으로 당첨금을 분배. 운영자를 신뢰할 필요 없음</span></span>이 결과를 판단해 자동 분배하므로 운영자를 믿을 필요가 없습니다. 프론트엔드가 차단되어도 프로토콜 자체는 멈추지 않는 강력한 <span class="term">검열 저항성<span class="term-tip">스마트 컨트랙트로 구동되어 특정 기관이 서비스를 강제로 종료할 수 없는 특성</span></span>이 핵심 가치입니다.</div>
+        
+        <div class="card info">
+            <h3>사회적 가치</h3>
+            <div>예측 시장은 선거 확률만 알려주는 것이 아닙니다. 금리 결정, 기후 변화 정책, 기업 실적 등 불확실한 미래 정보를 가격으로 환산해 사회에 '실시간 확률 인프라'를 제공합니다.</div>
+          </div>
+        
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-14">← CH 14 양자 내성</a>
+      <a href="/chapters">전체 챕터</a>
+      <span></span>
+    </nav>
+  </main>
+</body>
+</html>

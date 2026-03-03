@@ -75,3 +75,23 @@ ui = initUI({
   },
   onAskAI: (question) => assistant.ask(question),
 });
+
+// ---- Agentation (dev only) ----
+if (import.meta.env.DEV) {
+  try {
+    const [{ createRoot }, { createElement }, { Agentation }] = await Promise.all([
+      import('react-dom/client'),
+      import('react'),
+      import('agentation'),
+    ]);
+
+    const el = document.createElement('div');
+    el.id = '__agentation__';
+    document.body.appendChild(el);
+    createRoot(el).render(createElement(Agentation));
+
+    console.info('[Agentation] mounted');
+  } catch (error) {
+    console.error('[Agentation] failed to mount', error);
+  }
+}

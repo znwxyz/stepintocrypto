@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 06 시장 구조와 트레이딩 | Step into Crypto</title>
+  <meta name="description" content="무기한 선물 (Perpetual Futures) 는 만기가 없는 혁신적 상품입니다. 펀딩비 (Funding Rate) 는 8시간마다 롱-숏 간 이자를 교환해 선물가와 현물가를 일치시키는 천재적 메커니즘입니다. 강세장에서 펀딩비는 연 50~100%까지 치솟습니다." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-06" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 06 시장 구조와 트레이딩 | Step into Crypto" />
+  <meta property="og:description" content="무기한 선물 (Perpetual Futures) 는 만기가 없는 혁신적 상품입니다. 펀딩비 (Funding Rate) 는 8시간마다 롱-숏 간 이자를 교환해 선물가와 현물가를 일치시키는 천재적 메커니즘입니다. 강세장에서 펀딩비는 연 50~100%까지 치솟습니다." />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-06" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 06 시장 구조와 트레이딩 | Step into Crypto" />
+  <meta name="twitter:description" content="무기한 선물 (Perpetual Futures) 는 만기가 없는 혁신적 상품입니다. 펀딩비 (Funding Rate) 는 8시간마다 롱-숏 간 이자를 교환해 선물가와 현물가를 일치시키는 천재적 메커니즘입니다. 강세장에서 펀딩비는 연 50~100%까지 치솟습니다." />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"시장 구조와 트레이딩 - Step into Crypto","description":"무기한 선물 (Perpetual Futures) 는 만기가 없는 혁신적 상품입니다. 펀딩비 (Funding Rate) 는 8시간마다 롱-숏 간 이자를 교환해 선물가와 현물가를 일치시키는 천재적 메커니즘입니다. 강세장에서 펀딩비는 연 50~100%까지 치솟습니다.","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-06","url":"https://stepintocrypto.xyz/chapter-06","position":7,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 06</span>
+      <h1>시장 구조와 트레이딩</h1>
+      <p class="subtitle">기관이 실제로 돈을 버는 방법</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">무기한 선물과 펀딩비 메커니즘</a></li><li><a href="#sec-2">베이시스 트레이딩: 기관의 무위험 수익</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>무기한 선물 (Perp) = 만기 없는 선물 계약, 펀딩비로 현물가에 고정</li><li>베이시스 트레이딩 = 현물 매수 + 선물 숏 → 델타 중립 + 펀딩비 수취</li><li>비트코인 현물 ETF(2024 승인) = 기관 자금의 크립토 진입 통로</li><li>펀딩비가 연 50~100% → 베이시스 트레이더에게 '현금 복사기'</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>무기한 선물과 펀딩비 메커니즘</h2>
+        <div class="section-body"><span class="term">무기한 선물 (Perpetual Futures)<span class="term-tip">만기일이 없는 선물 계약. 크립토 업계가 발명. 현물 가격과의 괴리를 펀딩비로 조정</span></span>는 만기가 없는 혁신적 상품입니다. <span class="term">펀딩비 (Funding Rate)<span class="term-tip">선물 가격이 현물보다 비싸면 롱이 숏에게, 반대면 숏이 롱에게 매 8시간마다 지불하는 이자. 두 가격을 자석처럼 붙게 함</span></span>는 8시간마다 롱-숏 간 이자를 교환해 선물가와 현물가를 일치시키는 천재적 메커니즘입니다. 강세장에서 펀딩비는 연 50~100%까지 치솟습니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>베이시스 트레이딩: 기관의 무위험 수익</h2>
+        <div class="section-body">기관들의 핵심 전략인 <span class="term">베이시스 트레이딩<span class="term-tip">현물 매수 + 선물 공매도를 동시에 취해 가격 방향성 위험을 0으로 만들고, 펀딩비 수익만 챙기는 시장 중립 전략</span></span>은 가격 등락에 무관하게 펀딩비를 수취합니다. 100억 현물 매수 + 100억 선물 숏 = <span class="term">델타 중립 (Delta Neutral)<span class="term-tip">가격이 오르든 내리든 포지션 가치가 변하지 않는 상태. 방향성 리스크 = 0</span></span> 상태에서 연 50%의 펀딩비를 수취합니다. 전통 금융 채권 이자 연 5%와 비교해보면 얼마나 강력한지 알 수 있습니다.</div>
+        
+        <div class="card success">
+            <h3>2024년 게임 체인저</h3>
+            <div>비트코인·이더리움 현물 ETF 승인으로 연기금·뮤추얼 펀드가 지갑 없이 기존 주식 계좌로 크립토 투자 가능. 마이크로스트래티지의 전환사채-비트코인 전략도 대성공.</div>
+          </div>
+        
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-05">← CH 05 자산 보관</a>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-07">CH 07 탈중앙화 금융 (DeFi) →</a>
+    </nav>
+  </main>
+</body>
+</html>

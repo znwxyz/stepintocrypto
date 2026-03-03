@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 11 NFT | Step into Crypto</title>
+  <meta name="description" content="NFT는 디지털 재산권을 분해합니다: 토큰 통제권 (블록체인 장부), 출처 증명 (작가 지갑에서 발행), 콘텐츠 데이터 (IPFS/Arweave 등 외부 저장), 사용 권한 (오프체인 법률·라이선스). 블록체인에 기록된 것은 &#39;소유권 증명&#39;이지 이미지 파일 자체가 아닙" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-11" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 11 NFT | Step into Crypto" />
+  <meta property="og:description" content="NFT는 디지털 재산권을 분해합니다: 토큰 통제권 (블록체인 장부), 출처 증명 (작가 지갑에서 발행), 콘텐츠 데이터 (IPFS/Arweave 등 외부 저장), 사용 권한 (오프체인 법률·라이선스). 블록체인에 기록된 것은 &#39;소유권 증명&#39;이지 이미지 파일 자체가 아닙" />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-11" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 11 NFT | Step into Crypto" />
+  <meta name="twitter:description" content="NFT는 디지털 재산권을 분해합니다: 토큰 통제권 (블록체인 장부), 출처 증명 (작가 지갑에서 발행), 콘텐츠 데이터 (IPFS/Arweave 등 외부 저장), 사용 권한 (오프체인 법률·라이선스). 블록체인에 기록된 것은 &#39;소유권 증명&#39;이지 이미지 파일 자체가 아닙" />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"NFT - Step into Crypto","description":"NFT는 디지털 재산권을 분해합니다: 토큰 통제권 (블록체인 장부), 출처 증명 (작가 지갑에서 발행), 콘텐츠 데이터 (IPFS/Arweave 등 외부 저장), 사용 권한 (오프체인 법률·라이선스). 블록체인에 기록된 것은 '소유권 증명'이지 이미지 파일 자체가 아닙니다.","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-11","url":"https://stepintocrypto.xyz/chapter-11","position":12,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 11</span>
+      <h1>NFT</h1>
+      <p class="subtitle">디지털 소유권의 재정의</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">소유권의 4가지 레이어</a></li><li><a href="#sec-2">마켓플레이스 전쟁과 부족 신호</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>NFT = 이미지 소유 X, 블록체인 소유권 기록 O — 데이터는 외부에 있음</li><li>ERC-721(고유 토큰) vs ERC-1155(다중 토큰) vs 솔라나 압축 NFT</li><li>블루칩 PFP = 부족적 신호 도구 (디지털 에르메스 가방)</li><li>블러(Blur)의 로열티 0% 전략이 오픈씨를 항복시킨 사례 — 기술적 강제 불가</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>소유권의 4가지 레이어</h2>
+        <div class="section-body">NFT는 디지털 재산권을 분해합니다: <b style="color:var(--text-bright)">토큰 통제권</b>(블록체인 장부), <b style="color:var(--text-bright)">출처 증명</b>(작가 지갑에서 발행), <b style="color:var(--text-bright)">콘텐츠 데이터</b>(<span class="term">IPFS/Arweave<span class="term-tip">분산 파일 저장 시스템. NFT 이미지 파일을 블록체인 외부에 저장하는 데 활용</span></span> 등 외부 저장), <b style="color:var(--text-bright)">사용 권한</b>(오프체인 법률·라이선스). 블록체인에 기록된 것은 '소유권 증명'이지 이미지 파일 자체가 아닙니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>마켓플레이스 전쟁과 부족 신호</h2>
+        <div class="section-body"><span class="term">블러 (Blur)<span class="term-tip">로열티를 0%로 낮추고 전문 트레이더에게 BLUR 토큰을 대량 배포해 오픈씨를 제친 NFT 마켓플레이스</span></span>는 로열티를 사실상 0%로 만들고 전문 트레이더에게 토큰을 뿌려 시장 1위를 탈환했습니다. ERC-721 기술 자체에 로열티 강제 코드가 없기 때문에 오픈씨도 항복할 수밖에 없었습니다. 크립토펑크·보어드 에이프 같은 블루칩 PFP는 롤렉스·에르메스처럼 부유한 커뮤니티 소속을 과시하는 <span class="term">부족적 신호 (Tribal Signaling)<span class="term-tip">배타적 커뮤니티 멤버십을 과시하는 사회적 도구. NFT 가격의 실질적 동인 중 하나</span></span> 역할을 합니다.</div>
+        
+        
+        
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-10">← CH 10 하이퍼리퀴드</a>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-12">CH 12 DAO와 토큰 경제학 →</a>
+    </nav>
+  </main>
+</body>
+</html>

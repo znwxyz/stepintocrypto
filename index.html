@@ -1930,6 +1930,66 @@
     .cta-btn { justify-content: center; }
   }
 
+  .chapter-library {
+    margin-top: 48px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(0, 212, 255, 0.04);
+  }
+
+  .chapter-library-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+
+  .chapter-library-desc {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .chapter-library-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .chapter-library-links a {
+    display: block;
+    border: 1px solid rgba(30, 58, 95, 0.8);
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+
+  .chapter-library-links a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(0, 212, 255, 0.08);
+  }
+
+  .chapter-library-hub {
+    margin-top: 12px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
+    .chapter-library-links {
+      grid-template-columns: 1fr;
+    }
+  }
+
   /* FOOTER LEGAL */
   .site-footer {
     margin-top: 12px;
@@ -2268,6 +2328,32 @@
 
     <!-- chapters injected by JS -->
     <div id="chapters-root"></div>
+
+    <section class="chapter-library" aria-labelledby="chapter-library-title">
+      <h2 class="chapter-library-title" id="chapter-library-title">텍스트 챕터 페이지 (검색엔진용)</h2>
+      <p class="chapter-library-desc">아래 링크는 챕터 내용을 정적 HTML로 제공하는 페이지입니다. 검색엔진/애드센스 봇이 자바스크립트 없이도 본문을 직접 읽을 수 있습니다.</p>
+      <ul class="chapter-library-links">
+        <li><a href="/chapter-00">CH 00 · 머리말</a></li>
+        <li><a href="/chapter-01">CH 01 · 비트코인</a></li>
+        <li><a href="/chapter-02">CH 02 · 이더리움</a></li>
+        <li><a href="/chapter-03">CH 03 · 솔라나</a></li>
+        <li><a href="/chapter-04">CH 04 · L1 아키텍처</a></li>
+        <li><a href="/chapter-05">CH 05 · 자산 보관</a></li>
+        <li><a href="/chapter-06">CH 06 · 시장 구조와 트레이딩</a></li>
+        <li><a href="/chapter-07">CH 07 · 탈중앙화 금융 (DeFi)</a></li>
+        <li><a href="/chapter-08">CH 08 · MEV</a></li>
+        <li><a href="/chapter-09">CH 09 · 스테이블코인 &amp; RWA</a></li>
+        <li><a href="/chapter-10">CH 10 · 하이퍼리퀴드</a></li>
+        <li><a href="/chapter-11">CH 11 · NFT</a></li>
+        <li><a href="/chapter-12">CH 12 · DAO와 토큰 경제학</a></li>
+        <li><a href="/chapter-13">CH 13 · DePIN</a></li>
+        <li><a href="/chapter-14">CH 14 · 양자 내성</a></li>
+        <li><a href="/chapter-15">CH 15 · 예측 시장</a></li>
+      </ul>
+      <div class="chapter-library-hub">
+        <a href="/chapters">전체 챕터 허브 페이지 보기</a>
+      </div>
+    </section>
 
     <!-- BOTTOM CTA -->
     <div class="bottom-cta">

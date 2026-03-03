@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 02 이더리움 | Step into Crypto</title>
+  <meta name="description" content="이더리움의 심장부 EVM (이더리움 가상 머신) 은 솔리디티(Solidity) 로 작성된 코드를 실행합니다. 무한 루프 악성 코드 방지를 위해 모든 연산에 가스 (Gas) 를 부과합니다. EIP-1559 업그레이드로 기본 수수료가 소각되어 ETH가 디플레이션 자산이 되" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-02" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 02 이더리움 | Step into Crypto" />
+  <meta property="og:description" content="이더리움의 심장부 EVM (이더리움 가상 머신) 은 솔리디티(Solidity) 로 작성된 코드를 실행합니다. 무한 루프 악성 코드 방지를 위해 모든 연산에 가스 (Gas) 를 부과합니다. EIP-1559 업그레이드로 기본 수수료가 소각되어 ETH가 디플레이션 자산이 되" />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-02" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 02 이더리움 | Step into Crypto" />
+  <meta name="twitter:description" content="이더리움의 심장부 EVM (이더리움 가상 머신) 은 솔리디티(Solidity) 로 작성된 코드를 실행합니다. 무한 루프 악성 코드 방지를 위해 모든 연산에 가스 (Gas) 를 부과합니다. EIP-1559 업그레이드로 기본 수수료가 소각되어 ETH가 디플레이션 자산이 되" />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"이더리움 - Step into Crypto","description":"이더리움의 심장부 EVM (이더리움 가상 머신) 은 솔리디티(Solidity) 로 작성된 코드를 실행합니다. 무한 루프 악성 코드 방지를 위해 모든 연산에 가스 (Gas) 를 부과합니다. EIP-1559 업그레이드로 기본 수수료가 소각되어 ETH가 디플레이션 자산이 되었습니다.","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-02","url":"https://stepintocrypto.xyz/chapter-02","position":3,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 02</span>
+      <h1>이더리움</h1>
+      <p class="subtitle">월드 컴퓨터와 스마트 컨트랙트</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">EVM과 가스(Gas)</a></li><li><a href="#sec-2">더 머지와 지분 증명(PoS)</a></li><li><a href="#sec-3">롤업(Rollups)과 L2 확장</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>EVM = 전 세계 수천 개 노드에서 동시 실행되는 탈중앙화 컴퓨터</li><li>EIP-1559: 기본 수수료 소각 → ETH를 디플레이션 자산으로</li><li>더 머지(2022): PoW → PoS 전환, 에너지 99.9% 절감</li><li>롤업 (L2): 연산을 외부에서, 결과만 L1에 기록 → 확장성 해결</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>EVM과 가스(Gas)</h2>
+        <div class="section-body">이더리움의 심장부 <span class="term">EVM (이더리움 가상 머신)<span class="term-tip">스마트 컨트랙트 코드를 전 세계 수천 대 노드에서 동시 실행하고 결과를 검증하는 분산 컴퓨팅 환경</span></span>은 <span class="term">솔리디티(Solidity)<span class="term-tip">이더리움 스마트 컨트랙트를 작성하는 주요 프로그래밍 언어. C++, Python과 유사한 문법</span></span>로 작성된 코드를 실행합니다. 무한 루프 악성 코드 방지를 위해 모든 연산에 <span class="term">가스 (Gas)<span class="term-tip">이더리움 연산에 부과되는 수수료. 복잡한 계약일수록 가스비가 더 많이 든다</span></span>를 부과합니다. <span class="term">EIP-1559<span class="term-tip">알고리즘이 혼잡도에 따라 기본 수수료를 자동 결정하고, 이 수수료를 소각해 ETH 공급을 줄이는 업그레이드</span></span> 업그레이드로 기본 수수료가 소각되어 ETH가 디플레이션 자산이 되었습니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>더 머지와 지분 증명(PoS)</h2>
+        <div class="section-body">2022년 9월, <span class="term">더 머지 (The Merge)<span class="term-tip">이더리움이 에너지 낭비적인 PoW(채굴)에서 PoS(스테이킹)로 전환한 역사적 업그레이드. 에너지 소비 99.9% 절감</span></span>로 이더리움은 채굴을 버리고 <span class="term">지분 증명 (PoS)<span class="term-tip">컴퓨팅 파워 대신 보유한 암호화폐를 담보로 맡겨 블록 검증 권한을 얻는 합의 방식</span></span>으로 전환했습니다. 검증자는 최소 32 ETH를 스테이킹해야 하며, 악의적 행동 시 <span class="term">슬래싱 (Slashing)<span class="term-tip">검증자가 악의적 행동이나 오류를 일으키면 담보로 맡긴 ETH를 직접 몰수하는 페널티</span></span> 페널티로 ETH를 몰수당합니다. <span class="term">리도(Lido)<span class="term-tip">소액 사용자들의 ETH를 모아 대신 스테이킹해주는 유동성 스테이킹 프로토콜. stETH 토큰 발행</span></span> 같은 유동성 스테이킹 프로토콜로 32 ETH 없이도 참여 가능합니다.</div>
+        
+        
+        <table>
+            <thead><tr><th>구분</th><th>작업 증명 (비트코인)</th><th>지분 증명 (이더리움)</th></tr></thead>
+            <tbody>
+              <tr><td>보안 원천</td><td>컴퓨팅 연산력 (전기)</td><td>자본 (스테이킹된 코인)</td></tr><tr><td>참여자</td><td>채굴자 (Miner)</td><td>검증자 (Validator)</td></tr><tr><td>블록 권한</td><td>해시 퍼즐 최초 해결자</td><td>지분 비례 무작위 선정</td></tr><tr><td>악의적 행위</td><td>전기 요금 손실 (간접)</td><td>담보금 직접 몰수 (슬래싱)</td></tr>
+            </tbody>
+          </table>
+      </section><section class="section" id="sec-3">
+        <h2>롤업(Rollups)과 L2 확장</h2>
+        <div class="section-body">이더리움은 <span class="term">롤업 (Rollups)<span class="term-tip">무거운 연산은 L2에서 처리하고, 압축된 결과만 L1에 기록해 이더리움 보안을 그대로 활용하는 확장 기술</span></span>으로 확장성을 해결합니다. <b style="color:var(--text-bright)">옵티미스틱 롤업</b>(아비트럼, 옵티미즘)은 거래를 낙관적으로 수용하되 7일 이의 기간을 두고, <b style="color:var(--text-bright)">ZK 롤업</b>(zkSync, 스타크넷)은 수학적 증명으로 즉시 확정합니다. <span class="term">EIP-4844 블롭(Blobs)<span class="term-tip">18일 후 자동 삭제되는 임시 데이터 저장 공간. L2가 데이터를 이더리움에 저장하는 비용을 대폭 낮춤</span></span>으로 L2 수수료를 극적으로 낮췄습니다.</div>
+        
+        
+        
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-01">← CH 01 비트코인</a>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-03">CH 03 솔라나 →</a>
+    </nav>
+  </main>
+</body>
+</html>

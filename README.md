@@ -1,6 +1,22 @@
 # stepintocrypto
 step into crypto
 
+## SEO / AdSense Static Pages
+
+JS 렌더링 없이도 봇이 챕터 본문을 읽을 수 있도록, 아래 명령으로 정적 페이지를 생성합니다.
+
+```bash
+npm run generate:static
+```
+
+생성 파일:
+- `chapter-00.html` ~ `chapter-15.html`
+- `chapters.html`
+- `sitemap.xml`
+- `robots.txt`
+
+`content/chapters.json` 내용을 수정했다면, 배포 전에 위 명령을 다시 실행하세요.
+
 ## Design System
 
 - `design-system/README.md`

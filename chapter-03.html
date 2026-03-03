@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 03 솔라나 | Step into Crypto</title>
+  <meta name="description" content="솔라나는 이더리움과 달리 하드웨어 성능을 극한까지 쥐어짜는 철학을 선택했습니다. 핵심 혁신은 병렬 처리 (Parallel Execution) 입니다. 또한 역사 증명 (PoH) 로 모든 노드가 같은 시계를 보게 해 합의 통신을 줄였습니다. PDA (프로그램 파생 주소)" />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-03" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 03 솔라나 | Step into Crypto" />
+  <meta property="og:description" content="솔라나는 이더리움과 달리 하드웨어 성능을 극한까지 쥐어짜는 철학을 선택했습니다. 핵심 혁신은 병렬 처리 (Parallel Execution) 입니다. 또한 역사 증명 (PoH) 로 모든 노드가 같은 시계를 보게 해 합의 통신을 줄였습니다. PDA (프로그램 파생 주소)" />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-03" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 03 솔라나 | Step into Crypto" />
+  <meta name="twitter:description" content="솔라나는 이더리움과 달리 하드웨어 성능을 극한까지 쥐어짜는 철학을 선택했습니다. 핵심 혁신은 병렬 처리 (Parallel Execution) 입니다. 또한 역사 증명 (PoH) 로 모든 노드가 같은 시계를 보게 해 합의 통신을 줄였습니다. PDA (프로그램 파생 주소)" />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"솔라나 - Step into Crypto","description":"솔라나는 이더리움과 달리 하드웨어 성능을 극한까지 쥐어짜는 철학을 선택했습니다. 핵심 혁신은 병렬 처리 (Parallel Execution) 입니다. 또한 역사 증명 (PoH) 로 모든 노드가 같은 시계를 보게 해 합의 통신을 줄였습니다. PDA (프로그램 파생 주소) 는 에스크로 신뢰","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-03","url":"https://stepintocrypto.xyz/chapter-03","position":4,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 03</span>
+      <h1>솔라나</h1>
+      <p class="subtitle">하드웨어를 극한까지 쥐어짜다</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">핵심 혁신: 병렬 처리와 PoH</a></li><li><a href="#sec-2">성능과 탈중앙화의 트레이드오프</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>병렬 처리 + PoH = 단일 체인에서 초당 수천 건 처리</li><li>모놀리식 아키텍처: L2 없이 원자적 결합성 유지</li><li>높은 하드웨어 요구사항 → 중앙화 압력 (데이터센터급 필요)</li><li>파이어댄서(Firedancer): 네트워크 안정성과 탈중앙화 개선 시도</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>핵심 혁신: 병렬 처리와 PoH</h2>
+        <div class="section-body">솔라나는 이더리움과 달리 하드웨어 성능을 극한까지 쥐어짜는 철학을 선택했습니다. 핵심 혁신은 <span class="term">병렬 처리 (Parallel Execution)<span class="term-tip">트랜잭션이 읽고 쓸 계정을 미리 명시하도록 강제해, 서로 간섭 없는 거래들을 여러 CPU 코어에서 동시 처리</span></span>입니다. 또한 <span class="term">역사 증명 (PoH)<span class="term-tip">해시 함수로 만든 암호학적 '글로벌 시계'. 거래 순서를 명확히 찍어 통신 없이 합의 가능하게 함</span></span>로 모든 노드가 같은 시계를 보게 해 합의 통신을 줄였습니다. <span class="term">PDA (프로그램 파생 주소)<span class="term-tip">프라이빗 키가 없어 스마트 컨트랙트 프로그램만 통제 가능한 주소. 에스크로 신뢰 문제를 암호학으로 해결</span></span>는 에스크로 신뢰 문제를 구조적으로 해결했습니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>성능과 탈중앙화의 트레이드오프</h2>
+        <div class="section-body">솔라나 검증자를 운영하려면 월 수천 달러의 데이터센터급 인프라가 필요합니다. 권력이 소수 대형 운영자에게 집중되는 문제를 보완하기 위해 점프 크립토 주도로 <span class="term">파이어댄서 (Firedancer)<span class="term-tip">솔라나 검증자 클라이언트를 C언어로 백지부터 새로 개발한 독립 프로젝트. 네트워크 안정성과 클라이언트 다양성 제공</span></span>를 개발했습니다. 솔라나의 모놀리식 구조 덕분에 복잡한 디파이를 한 번에 성공시키는 <span class="term">원자적 결합성<span class="term-tip">여러 프로토콜 기능을 단 하나의 트랜잭션으로 묶어 동시 실행하거나, 실패 시 전체 롤백하는 특성</span></span>이 유지되어 밈코인·온체인 오더북 거래가 폭발했습니다.</div>
+        
+        <div class="card info">
+            <h3>알펜글로우 (Alpenglow)</h3>
+            <div>현재 12초대 완결성을 0.1초(나스닥 수준)로 끌어올리기 위해 PoH를 폐기하고 완전히 새로운 합의 알고리즘으로 전환하는 초대형 업그레이드 준비 중.</div>
+          </div>
+        
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-02">← CH 02 이더리움</a>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-04">CH 04 L1 아키텍처 →</a>
+    </nav>
+  </main>
+</body>
+</html>

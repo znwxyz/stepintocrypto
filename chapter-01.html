@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 01 비트코인 | Step into Crypto</title>
+  <meta name="description" content="비트코인은 2009년 1월 3일, 익명의 창시자 사토시 나카모토 가 만든 P2P 전자 현금 시스템입니다. 채굴자들은 SHA-256 해시 함수를 이용해 목표값보다 작은 결과를 찾는 퍼즐을 풀고, 성공하면 새로운 비트코인 보상을 받습니다. 이 과정을 작업 증명 (PoW) " />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-01" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 01 비트코인 | Step into Crypto" />
+  <meta property="og:description" content="비트코인은 2009년 1월 3일, 익명의 창시자 사토시 나카모토 가 만든 P2P 전자 현금 시스템입니다. 채굴자들은 SHA-256 해시 함수를 이용해 목표값보다 작은 결과를 찾는 퍼즐을 풀고, 성공하면 새로운 비트코인 보상을 받습니다. 이 과정을 작업 증명 (PoW) " />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-01" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 01 비트코인 | Step into Crypto" />
+  <meta name="twitter:description" content="비트코인은 2009년 1월 3일, 익명의 창시자 사토시 나카모토 가 만든 P2P 전자 현금 시스템입니다. 채굴자들은 SHA-256 해시 함수를 이용해 목표값보다 작은 결과를 찾는 퍼즐을 풀고, 성공하면 새로운 비트코인 보상을 받습니다. 이 과정을 작업 증명 (PoW) " />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"비트코인 - Step into Crypto","description":"비트코인은 2009년 1월 3일, 익명의 창시자 사토시 나카모토 가 만든 P2P 전자 현금 시스템입니다. 채굴자들은 SHA-256 해시 함수를 이용해 목표값보다 작은 결과를 찾는 퍼즐을 풀고, 성공하면 새로운 비트코인 보상을 받습니다. 이 과정을 작업 증명 (PoW) 이라고 합니다.","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-01","url":"https://stepintocrypto.xyz/chapter-01","position":2,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 01</span>
+      <h1>비트코인</h1>
+      <p class="subtitle">디지털 희소성의 탄생</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">탄생 배경과 작업 증명</a></li><li><a href="#sec-2">UTXO 모델과 공급 구조</a></li><li><a href="#sec-3">확장성: 라이트닝 네트워크와 오디널스</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>2008년 금융위기의 반작용으로 탄생 — 중앙 금융 시스템에 대한 저항</li><li>SHA-256 + PoW = 에너지를 소모해야 블록 생성 가능 → 공격 비용 상승</li><li>2,100만 개 고정 공급 + 4년마다 반감기 = 디스인플레이션 자산</li><li>UTXO 모델로 이중 지불 완벽 방지</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>탄생 배경과 작업 증명</h2>
+        <div class="section-body">비트코인은 2009년 1월 3일, 익명의 창시자 <span class="term">사토시 나카모토<span class="term-tip">비트코인 창시자. 2010년 이후 종적을 감췄으며 신원 불명. 약 100만 개의 비트코인을 보유한 것으로 추정</span></span>가 만든 P2P 전자 현금 시스템입니다. 채굴자들은 <span class="term">SHA-256<span class="term-tip">어떤 데이터를 입력해도 고정 길이의 문자열로 변환하는 암호화 함수. 역추적 불가능</span></span> 해시 함수를 이용해 목표값보다 작은 결과를 찾는 퍼즐을 풀고, 성공하면 새로운 비트코인 보상을 받습니다. 이 과정을 <span class="term">작업 증명 (PoW)<span class="term-tip">Proof of Work. 컴퓨팅 연산력(전기 에너지)으로 블록 생성 권한을 얻는 방식</span></span>이라고 합니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>UTXO 모델과 공급 구조</h2>
+        <div class="section-body">비트코인은 은행 계좌 방식이 아닌 <span class="term">UTXO<span class="term-tip">Unspent Transaction Output. 지갑에 잔액이 아닌 '사용되지 않은 거스름돈 묶음'이 있는 구조. 이중 지불을 원천 차단</span></span> 모델을 사용합니다. 현금 지갑의 5천 원권/1천 원권처럼, 사용할 때 기존 UTXO를 완전히 파괴하고 새 UTXO를 생성합니다. 공급은 약 2,100만 개로 고정, 4년마다 <span class="term">반감기 (Halving)<span class="term-tip">약 21만 블록(4년)마다 채굴 보상이 절반으로 줄어드는 이벤트. 비트코인을 점점 희귀하게 만드는 핵심 설계</span></span>를 통해 보상이 절반씩 줄어듭니다.</div>
+        
+        <div class="card info">
+            <h3>주소 진화</h3>
+            <div>Legacy(1xxx) → P2SH(3xxx) → Native SegWit(bc1q) → Taproot(bc1p) 순서로 진화. Taproot는 복잡한 조건을 단순 결제처럼 숨겨 프라이버시 향상.</div>
+          </div>
+        
+      </section><section class="section" id="sec-3">
+        <h2>확장성: 라이트닝 네트워크와 오디널스</h2>
+        <div class="section-body">비트코인의 느린 처리 속도는 <span class="term">라이트닝 네트워크<span class="term-tip">두 사람 간 오프체인 결제 채널을 열어 소액 결제를 즉시·무료에 가깝게 처리하는 Layer 2 솔루션</span></span>로 해결합니다. 최근엔 <span class="term">오디널스 (Ordinals)<span class="term-tip">사토시에 고유 번호를 매겨 이미지/텍스트를 새겨 넣는 기술. 비트코인 네이티브 NFT를 가능하게 함</span></span>가 등장해 비트코인을 데이터 저장소로 활용하는 실험이 폭발했습니다. BRC-20으로 밈코인 발행도 가능해졌지만 '순수 금융 거래를 방해하는 스팸'이라는 철학적 논쟁도 일으켰습니다.</div>
+        
+        
+        
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-00">← CH 00 머리말</a>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-02">CH 02 이더리움 →</a>
+    </nav>
+  </main>
+</body>
+</html>

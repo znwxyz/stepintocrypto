@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 05 자산 보관 | Step into Crypto</title>
+  <meta name="description" content="자산 보관의 핵심은 퍼블릭 키 / 프라이빗 키 쌍입니다. 소프트웨어 지갑 (메타마스크) 은 편리하지만 취약하고, 하드웨어 지갑 은 인터넷과 차단된 보안 칩에 키를 저장해 원격 해킹이 불가능합니다." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-05" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 05 자산 보관 | Step into Crypto" />
+  <meta property="og:description" content="자산 보관의 핵심은 퍼블릭 키 / 프라이빗 키 쌍입니다. 소프트웨어 지갑 (메타마스크) 은 편리하지만 취약하고, 하드웨어 지갑 은 인터넷과 차단된 보안 칩에 키를 저장해 원격 해킹이 불가능합니다." />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-05" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 05 자산 보관 | Step into Crypto" />
+  <meta name="twitter:description" content="자산 보관의 핵심은 퍼블릭 키 / 프라이빗 키 쌍입니다. 소프트웨어 지갑 (메타마스크) 은 편리하지만 취약하고, 하드웨어 지갑 은 인터넷과 차단된 보안 칩에 키를 저장해 원격 해킹이 불가능합니다." />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"자산 보관 - Step into Crypto","description":"자산 보관의 핵심은 퍼블릭 키 / 프라이빗 키 쌍입니다. 소프트웨어 지갑 (메타마스크) 은 편리하지만 취약하고, 하드웨어 지갑 은 인터넷과 차단된 보안 칩에 키를 저장해 원격 해킹이 불가능합니다.","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-05","url":"https://stepintocrypto.xyz/chapter-05","position":6,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 05</span>
+      <h1>자산 보관</h1>
+      <p class="subtitle">프라이빗 키가 곧 소유권</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">암호학적 기초와 지갑 유형</a></li><li><a href="#sec-2">기관 보관 아키텍처</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>"Not your keys, not your coins" — 프라이빗 키를 갖지 않으면 내 돈이 아님</li><li>시드 구문 12~24단어 = 모든 자산의 마스터 열쇠 → 절대 온라인 저장 금지</li><li>하드웨어 지갑 = 보안 골드 스탠다드 (렛저, 트레저)</li><li>기관 수준: Multisig → MPC → 적격 수탁 순서로 보안 강화</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>암호학적 기초와 지갑 유형</h2>
+        <div class="section-body">자산 보관의 핵심은 <span class="term">퍼블릭 키 / 프라이빗 키<span class="term-tip">퍼블릭 키=자물쇠(주소). 프라이빗 키=열쇠(서명용). 타원 곡선 암호화로 연결되며, 프라이빗 키로 퍼블릭 키를 만들 수 있지만 역산 불가</span></span> 쌍입니다. <span class="term">소프트웨어 지갑 (메타마스크)<span class="term-tip">크롬 확장 프로그램·앱 형태. 편리하지만 악성코드·피싱에 노출 위험</span></span>은 편리하지만 취약하고, <span class="term">하드웨어 지갑<span class="term-tip">렛저·트레저 등. 인터넷과 완전 차단된 보안 칩에 프라이빗 키 저장. 원격 해킹 사실상 불가능</span></span>은 인터넷과 차단된 보안 칩에 키를 저장해 원격 해킹이 불가능합니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>기관 보관 아키텍처</h2>
+        <div class="section-body">기관은 단일 직원에게 키를 맡길 수 없어 체계적인 시스템이 필요합니다.</div>
+        
+        
+        <table>
+            <thead><tr><th>방식</th><th>작동 원리</th><th>특징</th></tr></thead>
+            <tbody>
+              <tr><td>Multisig (다중 서명)</td><td>임원 5명 중 3명 동의 필요</td><td>온체인 투명. 수수료 비싸고 느림</td></tr><tr><td>MPC (다자간 연산)</td><td>키를 수학적 조각으로 분산 보관</td><td>오프체인 서명. 빠르고 유연. 코드 결함 위험</td></tr><tr><td>적격 수탁</td><td>규제 기관에 콜드 스토리지 위탁</td><td>법적 보호. 자금 인출에 며칠 소요</td></tr>
+            </tbody>
+          </table>
+      </section></div>
+
+    <nav class="pager">
+      <a href="/chapter-04">← CH 04 L1 아키텍처</a>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-06">CH 06 시장 구조와 트레이딩 →</a>
+    </nav>
+  </main>
+</body>
+</html>

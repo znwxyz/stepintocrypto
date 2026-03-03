@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CH 00 머리말 | Step into Crypto</title>
+  <meta name="description" content="크립토 공간은 인류가 만든 가장 공격적인 자본주의와 무자비한 능력주의가 지배하는 세계입니다. 전통 금융에는 &#39;관리자 &#39;라는 안전망이 있지만, 크립토엔 없습니다. 자금을 잘못 보내면 영원히 사라지고, 프라이빗 키 를 잃으면 자산도 사라집니다." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
+  <link rel="canonical" href="https://stepintocrypto.xyz/chapter-00" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="CH 00 머리말 | Step into Crypto" />
+  <meta property="og:description" content="크립토 공간은 인류가 만든 가장 공격적인 자본주의와 무자비한 능력주의가 지배하는 세계입니다. 전통 금융에는 &#39;관리자 &#39;라는 안전망이 있지만, 크립토엔 없습니다. 자금을 잘못 보내면 영원히 사라지고, 프라이빗 키 를 잃으면 자산도 사라집니다." />
+  <meta property="og:url" content="https://stepintocrypto.xyz/chapter-00" />
+  <meta property="og:site_name" content="Step into Crypto" />
+  <meta property="og:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CH 00 머리말 | Step into Crypto" />
+  <meta name="twitter:description" content="크립토 공간은 인류가 만든 가장 공격적인 자본주의와 무자비한 능력주의가 지배하는 세계입니다. 전통 금융에는 &#39;관리자 &#39;라는 안전망이 있지만, 크립토엔 없습니다. 자금을 잘못 보내면 영원히 사라지고, 프라이빗 키 를 잃으면 자산도 사라집니다." />
+  <meta name="twitter:image" content="https://stepintocrypto.xyz/og-cover-v2.png?v=20260301" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+  :root {
+    --bg: #050811;
+    --surface: #0d1520;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --accent3: #7fff6b;
+    --text: #c8dff5;
+    --text-bright: #f0f8ff;
+    --text-muted: #7fa0c3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans KR", sans-serif;
+    line-height: 1.7;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; margin-bottom: 18px; }
+  .hero {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .label {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 32px; line-height: 1.2; }
+  .subtitle { margin: 0; color: var(--text-muted); font-size: 14px; }
+  .key-points, .section, .toc, .card, table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .toc, .key-points { padding: 16px; margin-bottom: 14px; }
+  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 17px; color: var(--text-bright); }
+  ul { margin: 0; padding-left: 20px; }
+  .sections { display: grid; gap: 14px; }
+  .section { padding: 18px; }
+  .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
+  .section-body { font-size: 15px; }
+  .formula {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: rgba(127, 255, 107, 0.06);
+    color: var(--accent3);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 18px;
+    text-align: center;
+  }
+  .formula-note { margin-top: 8px; color: var(--text-muted); font-size: 14px; }
+  .card { margin-top: 12px; padding: 12px 14px; }
+  .card h3 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
+  .card.warn h3 { color: var(--accent2); }
+  .card.success { border-color: rgba(127, 255, 107, 0.5); background: rgba(127, 255, 107, 0.08); }
+  .card.success h3 { color: var(--accent3); }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
+  th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 12px; }
+  .pager {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    text-align: center;
+  }
+  .pager a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .hub-list { display: grid; gap: 10px; margin-top: 16px; }
+  .hub-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 14px;
+  }
+  .hub-item h2 { margin: 0 0 6px; font-size: 18px; color: var(--text-bright); }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 14px; }
+</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"머리말 - Step into Crypto","description":"크립토 공간은 인류가 만든 가장 공격적인 자본주의와 무자비한 능력주의가 지배하는 세계입니다. 전통 금융에는 '관리자 '라는 안전망이 있지만, 크립토엔 없습니다. 자금을 잘못 보내면 영원히 사라지고, 프라이빗 키 를 잃으면 자산도 사라집니다.","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-00","url":"https://stepintocrypto.xyz/chapter-00","position":1,"author":{"@type":"Person","name":"Max8"}}</script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="topnav">
+      <a href="/">홈</a>
+      <a href="/chapters">챕터 허브</a>
+      <a href="/guestbook">방명록</a>
+    </nav>
+
+    <header class="hero">
+      <span class="label">CH 00</span>
+      <h1>머리말</h1>
+      <p class="subtitle">왜 크립토를 이해해야 하는가</p>
+    </header>
+
+    <section class="toc">
+      <h2>목차</h2>
+      <ul><li><a href="#sec-1">적대적 환경 (Adversarial Frontier)</a></li><li><a href="#sec-2">편리함의 폭정 vs 절대 주권</a></li></ul>
+    </section>
+
+    <section class="key-points">
+      <h2>핵심 포인트</h2>
+      <ul><li>크립토는 '관리자 없는' 적대적 환경 — 실수에 대한 구제 없음</li><li>편리함의 폭정 vs 절대 주권 — 트레이드오프 이해가 핵심</li><li>비트코인은 '일상의 도구'가 아닌 시스템 붕괴 대비 '화재 보험'</li><li>프로토콜은 도덕 판단을 안 함 — 스스로를 보호하는 기술이 필수</li></ul>
+    </section>
+
+    <div class="sections"><section class="section" id="sec-1">
+        <h2>적대적 환경 (Adversarial Frontier)</h2>
+        <div class="section-body">크립토 공간은 인류가 만든 가장 공격적인 자본주의와 무자비한 능력주의가 지배하는 세계입니다. 전통 금융에는 '<span class="term">관리자<span class="term-tip">은행, 카드사 등 분쟁 해결·복구를 담당하는 중앙 기관</span></span>'라는 안전망이 있지만, 크립토엔 없습니다. 자금을 잘못 보내면 영원히 사라지고, <span class="term">프라이빗 키<span class="term-tip">암호화폐 자산을 통제하는 비밀 난수. 이것을 잃으면 자산에 접근 불가</span></span>를 잃으면 자산도 사라집니다.</div>
+        
+        
+        
+      </section><section class="section" id="sec-2">
+        <h2>편리함의 폭정 vs 절대 주권</h2>
+        <div class="section-body">대부분의 사람들은 문제 발생 시 책임을 물을 수 있는 편리함을 원합니다. 애플페이가 잘 작동하는 안정된 민주주의 국가에서 <span class="term">시드 구문<span class="term-tip">12~24개의 영단어로 구성된 지갑 복구 비밀번호. 이것만 있으면 어떤 기기에서도 지갑 복원 가능</span></span>을 외우고 스스로 은행이 되는 것은 번거롭습니다. 그러나 캐나다 트럭 운전사 시위 당시 계좌 동결 사례처럼, 전통 금융 접근권은 언제든 철회될 수 있는 '특권'입니다.</div>
+        
+        <div class="card warn">
+            <h3>핵심 역설</h3>
+            <div>비트코인의 주권은 필요 없을 때는 번거롭지만, 필요할 때는 유일한 탈출구가 됩니다. 집에 불이 나야 화재 보험의 가치를 압니다.</div>
+          </div>
+        
+      </section></div>
+
+    <nav class="pager">
+      <span></span>
+      <a href="/chapters">전체 챕터</a>
+      <a href="/chapter-01">CH 01 비트코인 →</a>
+    </nav>
+  </main>
+</body>
+</html>
