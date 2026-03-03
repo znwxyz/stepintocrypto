@@ -14,7 +14,7 @@ step into crypto
    - `window.SIC_SUPABASE_ANON_KEY`
 3. SQL Editor에서 관리자 삭제 비밀번호 설정 (원하는 값으로 변경)
    - `update app_private.guestbook_admin_secret set password_hash = crypt('YOUR_PASSWORD', gen_salt('bf')) where id = true;`
-4. `guestbook.html` 접속 후 목록 조회/등록/삭제 동작 확인 (`delete_guestbook_entry` RPC 포함)
+4. `guestbook.html` 접속 후 목록 조회/등록/삭제/대댓글 동작 확인 (`delete_guestbook_entry` RPC 포함)
 5. `supabase/guestbook.sql`에는 기본 스팸 방어가 포함됩니다.
    - 동일 IP 기준 60초 내 3회 초과 작성 차단
    - 동일 이름/내용 24시간 중복 등록 차단

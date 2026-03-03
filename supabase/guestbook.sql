@@ -10,6 +10,21 @@ create table if not exists public.guestbook_entries (
 alter table public.guestbook_entries enable row level security;
 alter table public.guestbook_entries add column if not exists created_ip inet;
 alter table public.guestbook_entries add column if not exists created_ua text;
+alter table public.guestbook_entries add column if not exists parent_id uuid;
+create index if not exists guestbook_entries_parent_id_idx on public.guestbook_entries(parent_id);
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'guestbook_entries_parent_fk'
+  ) then
+    alter table public.guestbook_entries
+      add constraint guestbook_entries_parent_fk
+      foreign key (parent_id) references public.guestbook_entries(id) on delete cascade;
+  end if;
+end $$;
 
 create schema if not exists app_private;
 
@@ -102,7 +117,7 @@ before insert on public.guestbook_entries
 for each row
 execute function public.set_guestbook_request_meta();
 
-create or replace function public.can_insert_guestbook_entry(p_name text, p_message text)
+create or replace function public.can_insert_guestbook_entry(p_name text, p_message text, p_parent_id uuid default null)
 returns boolean
 language plpgsql
 security definer
@@ -112,6 +127,7 @@ declare
   req_ip inet;
   recent_ip_count integer;
   duplicate_count integer;
+  parent_parent_id uuid;
 begin
   if p_name is null or char_length(trim(p_name)) = 0 then
     return false;
@@ -139,10 +155,27 @@ begin
   from public.guestbook_entries
   where lower(name) = lower(trim(p_name))
     and lower(message) = lower(trim(p_message))
+    and coalesce(parent_id, '00000000-0000-0000-0000-000000000000'::uuid)
+      = coalesce(p_parent_id, '00000000-0000-0000-0000-000000000000'::uuid)
     and created_at > now() - interval '24 hours';
 
   if duplicate_count > 0 then
     return false;
+  end if;
+
+  if p_parent_id is not null then
+    select parent_id
+      into parent_parent_id
+    from public.guestbook_entries
+    where id = p_parent_id;
+
+    if not found then
+      return false;
+    end if;
+
+    if parent_parent_id is not null then
+      return false;
+    end if;
   end if;
 
   return true;
@@ -181,8 +214,8 @@ revoke all on function public.delete_guestbook_entry(uuid, text) from public;
 grant execute on function public.delete_guestbook_entry(uuid, text) to anon;
 grant execute on function public.delete_guestbook_entry(uuid, text) to authenticated;
 revoke all on function public.is_guestbook_admin() from public;
-grant execute on function public.can_insert_guestbook_entry(text, text) to anon;
-grant execute on function public.can_insert_guestbook_entry(text, text) to authenticated;
+grant execute on function public.can_insert_guestbook_entry(text, text, uuid) to anon;
+grant execute on function public.can_insert_guestbook_entry(text, text, uuid) to authenticated;
 grant execute on function public.request_client_ip() to anon;
 grant execute on function public.request_client_ip() to authenticated;
 
@@ -214,7 +247,7 @@ begin
     on public.guestbook_entries
     for insert
     to anon
-    with check (public.can_insert_guestbook_entry(name, message));
+    with check (public.can_insert_guestbook_entry(name, message, parent_id));
 
   if not exists (
     select 1 from pg_policies

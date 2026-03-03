@@ -225,6 +225,93 @@
     opacity: 1;
   }
 
+  .entry-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .entry-reply-toggle {
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text-muted);
+    border-radius: 7px;
+    height: 30px;
+    padding: 0 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.6px;
+    cursor: pointer;
+  }
+
+  .entry-reply-toggle:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .entry-reply-form {
+    margin-top: 10px;
+    border: 1px dashed rgba(30, 58, 95, 0.8);
+    border-radius: 9px;
+    padding: 10px;
+    display: none;
+    background: rgba(5, 8, 17, 0.38);
+  }
+
+  .entry-reply-form.open {
+    display: block;
+  }
+
+  .entry-reply-form .field {
+    margin-top: 0;
+    margin-bottom: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .entry-reply-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .entry-reply-cancel {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    border-radius: 7px;
+    height: 30px;
+    padding: 0 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+  }
+
+  .entry-reply-submit {
+    border: 1px solid #7fff6b;
+    background: rgba(127, 255, 107, 0.12);
+    color: #d9ffd2;
+    border-radius: 7px;
+    height: 30px;
+    padding: 0 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+  }
+
+  .reply-list {
+    margin-top: 10px;
+    margin-left: 22px;
+    border-left: 1px dashed rgba(30, 58, 95, 0.7);
+    padding-left: 10px;
+  }
+
+  .entry.entry-reply {
+    border-style: dashed;
+    background: rgba(10, 16, 25, 0.7);
+    margin-bottom: 8px;
+  }
+
   .empty {
     color: var(--text-muted);
     font-size: 13px;
@@ -845,7 +932,7 @@
     supabaseAnonKey: window.SIC_SUPABASE_ANON_KEY || ''
   };
   const TABLE = 'guestbook_entries';
-  const LIST_LIMIT = 100;
+  const LIST_LIMIT = 300;
   const nameEl = document.getElementById('guest-name');
   const msgEl = document.getElementById('guest-message');
   const submitBtn = document.getElementById('guest-submit');
@@ -885,7 +972,7 @@
   }
 
   async function fetchEntries() {
-    const endpoint = `${CONFIG.supabaseUrl}/rest/v1/${TABLE}?select=id,name,message,created_at&order=created_at.desc&limit=${LIST_LIMIT}`;
+    const endpoint = `${CONFIG.supabaseUrl}/rest/v1/${TABLE}?select=id,name,message,parent_id,created_at&order=created_at.desc&limit=${LIST_LIMIT}`;
     const res = await fetch(endpoint, {
       method: 'GET',
       headers: getHeaders()
@@ -896,15 +983,17 @@
     return res.json();
   }
 
-  async function createEntry(name, message) {
+  async function createEntry(name, message, parentId = null) {
     const endpoint = `${CONFIG.supabaseUrl}/rest/v1/${TABLE}`;
+    const payload = { name, message };
+    if (parentId) payload.parent_id = parentId;
     const res = await fetch(endpoint, {
       method: 'POST',
       headers: {
         ...getHeaders(),
         Prefer: 'return=minimal'
       },
-      body: JSON.stringify([{ name, message }])
+      body: JSON.stringify([payload])
     });
     if (!res.ok) {
       throw new Error(`등록 실패 (${res.status})`);
@@ -944,6 +1033,103 @@
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
   }
 
+  function buildThread(items) {
+    const roots = [];
+    const repliesByParent = new Map();
+    const itemMap = new Map(items.map((item) => [item.id, item]));
+
+    items.forEach((item) => {
+      if (!item.parent_id || !itemMap.has(item.parent_id)) {
+        roots.push(item);
+        return;
+      }
+      const list = repliesByParent.get(item.parent_id) || [];
+      list.push(item);
+      repliesByParent.set(item.parent_id, list);
+    });
+
+    roots.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+    repliesByParent.forEach((list) => {
+      list.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+    });
+
+    return { roots, repliesByParent };
+  }
+
+  function createReplyForm(parentId) {
+    const form = document.createElement('div');
+    form.className = 'entry-reply-form';
+    form.dataset.parentId = parentId;
+    form.innerHTML = `
+      <input class="field reply-name" type="text" maxlength="20" placeholder="답글 이름 (최대 20자)">
+      <textarea class="field reply-message" maxlength="300" placeholder="답글 내용 (최대 300자)"></textarea>
+      <div class="entry-reply-actions">
+        <button type="button" class="entry-reply-cancel">취소</button>
+        <button type="button" class="entry-reply-submit">답글 등록</button>
+      </div>
+    `;
+    return form;
+  }
+
+  function createEntryCard(item, options = {}) {
+    const { isReply = false } = options;
+    const card = document.createElement('article');
+    card.className = isReply ? 'entry entry-reply' : 'entry';
+    card.dataset.id = item.id;
+
+    const head = document.createElement('div');
+    head.className = 'entry-head';
+
+    const name = document.createElement('strong');
+    name.className = 'entry-name';
+    name.textContent = item.name;
+
+    const date = document.createElement('span');
+    date.className = 'entry-date';
+    date.textContent = fmtDate(item.created_at);
+
+    const msg = document.createElement('p');
+    msg.className = 'entry-msg';
+    msg.textContent = item.message;
+
+    const right = document.createElement('div');
+    right.className = 'entry-head-right';
+    right.appendChild(date);
+
+    if (!isReply) {
+      const delBtn = document.createElement('button');
+      delBtn.className = 'entry-delete';
+      delBtn.type = 'button';
+      delBtn.textContent = '×';
+      delBtn.setAttribute('aria-label', '방명록 삭제');
+      delBtn.dataset.action = 'delete';
+      delBtn.dataset.id = item.id;
+      right.prepend(delBtn);
+    }
+
+    head.appendChild(name);
+    head.appendChild(right);
+    card.appendChild(head);
+    card.appendChild(msg);
+
+    if (!isReply) {
+      const actions = document.createElement('div');
+      actions.className = 'entry-actions';
+
+      const replyToggle = document.createElement('button');
+      replyToggle.type = 'button';
+      replyToggle.className = 'entry-reply-toggle';
+      replyToggle.dataset.action = 'toggle-reply';
+      replyToggle.dataset.id = item.id;
+      replyToggle.textContent = '답글 달기';
+      actions.appendChild(replyToggle);
+      card.appendChild(actions);
+      card.appendChild(createReplyForm(item.id));
+    }
+
+    return card;
+  }
+
   function render(items) {
     if (!items.length) {
       listEl.innerHTML = '<p class="empty">아직 남겨진 글이 없습니다. 첫 번째로 메시지를 남겨보세요.</p>';
@@ -951,41 +1137,18 @@
     }
 
     listEl.innerHTML = '';
-    items.forEach((item) => {
-      const card = document.createElement('article');
-      card.className = 'entry';
-
-      const head = document.createElement('div');
-      head.className = 'entry-head';
-
-      const name = document.createElement('strong');
-      name.className = 'entry-name';
-      name.textContent = item.name;
-
-      const date = document.createElement('span');
-      date.className = 'entry-date';
-      date.textContent = fmtDate(item.created_at);
-
-      const msg = document.createElement('p');
-      msg.className = 'entry-msg';
-      msg.textContent = item.message;
-
-      const delBtn = document.createElement('button');
-      delBtn.className = 'entry-delete';
-      delBtn.type = 'button';
-      delBtn.textContent = '×';
-      delBtn.setAttribute('aria-label', '방명록 삭제');
-      delBtn.dataset.id = item.id;
-
-      const right = document.createElement('div');
-      right.className = 'entry-head-right';
-      right.appendChild(delBtn);
-      right.appendChild(date);
-
-      head.appendChild(name);
-      head.appendChild(right);
-      card.appendChild(head);
-      card.appendChild(msg);
+    const { roots, repliesByParent } = buildThread(items);
+    roots.forEach((root) => {
+      const card = createEntryCard(root, { isReply: false });
+      const replies = repliesByParent.get(root.id) || [];
+      if (replies.length) {
+        const replyList = document.createElement('div');
+        replyList.className = 'reply-list';
+        replies.forEach((reply) => {
+          replyList.appendChild(createEntryCard(reply, { isReply: true }));
+        });
+        card.appendChild(replyList);
+      }
       listEl.appendChild(card);
     });
   }
@@ -1029,7 +1192,7 @@
     submitBtn.disabled = true;
     setStatus('등록 중...');
     try {
-      await createEntry(name, message);
+      await createEntry(name, message, null);
       nameEl.value = '';
       msgEl.value = '';
       await reloadEntries();
@@ -1045,11 +1208,76 @@
   listEl.addEventListener('click', async (event) => {
     const target = event.target;
     if (!(target instanceof HTMLElement)) return;
-    if (!target.classList.contains('entry-delete')) return;
 
-    const entryId = target.dataset.id;
-    if (!entryId) return;
-    openAdminModal(entryId);
+    const deleteBtn = target.closest('[data-action="delete"]');
+    if (deleteBtn instanceof HTMLElement) {
+      const entryId = deleteBtn.dataset.id;
+      if (!entryId) return;
+      openAdminModal(entryId);
+      return;
+    }
+
+    const toggleBtn = target.closest('[data-action="toggle-reply"]');
+    if (toggleBtn instanceof HTMLElement) {
+      const card = toggleBtn.closest('.entry');
+      if (!card) return;
+      const form = card.querySelector('.entry-reply-form');
+      if (!(form instanceof HTMLElement)) return;
+      const willOpen = !form.classList.contains('open');
+
+      document.querySelectorAll('.entry-reply-form.open').forEach((el) => {
+        el.classList.remove('open');
+      });
+
+      if (willOpen) {
+        form.classList.add('open');
+        const replyName = form.querySelector('.reply-name');
+        if (replyName instanceof HTMLInputElement) replyName.focus();
+      }
+      return;
+    }
+
+    const cancelBtn = target.closest('.entry-reply-cancel');
+    if (cancelBtn instanceof HTMLElement) {
+      const form = cancelBtn.closest('.entry-reply-form');
+      if (!(form instanceof HTMLElement)) return;
+      form.classList.remove('open');
+      const replyName = form.querySelector('.reply-name');
+      const replyMessage = form.querySelector('.reply-message');
+      if (replyName instanceof HTMLInputElement) replyName.value = '';
+      if (replyMessage instanceof HTMLTextAreaElement) replyMessage.value = '';
+      return;
+    }
+
+    const submitReplyBtn = target.closest('.entry-reply-submit');
+    if (submitReplyBtn instanceof HTMLElement) {
+      const form = submitReplyBtn.closest('.entry-reply-form');
+      if (!(form instanceof HTMLElement)) return;
+      const parentId = form.dataset.parentId;
+      const replyName = form.querySelector('.reply-name');
+      const replyMessage = form.querySelector('.reply-message');
+      if (!(replyName instanceof HTMLInputElement) || !(replyMessage instanceof HTMLTextAreaElement)) return;
+
+      const name = replyName.value.trim();
+      const message = replyMessage.value.trim();
+      if (!parentId || !name || !message) {
+        setStatus('답글의 이름과 메시지를 입력해 주세요.', true);
+        return;
+      }
+
+      submitReplyBtn.disabled = true;
+      setStatus('답글 등록 중...');
+      try {
+        await createEntry(name, message, parentId);
+        await reloadEntries();
+        setStatus('답글이 등록되었습니다.');
+      } catch (err) {
+        const reason = err instanceof Error ? err.message : '알 수 없는 오류';
+        setStatus(`답글 등록에 실패했습니다. ${reason}`, true);
+      } finally {
+        submitReplyBtn.disabled = false;
+      }
+    }
   });
 
   adminCancelBtn.addEventListener('click', () => {
