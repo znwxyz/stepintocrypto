@@ -8,6 +8,8 @@ create table if not exists public.guestbook_entries (
 );
 
 alter table public.guestbook_entries enable row level security;
+alter table public.guestbook_entries add column if not exists created_ip inet;
+alter table public.guestbook_entries add column if not exists created_ua text;
 
 create schema if not exists app_private;
 
@@ -50,6 +52,103 @@ begin
 end;
 $$;
 
+create or replace function public.request_client_ip()
+returns inet
+language plpgsql
+stable
+as $$
+declare
+  headers json;
+  candidate text;
+begin
+  headers := coalesce(current_setting('request.headers', true), '{}')::json;
+  candidate := coalesce(headers ->> 'x-real-ip', split_part(coalesce(headers ->> 'x-forwarded-for', ''), ',', 1), '');
+  candidate := nullif(trim(candidate), '');
+  if candidate is null then
+    return null;
+  end if;
+
+  begin
+    return candidate::inet;
+  exception when others then
+    return null;
+  end;
+end;
+$$;
+
+create or replace function public.set_guestbook_request_meta()
+returns trigger
+language plpgsql
+security definer
+set search_path = public, app_private, pg_temp
+as $$
+declare
+  headers json;
+begin
+  headers := coalesce(current_setting('request.headers', true), '{}')::json;
+  if new.created_ip is null then
+    new.created_ip := public.request_client_ip();
+  end if;
+  if new.created_ua is null then
+    new.created_ua := nullif(coalesce(headers ->> 'user-agent', ''), '');
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists trg_guestbook_set_request_meta on public.guestbook_entries;
+create trigger trg_guestbook_set_request_meta
+before insert on public.guestbook_entries
+for each row
+execute function public.set_guestbook_request_meta();
+
+create or replace function public.can_insert_guestbook_entry(p_name text, p_message text)
+returns boolean
+language plpgsql
+security definer
+set search_path = public, app_private, pg_temp
+as $$
+declare
+  req_ip inet;
+  recent_ip_count integer;
+  duplicate_count integer;
+begin
+  if p_name is null or char_length(trim(p_name)) = 0 then
+    return false;
+  end if;
+  if p_message is null or char_length(trim(p_message)) = 0 then
+    return false;
+  end if;
+
+  req_ip := public.request_client_ip();
+
+  if req_ip is not null then
+    select count(*)
+      into recent_ip_count
+    from public.guestbook_entries
+    where created_ip = req_ip
+      and created_at > now() - interval '60 seconds';
+
+    if recent_ip_count >= 3 then
+      return false;
+    end if;
+  end if;
+
+  select count(*)
+    into duplicate_count
+  from public.guestbook_entries
+  where lower(name) = lower(trim(p_name))
+    and lower(message) = lower(trim(p_message))
+    and created_at > now() - interval '24 hours';
+
+  if duplicate_count > 0 then
+    return false;
+  end if;
+
+  return true;
+end;
+$$;
+
 create or replace function public.delete_guestbook_entry(p_id uuid, p_password text)
 returns boolean
 language plpgsql
@@ -81,6 +180,11 @@ $$;
 revoke all on function public.delete_guestbook_entry(uuid, text) from public;
 grant execute on function public.delete_guestbook_entry(uuid, text) to anon;
 grant execute on function public.delete_guestbook_entry(uuid, text) to authenticated;
+revoke all on function public.is_guestbook_admin() from public;
+grant execute on function public.can_insert_guestbook_entry(text, text) to anon;
+grant execute on function public.can_insert_guestbook_entry(text, text) to authenticated;
+grant execute on function public.request_client_ip() to anon;
+grant execute on function public.request_client_ip() to authenticated;
 
 do $$
 begin
@@ -97,18 +201,20 @@ begin
       using (true);
   end if;
 
-  if not exists (
+  if exists (
     select 1 from pg_policies
     where schemaname = 'public'
       and tablename = 'guestbook_entries'
       and policyname = 'guestbook_entries_insert_anon'
   ) then
-    create policy guestbook_entries_insert_anon
-      on public.guestbook_entries
-      for insert
-      to anon
-      with check (true);
+    drop policy guestbook_entries_insert_anon on public.guestbook_entries;
   end if;
+
+  create policy guestbook_entries_insert_anon
+    on public.guestbook_entries
+    for insert
+    to anon
+    with check (public.can_insert_guestbook_entry(name, message));
 
   if not exists (
     select 1 from pg_policies

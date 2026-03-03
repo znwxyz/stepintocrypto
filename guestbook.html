@@ -713,8 +713,8 @@
 <body>
   <div class="wrap">
     <div class="top">
-      <a class="logo" href="index.html"><span class="logo-line">Step into</span><span class="logo-line logo-crypto">Crypto <img src="favicon.svg" alt=""></span></a>
-      <a class="back" href="index.html">메인으로</a>
+      <a class="logo" href="/"><span class="logo-line">Step into</span><span class="logo-line logo-crypto">Crypto <img src="favicon.svg" alt=""></span></a>
+      <a class="back" href="/">메인으로</a>
     </div>
 
     <section class="panel">
@@ -734,7 +734,7 @@
 
     <footer class="site-footer">
       <div class="footer-links">
-        <a class="footer-text-btn" href="design-system.html">디자인시스템</a>
+        <a class="footer-text-btn" href="/design-system">디자인시스템</a>
         <button class="footer-text-btn" data-legal-open="privacy">개인정보처리방침</button>
         <button class="footer-text-btn" data-legal-open="terms">이용약관</button>
         <button class="footer-contact-btn" data-legal-open="contact">문의하기</button>
@@ -912,7 +912,7 @@
   }
 
   async function deleteEntry(id, password) {
-    const endpoint = `${CONFIG.supabaseUrl}/rest/v1/rpc/delete_guestbook_entry_v3`;
+    const endpoint = `${CONFIG.supabaseUrl}/rest/v1/rpc/delete_guestbook_entry`;
     let res;
     try {
       res = await fetch(endpoint, {
@@ -921,10 +921,8 @@
           ...getHeaders()
         },
         body: JSON.stringify({
-          payload: {
-            id,
-            password
-          }
+          p_id: id,
+          p_password: password
         })
       });
     } catch {
@@ -932,7 +930,7 @@
     }
 
     if (!res.ok) {
-      throw new Error(`삭제 실패 (${res.status}) - URL: ${CONFIG.supabaseUrl}`);
+      throw new Error(`삭제 실패 (${res.status})`);
     }
 
     const data = await res.json();

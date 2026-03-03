@@ -34,18 +34,7 @@ async function askRemoteAI({ question, contextSnippets }) {
   });
 
   if (!res.ok) {
-    const detailText = await res.text().catch(() => '');
-    let detailMessage = detailText;
-    try {
-      const parsed = JSON.parse(detailText);
-      const detailFirst = parsed?.detail ?? parsed?.message ?? parsed?.error;
-      if (typeof detailFirst === 'string') detailMessage = detailFirst;
-      else if (detailFirst) detailMessage = JSON.stringify(detailFirst);
-      else detailMessage = detailText;
-    } catch {
-      // Keep raw response text.
-    }
-    throw new Error(`원격 AI 오류 (${res.status}): ${detailMessage || '응답 없음'}`);
+    throw new Error(`원격 AI 오류 (${res.status})`);
   }
 
   const data = await res.json();

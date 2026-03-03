@@ -1,4 +1,54 @@
 const PROGRESS_STORAGE_KEY = 'sic_completed_chapters_v1';
+const ALLOWED_RICH_TAGS = new Set([
+  'A', 'B', 'BR', 'CODE', 'EM', 'I', 'LI', 'OL', 'P', 'PRE', 'S', 'SPAN', 'STRONG', 'U', 'UL',
+]);
+
+function escapeHtml(value = '') {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function sanitizeRichHtml(input = '') {
+  const template = document.createElement('template');
+  template.innerHTML = String(input);
+
+  const elements = template.content.querySelectorAll('*');
+  elements.forEach((el) => {
+    if (!ALLOWED_RICH_TAGS.has(el.tagName)) {
+      el.replaceWith(document.createTextNode(el.textContent || ''));
+      return;
+    }
+
+    [...el.attributes].forEach((attr) => {
+      const name = attr.name.toLowerCase();
+      if (name.startsWith('on') || name === 'style') {
+        el.removeAttribute(attr.name);
+        return;
+      }
+
+      if (el.tagName === 'A' && name === 'href') {
+        const href = attr.value.trim();
+        const safeHref = /^(https?:|mailto:|#|\/)/i.test(href);
+        if (!safeHref) el.removeAttribute(attr.name);
+        return;
+      }
+
+      if (el.tagName === 'A' && (name === 'target' || name === 'rel')) return;
+      if (el.tagName === 'SPAN' && name === 'class') return;
+      el.removeAttribute(attr.name);
+    });
+
+    if (el.tagName === 'A' && el.getAttribute('target') === '_blank') {
+      el.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
+
+  return template.innerHTML;
+}
 
 function loadCompletedSet() {
   try {
@@ -24,7 +74,14 @@ function buildNav(chapters, scrollToChapter) {
     const el = document.createElement('div');
     el.className = 'nav-item';
     el.dataset.idx = i;
-    el.innerHTML = `<span class="nav-num">${ch.num}</span><span class="nav-text">${ch.title}</span>`;
+    const num = document.createElement('span');
+    num.className = 'nav-num';
+    num.textContent = ch.num;
+    const text = document.createElement('span');
+    text.className = 'nav-text';
+    text.textContent = ch.title;
+    el.appendChild(num);
+    el.appendChild(text);
     el.addEventListener('click', () => scrollToChapter(i));
     navEl.appendChild(el);
   });
@@ -42,38 +99,38 @@ function buildChapters(chapters) {
 
     let sectionsHTML = '';
     ch.sections.forEach((sec) => {
-      let inner = `<div class="section-body">${sec.body}</div>`;
+      let inner = `<div class="section-body">${sanitizeRichHtml(sec.body)}</div>`;
 
       if (sec.formula) {
-        inner += `<div class="formula">${sec.formula}</div>`;
+        inner += `<div class="formula">${escapeHtml(sec.formula)}</div>`;
         if (sec.formulaNote) {
-          inner += `<div class="section-body" style="margin-top:8px">${sec.formulaNote}</div>`;
+          inner += `<div class="section-body" style="margin-top:8px">${escapeHtml(sec.formulaNote)}</div>`;
         }
       }
 
       if (sec.card) {
         const cardClass = sec.card.type === 'warn' ? 'warn' : sec.card.type === 'success' ? 'success' : '';
-        inner += `<div class="info-card ${cardClass}"><div class="card-tag">// ${sec.card.tag}</div>${sec.card.text}</div>`;
+        inner += `<div class="info-card ${cardClass}"><div class="card-tag">// ${escapeHtml(sec.card.tag)}</div>${sanitizeRichHtml(sec.card.text)}</div>`;
       }
 
       if (sec.table) {
         let tbl = `<table class="comp-table"><thead><tr>${sec.table.headers
-          .map((h) => `<th>${h}</th>`)
+          .map((h) => `<th>${escapeHtml(h)}</th>`)
           .join('')}</tr></thead><tbody>`;
 
         sec.table.rows.forEach((row) => {
-          tbl += `<tr>${row.map((c) => `<td>${c}</td>`).join('')}</tr>`;
+          tbl += `<tr>${row.map((c) => `<td>${escapeHtml(c)}</td>`).join('')}</tr>`;
         });
 
         tbl += '</tbody></table>';
         inner += tbl;
       }
 
-      sectionsHTML += `<div class="section"><div class="section-title">${sec.title}</div>${inner}</div><div class="divider"></div>`;
+      sectionsHTML += `<div class="section"><div class="section-title">${escapeHtml(sec.title)}</div>${inner}</div><div class="divider"></div>`;
     });
 
     const kpHTML = ch.keyPoints
-      .map((k) => `<div class="key-point"><span class="kp-icon">▸</span><span>${k}</span></div>`)
+      .map((k) => `<div class="key-point"><span class="kp-icon">▸</span><span>${escapeHtml(k)}</span></div>`)
       .join('');
 
     div.innerHTML = `
@@ -81,8 +138,8 @@ function buildChapters(chapters) {
         <div class="chapter-header-left">
           <span class="chapter-num-badge">CH ${ch.num}</span>
           <div class="chapter-title-wrap">
-            <div class="chapter-title">${ch.title}</div>
-            <div class="chapter-subtitle">${ch.subtitle}</div>
+            <div class="chapter-title">${escapeHtml(ch.title)}</div>
+            <div class="chapter-subtitle">${escapeHtml(ch.subtitle)}</div>
           </div>
         </div>
         <div class="chapter-header-right">
@@ -291,9 +348,23 @@ export function initUI({
       (t) => !filter || t.term.includes(filter) || t.def.includes(filter),
     );
 
-    glossaryList.innerHTML = terms
-      .map((t) => `<div class="glossary-item"><div class="g-term">${t.term}</div><div class="g-def">${t.def}</div></div>`)
-      .join('');
+    glossaryList.innerHTML = '';
+    terms.forEach((t) => {
+      const item = document.createElement('div');
+      item.className = 'glossary-item';
+
+      const term = document.createElement('div');
+      term.className = 'g-term';
+      term.textContent = t.term;
+
+      const def = document.createElement('div');
+      def.className = 'g-def';
+      def.textContent = t.def;
+
+      item.appendChild(term);
+      item.appendChild(def);
+      glossaryList.appendChild(item);
+    });
   }
 
   function openGlossary() {

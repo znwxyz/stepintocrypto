@@ -118,11 +118,17 @@ export function createQuizController({ quizData, chapters }) {
   const sortEl = document.getElementById('quiz-sort');
   const toolbarEl = document.getElementById('quiz-toolbar');
 
-  const chapterOptions = ['<option value="all">챕터: 전체</option>'];
+  chapterFilterEl.innerHTML = '';
+  const allOption = document.createElement('option');
+  allOption.value = 'all';
+  allOption.textContent = '챕터: 전체';
+  chapterFilterEl.appendChild(allOption);
   chapters.forEach((ch) => {
-    chapterOptions.push(`<option value="${ch.num}">CH ${ch.num} · ${ch.title}</option>`);
+    const option = document.createElement('option');
+    option.value = ch.num;
+    option.textContent = `CH ${ch.num} · ${ch.title}`;
+    chapterFilterEl.appendChild(option);
   });
-  chapterFilterEl.innerHTML = chapterOptions.join('');
 
   function close() {
     overlay.classList.remove('open');

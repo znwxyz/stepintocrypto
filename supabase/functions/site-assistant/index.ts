@@ -1,31 +1,96 @@
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-};
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX_REQUESTS = 20;
+const rateLimitState = new Map<string, number[]>();
+
+function parseAllowedOrigins() {
+  const raw = Deno.env.get('ALLOWED_ORIGINS') || '';
+  const fromEnv = raw
+    .split(',')
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  if (fromEnv.length > 0) return fromEnv;
+  return [
+    'https://stepintocrypto.xyz',
+    'https://www.stepintocrypto.xyz',
+  ];
+}
+
+const allowedOrigins = parseAllowedOrigins();
+
+function getRequestIp(req: Request) {
+  const forwarded = req.headers.get('x-forwarded-for') || '';
+  const firstForwarded = forwarded.split(',')[0]?.trim();
+  return firstForwarded || req.headers.get('x-real-ip') || 'unknown';
+}
+
+function getCorsHeaders(origin: string | null) {
+  const safeOrigin = origin && allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+  return {
+    'Access-Control-Allow-Origin': safeOrigin,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    Vary: 'Origin',
+  };
+}
+
+function isAllowedOrigin(origin: string | null) {
+  if (!origin) return false;
+  if (allowedOrigins.includes(origin)) return true;
+  if (origin.startsWith('http://localhost:')) return true;
+  if (origin.startsWith('http://127.0.0.1:')) return true;
+  return false;
+}
+
+function isRateLimited(key: string) {
+  const now = Date.now();
+  const recent = (rateLimitState.get(key) || []).filter((ts) => now - ts < RATE_LIMIT_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT_MAX_REQUESTS) {
+    rateLimitState.set(key, recent);
+    return true;
+  }
+  recent.push(now);
+  rateLimitState.set(key, recent);
+  return false;
+}
 
 type ContextSnippet = {
   source?: string;
   text?: string;
 };
 
-function jsonResponse(status: number, body: Record<string, unknown>) {
+function jsonResponse(
+  status: number,
+  body: Record<string, unknown>,
+  origin: string | null,
+) {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
-      ...corsHeaders,
+      ...getCorsHeaders(origin),
       'Content-Type': 'application/json; charset=utf-8',
     },
   });
 }
 
 Deno.serve(async (req) => {
+  const origin = req.headers.get('origin');
+
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
+    return new Response('ok', { headers: getCorsHeaders(origin) });
   }
 
   if (req.method !== 'POST') {
-    return jsonResponse(405, { error: 'Method not allowed' });
+    return jsonResponse(405, { error: 'Method not allowed' }, origin);
+  }
+
+  if (!isAllowedOrigin(origin)) {
+    return jsonResponse(403, { error: 'Origin not allowed' }, origin);
+  }
+
+  const requesterKey = `${origin}:${getRequestIp(req)}`;
+  if (isRateLimited(requesterKey)) {
+    return jsonResponse(429, { error: 'Too many requests' }, origin);
   }
 
   try {
@@ -39,7 +104,11 @@ Deno.serve(async (req) => {
     const contextSnippets = (Array.isArray(payload?.contextSnippets) ? payload.contextSnippets : []) as ContextSnippet[];
 
     if (!question) {
-      return jsonResponse(400, { error: 'question is required' });
+      return jsonResponse(400, { error: 'question is required' }, origin);
+    }
+
+    if (question.length > 500) {
+      return jsonResponse(400, { error: 'question is too long' }, origin);
     }
 
     const contextText = contextSnippets
@@ -85,16 +154,15 @@ Deno.serve(async (req) => {
       });
 
       if (!openaiRes.ok) {
-        const detail = await openaiRes.text().catch(() => '');
-        return jsonResponse(502, { error: 'OpenAI request failed', detail });
+        return jsonResponse(502, { error: 'OpenAI request failed' }, origin);
       }
 
       const result = await openaiRes.json();
       const answer = result?.choices?.[0]?.message?.content;
       if (!answer || typeof answer !== 'string') {
-        return jsonResponse(502, { error: 'Invalid OpenAI response' });
+        return jsonResponse(502, { error: 'Invalid OpenAI response' }, origin);
       }
-      return jsonResponse(200, { answer: answer.trim(), provider: 'openai' });
+      return jsonResponse(200, { answer: answer.trim(), provider: 'openai' }, origin);
     }
 
     if (HF_API_KEY) {
@@ -122,7 +190,7 @@ Deno.serve(async (req) => {
 
       const hfJson = await hfRes.json().catch(() => ({}));
       if (!hfRes.ok) {
-        return jsonResponse(502, { error: 'Hugging Face request failed', detail: hfJson });
+        return jsonResponse(502, { error: 'Hugging Face request failed' }, origin);
       }
 
       let answer = '';
@@ -133,20 +201,20 @@ Deno.serve(async (req) => {
       }
 
       if (!answer.trim()) {
-        return jsonResponse(502, { error: 'Invalid Hugging Face response', detail: hfJson });
+        return jsonResponse(502, { error: 'Invalid Hugging Face response' }, origin);
       }
 
-      return jsonResponse(200, { answer: answer.trim(), provider: 'huggingface' });
+      return jsonResponse(200, { answer: answer.trim(), provider: 'huggingface' }, origin);
     }
 
     return jsonResponse(500, {
       error: 'No AI provider configured',
       detail: 'Set OPENAI_API_KEY or HF_API_KEY in Edge Function secrets.',
-    });
+    }, origin);
   } catch (err) {
+    console.error('site-assistant-unhandled', err);
     return jsonResponse(500, {
       error: 'Unhandled error',
-      detail: err instanceof Error ? err.message : String(err),
-    });
+    }, origin);
   }
 });
