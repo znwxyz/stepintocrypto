@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">암호학적 기초와 지갑 유형</a></li><li><a href="#sec-2">기관 보관 아키텍처</a></li></ul>
+      <ul><li><a href="#sec-1">암호학적 기초와 지갑 유형</a></li><li><a href="#sec-2">기관 보관 아키텍처</a></li><li><a href="#sec-3">개인 보관의 실무: 키 관리 체계</a></li><li><a href="#sec-4">기관 보관: Multisig와 MPC의 선택 기준</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -167,6 +188,18 @@
               <tr><td>Multisig (다중 서명)</td><td>임원 5명 중 3명 동의 필요</td><td>온체인 투명. 수수료 비싸고 느림</td></tr><tr><td>MPC (다자간 연산)</td><td>키를 수학적 조각으로 분산 보관</td><td>오프체인 서명. 빠르고 유연. 코드 결함 위험</td></tr><tr><td>적격 수탁</td><td>규제 기관에 콜드 스토리지 위탁</td><td>법적 보호. 자금 인출에 며칠 소요</td></tr>
             </tbody>
           </table>
+      </section><section class="section" id="sec-3">
+        <h2>개인 보관의 실무: 키 관리 체계</h2>
+        <div class="section-body"><p>개인 보관(Self-custody)은 하드웨어 지갑 하나로 끝나지 않습니다. 시드 백업 매체, 백업 위치 분산, 상속 계획, 기기 분실 시 복구 시나리오까지 포함한 <b style="color:var(--text-bright)">운영 체계</b>가 필요합니다. 기술보다 프로세스가 보안을 결정합니다.</p><p>또한 승인(Allowance) 관리와 서명 습관이 중요합니다. 피싱 사이트는 키 탈취보다 과도한 승인 유도로 자산을 빼갑니다. 정기적으로 승인 내역을 정리하고, 고액 지갑은 거래 전용/보관 전용으로 분리해야 합니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>기관 보관: Multisig와 MPC의 선택 기준</h2>
+        <div class="section-body"><p>기관은 내부통제와 운영속도를 동시에 만족해야 합니다. Multisig는 온체인 투명성과 강한 통제에 유리하지만 운영 비용이 크고 유연성이 낮습니다. MPC는 속도와 운영 유연성이 좋지만, 구현 복잡성과 벤더 리스크 관리가 필요합니다.</p><p>핵심은 기술 우열이 아니라 조직의 의사결정 구조와 규제 요구입니다. 승인 체계, 감사 추적, 사고 대응 시간을 수치화해 설계를 선택해야 실제 운영에서 실패하지 않습니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -175,5 +208,6 @@
       <a href="/chapter-06">CH 06 시장 구조와 트레이딩 →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

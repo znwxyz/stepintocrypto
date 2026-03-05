@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">dYdX 몰락과 하이퍼리퀴드의 부상</a></li><li><a href="#sec-2">기술적 혁신과 한계</a></li></ul>
+      <ul><li><a href="#sec-1">dYdX 몰락과 하이퍼리퀴드의 부상</a></li><li><a href="#sec-2">기술적 혁신과 한계</a></li><li><a href="#sec-3">Hyperliquid의 성장 메커니즘</a></li><li><a href="#sec-4">수익 공유 모델과 거버넌스 균형</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -165,6 +186,18 @@
             <div>검증자 지분 80%+를 재단이 통제, 노드 코드 비공개(검증자들이 자신이 실행하는 코드를 검증 못 함), 중앙화 API 서버 과부하 시 수십 분 먹통 발생.</div>
           </div>
         
+      </section><section class="section" id="sec-3">
+        <h2>Hyperliquid의 성장 메커니즘</h2>
+        <div class="section-body"><p>Hyperliquid의 성장은 단일 요인보다, 성능·제품 완성도·토큰 인센티브가 동시에 맞물린 결과입니다. 빠른 체결과 낮은 마찰 UX가 트레이더를 끌어오고, 유동성은 다시 체결 품질을 개선하는 선순환을 만들었습니다. 결국 거래 인프라는 네트워크 효과 산업입니다.</p><p>특히 온체인 투명성과 CEX 수준 UX를 함께 추구한 점이 차별점이었습니다. 사용자 관점에서는 ‘탈중앙화 여부’만큼 실제 체결 경험이 중요하며, 이 균형을 얼마나 오래 유지하느냐가 장기 경쟁력을 결정합니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>수익 공유 모델과 거버넌스 균형</h2>
+        <div class="section-body"><p>수수료 기반 바이백/분배 모델은 토큰 수요를 강화하지만, 단기 가격 방어 수단으로만 쓰이면 역효과가 납니다. 프로토콜 성장률, 리스크 준비금, 인프라 재투자 비율이 함께 설계되어야 지속 가능한 가치 포착이 됩니다.</p><p>거버넌스 역시 속도와 안전의 균형이 핵심입니다. 너무 느리면 기회를 놓치고, 너무 빠르면 정책 품질이 무너집니다. 고도화된 거래 프로토콜일수록 거버넌스는 포퓰리즘보다 운영 체계에 가깝습니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -173,5 +206,6 @@
       <a href="/chapter-11">CH 11 NFT →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

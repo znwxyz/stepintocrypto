@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">블록체인의 4대 기능과 아키텍처</a></li><li><a href="#sec-2">완결성(Finality)의 세 가지 유형</a></li><li><a href="#sec-3">크로스체인 브릿지의 딜레마</a></li></ul>
+      <ul><li><a href="#sec-1">블록체인의 4대 기능과 아키텍처</a></li><li><a href="#sec-2">완결성(Finality)의 세 가지 유형</a></li><li><a href="#sec-3">크로스체인 브릿지의 딜레마</a></li><li><a href="#sec-4">트릴레마를 실무적으로 읽는 법</a></li><li><a href="#sec-5">브리지와 상호운용성의 보안 경계</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -171,6 +192,18 @@
             <div>블록체인 내부 보안(51% 공격 불가)도 외부 데이터를 가져오는 브릿지의 취약한 신뢰 앞에선 무용지물입니다.</div>
           </div>
         
+      </section><section class="section" id="sec-4">
+        <h2>트릴레마를 실무적으로 읽는 법</h2>
+        <div class="section-body"><p>블록체인 트릴레마는 이론 슬로건이 아니라 제품 설계의 현실 제약입니다. 탈중앙화, 보안, 확장성은 동시에 높이기 어렵고, 프로젝트는 반드시 우선순위를 선택합니다. 이 선택은 수수료 구조, 노드 요구사항, 업그레이드 속도, 생태계 구성에 그대로 반영됩니다.</p><p>따라서 체인을 비교할 때는 “어느 체인이 더 좋다”보다 “어떤 유스케이스에 어떤 체인이 맞는가”가 핵심입니다. 결제, 파생상품, 게임, 거버넌스는 요구 조건이 다르므로 정답도 하나가 아닙니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-5">
+        <h2>브리지와 상호운용성의 보안 경계</h2>
+        <div class="section-body"><p>크로스체인 브리지는 사실상 새로운 신뢰 계층을 만듭니다. 원체인이 아무리 안전해도 브리지 검증자/오라클/서명 체계가 취약하면 전체 시스템이 무너질 수 있습니다. 실제 대형 해킹도 대부분 이 경계면에서 발생했습니다.</p><p>상호운용성은 필수지만, 자산 규모가 클수록 브리지 설계의 가정(누가 검증하는가, 실패 시 누가 손실을 부담하는가)을 명시적으로 확인해야 합니다. 보안은 체인 내부만이 아니라 체인 사이에서 결정됩니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -179,5 +212,6 @@
       <a href="/chapter-05">CH 05 자산 보관 →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

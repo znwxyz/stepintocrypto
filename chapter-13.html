@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">DePIN의 역발상</a></li><li><a href="#sec-2">콜드 스타트와 지속 가능성</a></li></ul>
+      <ul><li><a href="#sec-1">DePIN의 역발상</a></li><li><a href="#sec-2">콜드 스타트와 지속 가능성</a></li><li><a href="#sec-3">DePIN의 경제학: 인센티브로 인프라를 켠다</a></li><li><a href="#sec-4">운영 리스크: 품질 검증과 시빌 방지</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -162,6 +183,18 @@
         
         
         
+      </section><section class="section" id="sec-3">
+        <h2>DePIN의 경제학: 인센티브로 인프라를 켠다</h2>
+        <div class="section-body"><p>DePIN은 토큰 인센티브를 이용해 물리 인프라 구축 비용을 분산합니다. 중앙 사업자가 선투자하던 구조를 네트워크 참여자에게 나눠 초기 확장 속도를 높일 수 있습니다. 헬륨, 지도 데이터 네트워크, 분산 GPU가 대표 사례입니다.</p><p>하지만 인센티브만으로는 지속 가능하지 않습니다. 실사용 수요와 단위경제가 받쳐주지 않으면 보상 축소 시 네트워크가 급격히 약해집니다. 결국 DePIN의 승부처는 “토큰 발행”이 아니라 “실제 고객 매출”입니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>운영 리스크: 품질 검증과 시빌 방지</h2>
+        <div class="section-body"><p>물리 네트워크는 온체인과 달리 데이터 진위 검증이 어렵습니다. 허위 위치 보고, 가짜 센서 데이터, 봇 참여를 막기 위한 검증 메커니즘이 필수입니다. 시빌 공격 방어가 약하면 인센티브 예산이 빠르게 소진됩니다.</p><p>따라서 DePIN 설계는 암호경제학과 운영공학의 결합 문제입니다. 스테이킹 슬래시, 평판 점수, 랜덤 감사, 오프체인 법적 집행을 함께 설계해야 품질을 유지할 수 있습니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -170,5 +203,6 @@
       <a href="/chapter-14">CH 14 양자 내성 →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

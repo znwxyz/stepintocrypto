@@ -3,6 +3,7 @@ import path from 'node:path';
 
 const rootDir = path.resolve(process.cwd(), 'repo_stepintocrypto');
 const contentPath = path.join(rootDir, 'content', 'chapters.json');
+const staticContentPath = path.join(rootDir, 'content', 'chapters-static.json');
 const baseUrl = 'https://stepintocrypto.xyz';
 
 const readJson = async (filePath) => JSON.parse(await fs.readFile(filePath, 'utf8'));
@@ -78,6 +79,27 @@ const buildStyles = () => `
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -158,6 +180,7 @@ const pageTemplate = ({ title, description, canonicalPath, body, jsonLd }) => `<
 </head>
 <body>
   ${body}
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>
 `;
@@ -295,7 +318,7 @@ const buildChapterJsonLd = (chapter, chapterPath, index) => ({
 });
 
 const writeStaticChapterPages = async () => {
-  const chapters = await readJson(contentPath);
+  const chapters = await readJson(staticContentPath).catch(() => readJson(contentPath));
   const pagePaths = [];
 
   for (let i = 0; i < chapters.length; i += 1) {

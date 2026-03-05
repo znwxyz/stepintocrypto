@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">핵심 혁신: 병렬 처리와 PoH</a></li><li><a href="#sec-2">성능과 탈중앙화의 트레이드오프</a></li></ul>
+      <ul><li><a href="#sec-1">핵심 혁신: 병렬 처리와 PoH</a></li><li><a href="#sec-2">성능과 탈중앙화의 트레이드오프</a></li><li><a href="#sec-3">솔라나 성능 모델: 병렬 실행의 장점과 한계</a></li><li><a href="#sec-4">생태계 리스크: 네트워크 안정성과 클라이언트 다양성</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -165,6 +186,18 @@
             <div>현재 12초대 완결성을 0.1초(나스닥 수준)로 끌어올리기 위해 PoH를 폐기하고 완전히 새로운 합의 알고리즘으로 전환하는 초대형 업그레이드 준비 중.</div>
           </div>
         
+      </section><section class="section" id="sec-3">
+        <h2>솔라나 성능 모델: 병렬 실행의 장점과 한계</h2>
+        <div class="section-body"><p>솔라나는 계정 기반 병렬 실행과 빠른 블록 생산으로 높은 처리량을 확보합니다. 핵심은 트랜잭션이 읽기/쓰기 계정을 명시해 충돌 없는 작업을 동시에 처리한다는 점입니다. 이 구조는 온체인 오더북·고빈도 디앱에 유리하며, CEX에 가까운 체감 UX를 제공합니다.</p><p>반면 고성능 요구는 노드 운영 비용을 끌어올려 탈중앙화 압력을 만들 수 있습니다. 그래서 솔라나를 볼 때는 “빠르다/느리다”보다 <b style="color:var(--text-bright)">성능-검열저항-운영비</b>의 균형을 함께 평가해야 합니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>생태계 리스크: 네트워크 안정성과 클라이언트 다양성</h2>
+        <div class="section-body"><p>고성능 체인은 작은 장애가 시장 전반의 신뢰 문제로 확대되기 쉽습니다. 따라서 단일 코드베이스·단일 운영 경로에 의존하지 않고, 클라이언트 다양성(예: Firedancer)과 운영 도구 성숙도가 중요합니다. 기술적 성능만큼 운영 레질리언스가 경쟁력입니다.</p><p>투자자·사용자 입장에서는 TPS 숫자보다 장애 대응 이력, 재가동 절차 투명성, 검증자 분포를 확인해야 합니다. ‘빠른 체인’의 장점은 크지만, 실전에서는 장애 내구성이 최종 승부를 가릅니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -173,5 +206,6 @@
       <a href="/chapter-04">CH 04 L1 아키텍처 →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

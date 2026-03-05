@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">양자 위협의 실체</a></li><li><a href="#sec-2">철학적 딜레마</a></li></ul>
+      <ul><li><a href="#sec-1">양자 위협의 실체</a></li><li><a href="#sec-2">철학적 딜레마</a></li><li><a href="#sec-3">양자 위협의 현실적 타임라인</a></li><li><a href="#sec-4">전환 전략: 암호 업그레이드와 사용자 마이그레이션</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -162,6 +183,18 @@
         
         
         
+      </section><section class="section" id="sec-3">
+        <h2>양자 위협의 현실적 타임라인</h2>
+        <div class="section-body"><p>양자컴퓨팅이 즉시 비트코인을 무력화하는 시나리오는 과장된 경우가 많지만, 장기적으로 공개키 암호(ECDSA)에 대한 위협은 진지하게 준비해야 합니다. 특히 공개키가 노출된 구형 주소나 장기 미이동 자산은 우선순위 관리가 필요합니다.</p><p>실무적으로는 “지금 당장 패닉”이 아니라, 업그레이드 가능성·지갑 이전 전략·표준화 동향을 추적하는 단계적 대응이 합리적입니다. 보안 전환은 기술뿐 아니라 사용자 교육과 운영 도구가 함께 준비되어야 성공합니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>전환 전략: 암호 업그레이드와 사용자 마이그레이션</h2>
+        <div class="section-body"><p>양자 내성 전환의 핵심은 새 서명 체계를 도입하는 것보다, 수억 개 UTXO/계정을 어떻게 안전하게 이전시키느냐입니다. 비활성 자산, 분실 키, 규제 자산 등 현실 제약이 크기 때문에 단계적 호환 전략이 필요합니다.</p><p>따라서 체인별로 소프트포크/하드포크 가능성, 호환성 브리지, 지갑 UX 설계를 함께 검토해야 합니다. 기술적 정답 하나보다, 사회적 합의를 만들 수 있는 실행 계획이 더 중요합니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -170,5 +203,6 @@
       <a href="/chapter-15">CH 15 예측 시장 →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

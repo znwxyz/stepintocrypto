@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">EVM과 가스(Gas)</a></li><li><a href="#sec-2">더 머지와 지분 증명(PoS)</a></li><li><a href="#sec-3">롤업(Rollups)과 L2 확장</a></li></ul>
+      <ul><li><a href="#sec-1">EVM과 가스(Gas)</a></li><li><a href="#sec-2">더 머지와 지분 증명(PoS)</a></li><li><a href="#sec-3">롤업(Rollups)과 L2 확장</a></li><li><a href="#sec-4">이더리움의 핵심: 상태 머신과 가스 시장</a></li><li><a href="#sec-5">롤업 중심 확장과 L1의 역할 재정의</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -173,6 +194,18 @@
         
         
         
+      </section><section class="section" id="sec-4">
+        <h2>이더리움의 핵심: 상태 머신과 가스 시장</h2>
+        <div class="section-body"><p>이더리움은 단순 송금망이 아니라 <b style="color:var(--text-bright)">전역 상태 머신</b>입니다. 모든 노드는 동일한 연산을 재실행해 상태를 동기화하고, 가스는 연산 복잡도를 가격으로 환산해 네트워크 자원을 배분합니다. 즉 가스비는 불편한 비용이 아니라, 스팸 방지와 공정한 우선순위 결정 장치입니다.</p><p>EIP-1559 이후 기본 수수료 소각이 도입되며 ETH는 네트워크 사용량과 연동되는 자산 성격을 강화했습니다. 이더리움을 평가할 때는 단순 TPS보다, 개발자 생태계·보안 예산·정산 신뢰·업그레이드 거버넌스를 함께 봐야 합니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-5">
+        <h2>롤업 중심 확장과 L1의 역할 재정의</h2>
+        <div class="section-body"><p>현재 이더리움 로드맵은 “L1에서 모든 실행”이 아니라 <b style="color:var(--text-bright)">L2 실행 + L1 정산</b>으로 수렴합니다. 롤업은 대량 거래를 압축해 게시하고, 이더리움은 데이터 가용성과 최종 정산 신뢰를 제공합니다. 덕분에 사용자 비용은 줄고, L1은 보안 앵커로서 가치가 강화됩니다.</p><p>다만 롤업 간 브리지, 시퀀서 중앙화, 사용자 UX 분절은 아직 해결 중인 과제입니다. 앞으로의 경쟁력은 단일 체인 TPS보다, 체인 간 자산 이동을 얼마나 안전하고 매끄럽게 만들 수 있느냐에 달려 있습니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -181,5 +214,6 @@
       <a href="/chapter-03">CH 03 솔라나 →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">탄생 배경과 작업 증명</a></li><li><a href="#sec-2">UTXO 모델과 공급 구조</a></li><li><a href="#sec-3">확장성: 라이트닝 네트워크와 오디널스</a></li></ul>
+      <ul><li><a href="#sec-1">탄생 배경과 작업 증명</a></li><li><a href="#sec-2">UTXO 모델과 공급 구조</a></li><li><a href="#sec-3">확장성: 라이트닝 네트워크와 오디널스</a></li><li><a href="#sec-4">비트코인 보안 예산과 경제적 완결성</a></li><li><a href="#sec-5">비트코인 확장: 라이트닝과 데이터 레이어의 분리</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -171,6 +192,18 @@
         
         
         
+      </section><section class="section" id="sec-4">
+        <h2>비트코인 보안 예산과 경제적 완결성</h2>
+        <div class="section-body"><p>비트코인 보안은 해시율 자체보다 <b style="color:var(--text-bright)">보안 예산(Security Budget)</b>으로 이해하는 것이 정확합니다. 보안 예산은 블록 보상 + 수수료이며, 공격자는 이를 초과하는 자본·전력을 투입해야 체인 재구성을 시도할 수 있습니다. 따라서 “확정”은 절대값이 아니라 확인 블록이 쌓이며 공격 비용이 기하급수적으로 증가하는 구조입니다.</p><p>반감기가 반복될수록 블록 보상 비중은 줄고 수수료 비중이 커집니다. 장기적으로는 온체인 수요(결제·정산·데이터 기록)가 충분해야 채굴 인센티브가 유지됩니다. 이 지점이 비트코인의 핵심 논쟁이며, 라이트닝/사이드체인과 온체인 수수료 시장이 함께 진화해야 하는 이유이기도 합니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-5">
+        <h2>비트코인 확장: 라이트닝과 데이터 레이어의 분리</h2>
+        <div class="section-body"><p>비트코인 확장은 “모든 거래를 L1에 넣는다”가 아니라, <b style="color:var(--text-bright)">결제와 정산을 분리</b>하는 접근입니다. 라이트닝은 빈번한 소액 결제를 오프체인 채널에서 처리하고, 분쟁 시에만 L1 정산을 호출합니다. 이 구조는 속도와 비용을 크게 개선하지만, 라우팅 유동성과 채널 운영 난이도라는 운영 과제를 동반합니다.</p><p>동시에 Ordinals/BRC-20 계열은 비트코인을 ‘결제 레이어’만이 아니라 ‘데이터 레이어’로도 사용하려는 시도입니다. 이는 수수료 수요를 늘리는 긍정과 블록 공간 혼잡을 키우는 부정을 함께 가져오므로, 사용성·철학·보안 예산 관점에서 균형 있는 해석이 필요합니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -179,5 +212,6 @@
       <a href="/chapter-02">CH 02 이더리움 →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

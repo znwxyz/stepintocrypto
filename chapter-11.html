@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">소유권의 4가지 레이어</a></li><li><a href="#sec-2">마켓플레이스 전쟁과 부족 신호</a></li></ul>
+      <ul><li><a href="#sec-1">소유권의 4가지 레이어</a></li><li><a href="#sec-2">마켓플레이스 전쟁과 부족 신호</a></li><li><a href="#sec-3">NFT의 본질: 이미지가 아니라 권리 레이어</a></li><li><a href="#sec-4">NFT 시장 구조: 유동성과 가격 발견</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -162,6 +183,18 @@
         
         
         
+      </section><section class="section" id="sec-3">
+        <h2>NFT의 본질: 이미지가 아니라 권리 레이어</h2>
+        <div class="section-body"><p>NFT의 본질은 JPEG 저장이 아니라, 디지털 객체에 <b style="color:var(--text-bright)">소유권·접근권·사용권</b>을 프로그래머블하게 부여하는 것입니다. 그래서 게임 아이템, 멤버십, 티켓, 라이선스 등 권리 구조가 분명한 분야에서 효용이 큽니다. 가격 변동성만 보면 본질을 놓치게 됩니다.</p><p>프로젝트를 평가할 때는 커뮤니티 열기보다 권리 설계와 지속 수요를 먼저 확인해야 합니다. 로열티 구조, 2차 유통 인센티브, 저작권 범위가 불명확하면 장기적으로 가치가 약해집니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>NFT 시장 구조: 유동성과 가격 발견</h2>
+        <div class="section-body"><p>NFT 시장은 주문장보다 오퍼/경매 중심이라 가격 발견이 느리고 변동성이 큽니다. 바닥가(Floor)는 참고치일 뿐, 개별 자산의 희소성과 속성 조합에 따라 체결 가격이 크게 달라집니다. 따라서 컬렉션 단위 통계와 개별 메타데이터 분석을 병행해야 합니다.</p><p>장기적으로는 대체불가능 자산의 금융화(대출·분할·지수화)가 유동성을 개선할 수 있습니다. 다만 금융화는 담보 평가 오류와 청산 리스크를 확대하므로, 데이터 품질과 리스크 한도 설계가 선행되어야 합니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -170,5 +203,6 @@
       <a href="/chapter-12">CH 12 DAO와 토큰 경제학 →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

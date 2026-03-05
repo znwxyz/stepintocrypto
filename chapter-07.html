@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">AMM과 x*y=k 공식</a></li><li><a href="#sec-2">대출 프로토콜과 자동 청산</a></li><li><a href="#sec-3">오라클과 플래시론의 위험</a></li></ul>
+      <ul><li><a href="#sec-1">AMM과 x*y=k 공식</a></li><li><a href="#sec-2">대출 프로토콜과 자동 청산</a></li><li><a href="#sec-3">오라클과 플래시론의 위험</a></li><li><a href="#sec-4">DEX 설계와 유동성의 본질</a></li><li><a href="#sec-5">렌딩 프로토콜의 리스크 연쇄</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -171,6 +192,18 @@
             <div>플래시론 → 얕은 DEX 풀 가격 100배 조작 → 오라클이 조작 가격 전달 → 부풀려진 담보로 대출 풀 전액 탈취 → 플래시론 상환 → 이익만 챙겨 도주</div>
           </div>
         
+      </section><section class="section" id="sec-4">
+        <h2>DEX 설계와 유동성의 본질</h2>
+        <div class="section-body"><p>DeFi의 핵심 혁신은 은행 기능의 탈중앙화가 아니라, <b style="color:var(--text-bright)">유동성의 알고리즘화</b>입니다. AMM은 주문 상대방을 사람 대신 수학 공식으로 대체해 24시간 거래를 가능하게 했습니다. 그 대가로 LP는 비영구 손실(IL)과 재밸런싱 비용을 떠안습니다.</p><p>따라서 LP 수익은 APR 숫자보다 거래량 품질과 변동성 구조에 좌우됩니다. 실제 성과는 보상 토큰보다 수수료 수익의 지속성과 손실 분포를 함께 봐야 판단할 수 있습니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-5">
+        <h2>렌딩 프로토콜의 리스크 연쇄</h2>
+        <div class="section-body"><p>렌딩은 담보비율만 지키면 안전해 보이지만, 급변장에서는 오라클 지연·유동성 공백·청산 경쟁이 결합해 손실이 증폭됩니다. 특히 상관관계가 높은 담보를 과도하게 허용한 시장은 연쇄 청산에 취약합니다.</p><p>건강한 프로토콜은 담보 상한, LTV 차등, 청산 인센티브, 비상 거버넌스 절차가 정교합니다. 사용자도 단일 담보·단일 프로토콜 집중을 피하고, 브리지 리스크가 개입된 자산은 보수적으로 다뤄야 합니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -179,5 +212,6 @@
       <a href="/chapter-08">CH 08 MEV →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

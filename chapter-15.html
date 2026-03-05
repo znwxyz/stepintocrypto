@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">대중의 지혜와 시장 메커니즘</a></li><li><a href="#sec-2">왜 탈중앙화인가</a></li></ul>
+      <ul><li><a href="#sec-1">대중의 지혜와 시장 메커니즘</a></li><li><a href="#sec-2">왜 탈중앙화인가</a></li><li><a href="#sec-3">예측시장의 정보 생산 메커니즘</a></li><li><a href="#sec-4">정치·거버넌스와 결합될 때의 가능성</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -165,6 +186,18 @@
             <div>예측 시장은 선거 확률만 알려주는 것이 아닙니다. 금리 결정, 기후 변화 정책, 기업 실적 등 불확실한 미래 정보를 가격으로 환산해 사회에 '실시간 확률 인프라'를 제공합니다.</div>
           </div>
         
+      </section><section class="section" id="sec-3">
+        <h2>예측시장의 정보 생산 메커니즘</h2>
+        <div class="section-body"><p>예측시장은 여론조사와 달리 참여자가 자신의 자본을 걸기 때문에, 정보의 질을 가격으로 압축하는 기능이 강합니다. 참가자는 확신이 높을수록 더 큰 포지션을 취하고, 틀리면 즉시 비용을 지불합니다. 그래서 시장가격은 단순 의견 평균보다 강한 신호가 되곤 합니다.</p><p>물론 시장도 완전하지 않습니다. 유동성 부족, 특정 집단 편향, 규제 불확실성은 왜곡을 만들 수 있습니다. 그럼에도 “실시간 확률 업데이트”라는 특성은 정책·투자·리스크 관리에서 강력한 보조 지표가 됩니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>정치·거버넌스와 결합될 때의 가능성</h2>
+        <div class="section-body"><p>예측시장이 발전하면 단순 베팅을 넘어 정책 실험 도구가 될 수 있습니다. 특정 정책 채택 시 GDP, 인플레이션, 고용 같은 결과를 시장으로 가격화하면, 주장 중심 토론보다 검증 가능한 가설 중심 의사결정이 가능해집니다.</p><p>다만 조작·내부자 정보·법적 책임 문제를 함께 다뤄야 합니다. 결국 성공 조건은 기술만이 아니라, 시장 무결성과 규제 정합성을 동시에 만족하는 제도 설계입니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -173,5 +206,6 @@
       <span></span>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

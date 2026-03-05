@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">샌드위치 공격의 원리</a></li><li><a href="#sec-2">플래시봇과 PBS</a></li></ul>
+      <ul><li><a href="#sec-1">샌드위치 공격의 원리</a></li><li><a href="#sec-2">플래시봇과 PBS</a></li><li><a href="#sec-3">MEV를 보는 프레임: 수수료가 아니라 질서의 문제</a></li><li><a href="#sec-4">중앙화 압력과 해결 방향</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -165,6 +186,18 @@
             <div>플래시봇 프로텍트(Flashbots Protect) 같은 프라이빗 RPC를 사용하면 거래를 공개 멤풀에 올리지 않고 비밀리에 처리해 샌드위치 공격을 피할 수 있습니다.</div>
           </div>
         
+      </section><section class="section" id="sec-3">
+        <h2>MEV를 보는 프레임: 수수료가 아니라 질서의 문제</h2>
+        <div class="section-body"><p>MEV는 채굴자/검증자의 부수 수익이 아니라, 블록 공간 우선순위를 둘러싼 <b style="color:var(--text-bright)">질서 설계 문제</b>입니다. 샌드위치·백런·청산 경합은 모두 “누가 먼저 아는가”와 “누가 먼저 넣는가”의 경쟁에서 발생합니다. 이는 DeFi UX와 공정성에 직접 영향을 줍니다.</p><p>MEV를 완전히 제거하기는 어렵지만, 경매 구조와 프라이빗 멤풀, PBS(제안자-빌더 분리)로 피해를 줄일 수 있습니다. 핵심은 추출을 음지에서 방치하지 않고, 예측 가능한 규칙으로 표면화하는 것입니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>중앙화 압력과 해결 방향</h2>
+        <div class="section-body"><p>MEV 방어 인프라가 소수 릴레이/빌더에 집중되면 검열 및 단일 실패점 리스크가 커집니다. 그래서 성능 향상만큼 분산된 빌더 생태계, 오픈 경매, 다중 릴레이 전략이 중요합니다. 기술적 탈중앙화와 경제적 탈중앙화가 동시에 필요합니다.</p><p>사용자 관점에서는 슬리피지 제한, 프라이빗 라우팅 사용, 거래 분할 같은 기초 수칙만으로도 피해를 크게 줄일 수 있습니다. MEV는 전문가만의 주제가 아니라 일반 사용자 비용에 직결되는 실전 이슈입니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -173,5 +206,6 @@
       <a href="/chapter-09">CH 09 스테이블코인 &amp; RWA →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

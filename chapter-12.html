@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">4가지 투표 모델</a></li><li><a href="#sec-2">거버넌스 공격과 방어</a></li></ul>
+      <ul><li><a href="#sec-1">4가지 투표 모델</a></li><li><a href="#sec-2">거버넌스 공격과 방어</a></li><li><a href="#sec-3">거버넌스 실패 패턴과 개선 원칙</a></li><li><a href="#sec-4">토크노믹스: 분배보다 흐름이 중요</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -162,6 +183,18 @@
         
         
         
+      </section><section class="section" id="sec-3">
+        <h2>거버넌스 실패 패턴과 개선 원칙</h2>
+        <div class="section-body"><p>DAO 거버넌스의 대표 실패는 참여율 저하, 고래 집중, 단기 인센티브 편향입니다. 포럼 토론은 활발해도 온체인 투표율이 낮으면 정당성이 약해지고, 소수 이해관계자가 정책을 좌우하기 쉽습니다. 거버넌스는 표 수가 아니라 참여 구조의 문제입니다.</p><p>개선 방향은 명확합니다. 의제 사전 공개, 위임(delegate) 활성화, 역할 기반 권한 분리, 비상권한의 투명한 제한이 필요합니다. “완전한 민주주의”보다 “책임 있는 운영체계”가 더 현실적입니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>토크노믹스: 분배보다 흐름이 중요</h2>
+        <div class="section-body"><p>좋은 토크노믹스는 초기 분배표보다 <b style="color:var(--text-bright)">지속 가능한 수요-공급 흐름</b>을 설계합니다. 배출(Emission), 락업 해제, 수수료 귀속, 보상 재원, 소각 메커니즘이 시간축에서 어떻게 상호작용하는지가 핵심입니다. 단기 APY로 수요를 당겨도 출구 설계가 약하면 가격이 붕괴합니다.</p><p>따라서 토큰 가치를 보려면 “누가 왜 계속 사야 하는가”를 명확히 답해야 합니다. 유틸리티가 실제 사용과 연결되지 않으면 토큰은 거버넌스 명목의 희석 자산으로 전락하기 쉽습니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -170,5 +203,6 @@
       <a href="/chapter-13">CH 13 DePIN →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

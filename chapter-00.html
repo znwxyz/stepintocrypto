@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">적대적 환경 (Adversarial Frontier)</a></li><li><a href="#sec-2">편리함의 폭정 vs 절대 주권</a></li></ul>
+      <ul><li><a href="#sec-1">적대적 환경 (Adversarial Frontier)</a></li><li><a href="#sec-2">편리함의 폭정 vs 절대 주권</a></li><li><a href="#sec-3">왜 지금 크립토를 공부해야 하나</a></li><li><a href="#sec-4">생존을 위한 기본 원칙</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -165,6 +186,18 @@
             <div>비트코인의 주권은 필요 없을 때는 번거롭지만, 필요할 때는 유일한 탈출구가 됩니다. 집에 불이 나야 화재 보험의 가치를 압니다.</div>
           </div>
         
+      </section><section class="section" id="sec-3">
+        <h2>왜 지금 크립토를 공부해야 하나</h2>
+        <div class="section-body"><p>크립토를 이해한다는 것은 단순히 코인 가격을 맞히는 일이 아니라, <b style="color:var(--text-bright)">돈·소유권·검열 저항성</b>이 어떤 구조에서 성립하는지를 배우는 일입니다. 기존 금융은 편의성과 복구성을 제공하지만, 그 대가로 계정 동결·거래 차단·중개자 리스크를 감수합니다. 반대로 크립토는 자기 책임을 요구하지만, 정치적·지리적 제약을 낮추는 강력한 도구를 제공합니다.</p><p>따라서 입문자는 먼저 “기술 자체”보다도 <b style="color:var(--text-bright)">트레이드오프</b>를 이해해야 합니다. 편의성과 주권은 동시에 극대화되기 어렵고, 대부분의 실패는 기술 부족보다 보안 습관 부족에서 발생합니다. 이 책의 관점은 ‘맹신’도 ‘냉소’도 아닌, 메커니즘 중심의 실전 이해입니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>생존을 위한 기본 원칙</h2>
+        <div class="section-body"><p>첫째, <b style="color:var(--text-bright)">검증 우선</b>입니다. 유명 인플루언서, 텔레그램 방, 화려한 대시보드보다 온체인 데이터·컨트랙트 권한·토크노믹스 문서를 먼저 확인해야 합니다. 둘째, <b style="color:var(--text-bright)">보관 우선</b>입니다. 수익률보다 키 관리가 먼저이며, 시드 문구·서명 권한·승인(Allowance) 관리가 장기 성과를 좌우합니다.</p><p>셋째, <b style="color:var(--text-bright)">포지션 사이징</b>입니다. 크립토 시장은 변동성이 구조적으로 높기 때문에, 맞는 방향을 봐도 레버리지와 리스크 관리가 부족하면 계정이 먼저 사라집니다. 결국 크립토에서 오래 살아남는 사람은 가장 똑똑한 사람이 아니라, 가장 일관되게 원칙을 지키는 사람입니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -173,5 +206,6 @@
       <a href="/chapter-01">CH 01 비트코인 →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>

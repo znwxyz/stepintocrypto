@@ -71,6 +71,27 @@
   .section { padding: 18px; }
   .section h2 { margin: 0 0 10px; font-size: 20px; color: var(--text-bright); }
   .section-body { font-size: 15px; }
+  .section-body p { margin: 0 0 12px; }
+  .section-body h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 14px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.2px;
+  }
+  .section-body ul {
+    margin: 0 0 12px;
+    padding-left: 20px;
+  }
+  .section-body li {
+    margin: 0 0 8px;
+  }
   .formula {
     margin-top: 12px;
     padding: 12px;
@@ -142,7 +163,7 @@
 
     <section class="toc">
       <h2>목차</h2>
-      <ul><li><a href="#sec-1">무기한 선물과 펀딩비 메커니즘</a></li><li><a href="#sec-2">베이시스 트레이딩: 기관의 무위험 수익</a></li></ul>
+      <ul><li><a href="#sec-1">무기한 선물과 펀딩비 메커니즘</a></li><li><a href="#sec-2">베이시스 트레이딩: 기관의 무위험 수익</a></li><li><a href="#sec-3">파생시장 구조: 펀딩비와 포지션 쏠림 해석</a></li><li><a href="#sec-4">리스크 관리: 시장 리스크와 거래소 리스크 분리</a></li></ul>
     </section>
 
     <section class="key-points">
@@ -165,6 +186,18 @@
             <div>비트코인·이더리움 현물 ETF 승인으로 연기금·뮤추얼 펀드가 지갑 없이 기존 주식 계좌로 크립토 투자 가능. 마이크로스트래티지의 전환사채-비트코인 전략도 대성공.</div>
           </div>
         
+      </section><section class="section" id="sec-3">
+        <h2>파생시장 구조: 펀딩비와 포지션 쏠림 해석</h2>
+        <div class="section-body"><p>펀딩비는 단순히 롱/숏 심리를 보여주는 지표가 아니라, 레버리지 수요와 시장 중립 자본의 비용을 동시에 반영합니다. 같은 양(+) 펀딩비라도 구조적 베이시스 수요인지, 투기 과열인지 구분해야 합니다. 따라서 OI, 청산 히트맵, 호가 두께를 함께 봐야 해석이 정확해집니다.</p><p>실무에서는 “신호 하나”로 진입하지 않습니다. 가격-미결제약정-OI 분포-볼륨 클러스터를 결합해 포지션 쏠림이 어디에서 붕괴할지 확률적으로 판단합니다. 좋은 트레이더는 예측보다 손실 관리가 빠릅니다.</p></div>
+        
+        
+        
+      </section><section class="section" id="sec-4">
+        <h2>리스크 관리: 시장 리스크와 거래소 리스크 분리</h2>
+        <div class="section-body"><p>많은 참가자가 방향성 리스크만 관리하고, 거래소/수탁/출금 리스크를 과소평가합니다. FTX 사태 이후 핵심 원칙은 단순합니다: 운영 자금만 거래소에 두고, 잉여 자금은 정기적으로 외부 수탁으로 이동합니다. 수익률보다 생존 확률이 우선입니다.</p><p>또한 교차증거금(Cross) 사용 시 계정 전체가 단일 실패점이 되므로, 전략 단위 격리와 손실 한도를 사전에 고정해야 합니다. 장기적으로 수익곡선을 결정하는 것은 진입 타점보다 리스크 프로토콜입니다.</p></div>
+        
+        
+        
       </section></div>
 
     <nav class="pager">
@@ -173,5 +206,6 @@
       <a href="/chapter-07">CH 07 탈중앙화 금융 (DeFi) →</a>
     </nav>
   </main>
+  <script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>
