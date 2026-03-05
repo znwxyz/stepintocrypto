@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://stepintocrypto.xyz/</loc></url><url><loc>https://stepintocrypto.xyz/chapters</loc></url><url><loc>https://stepintocrypto.xyz/guestbook</loc></url><url><loc>https://stepintocrypto.xyz/chapter-00</loc></url><url><loc>https://stepintocrypto.xyz/chapter-01</loc></url><url><loc>https://stepintocrypto.xyz/chapter-02</loc></url><url><loc>https://stepintocrypto.xyz/chapter-03</loc></url><url><loc>https://stepintocrypto.xyz/chapter-04</loc></url><url><loc>https://stepintocrypto.xyz/chapter-05</loc></url><url><loc>https://stepintocrypto.xyz/chapter-06</loc></url><url><loc>https://stepintocrypto.xyz/chapter-07</loc></url><url><loc>https://stepintocrypto.xyz/chapter-08</loc></url><url><loc>https://stepintocrypto.xyz/chapter-09</loc></url><url><loc>https://stepintocrypto.xyz/chapter-10</loc></url><url><loc>https://stepintocrypto.xyz/chapter-11</loc></url><url><loc>https://stepintocrypto.xyz/chapter-12</loc></url><url><loc>https://stepintocrypto.xyz/chapter-13</loc></url><url><loc>https://stepintocrypto.xyz/chapter-14</loc></url><url><loc>https://stepintocrypto.xyz/chapter-15</loc></url>
+  <url>
+    <loc>https://stepintocrypto.xyz/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url><loc>https://stepintocrypto.xyz/chapter-00</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-01</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-02</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-03</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-04</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-05</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-06</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-07</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-08</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-09</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-10</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-11</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-12</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-13</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-14</loc></url>
+  <url><loc>https://stepintocrypto.xyz/chapter-15</loc></url>
 </urlset>
