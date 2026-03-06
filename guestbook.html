@@ -37,6 +37,7 @@
     color: var(--text);
     font-family: 'Noto Sans KR', sans-serif;
     letter-spacing: var(--tracking-base);
+    font-weight: 300;
     min-height: 100vh;
   }
 
@@ -75,9 +76,18 @@
     text-decoration: none;
     color: var(--text-bright);
     font-family: 'DinaChaumontDisplayBold', 'Syne', sans-serif;
-    font-size: 34px;
+    font-size: 25px;
     font-weight: 800;
-    line-height: 1.04;
+    line-height: 1.1;
+  }
+  .logo,
+  .logo:hover,
+  .logo:focus,
+  .logo:active,
+  .logo:visited {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
   }
 
   .logo-line {
@@ -92,8 +102,8 @@
   }
 
   .logo img {
-    width: 22px;
-    height: 22px;
+    width: 14px;
+    height: 14px;
     transform: translateY(1px);
   }
 
@@ -116,21 +126,24 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 20px;
+    padding: 22px 24px;
     margin-bottom: 18px;
   }
 
   .title {
     font-family: 'Syne', sans-serif;
-    font-size: 30px;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.3;
     color: var(--text-bright);
     margin-bottom: 10px;
   }
 
   .desc {
     color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: 13.5px;
+    line-height: 1.85;
+    font-weight: 300;
   }
 
   .field {
@@ -140,7 +153,10 @@
     border-radius: 8px;
     color: var(--text);
     padding: 12px 14px;
-    font-size: 14px;
+    font-size: 13.5px;
+    font-family: 'Noto Sans KR', sans-serif;
+    letter-spacing: var(--tracking-base);
+    font-weight: 300;
     margin-top: 10px;
   }
 
@@ -164,8 +180,10 @@
     height: 38px;
     padding: 0 14px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 1px;
+    font-size: 10px;
+    letter-spacing: 1.6px;
+    font-weight: 400;
+    text-transform: uppercase;
     cursor: pointer;
   }
 
@@ -193,7 +211,9 @@
 
   .entry-name {
     font-family: 'Syne', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
     color: var(--text-bright);
   }
 
@@ -201,11 +221,13 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     color: var(--text-muted);
+    letter-spacing: 1px;
   }
 
   .entry-msg {
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: 13.5px;
+    line-height: 1.85;
+    font-weight: 300;
     white-space: pre-wrap;
   }
 
@@ -240,7 +262,8 @@
     padding: 0 10px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     cursor: pointer;
   }
 
@@ -284,6 +307,8 @@
     padding: 0 10px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     cursor: pointer;
   }
 
@@ -296,6 +321,8 @@
     padding: 0 10px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     cursor: pointer;
   }
 
@@ -314,13 +341,16 @@
 
   .empty {
     color: var(--text-muted);
-    font-size: 13px;
+    font-size: 12.5px;
     padding: 12px 2px;
+    line-height: 1.7;
   }
 
   .status {
     margin-top: 8px;
-    font-size: 12px;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1px;
     color: var(--text-muted);
     min-height: 18px;
   }
@@ -360,22 +390,25 @@
 
   .admin-modal-title {
     font-family: 'Syne', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 700;
     color: var(--text-bright);
     margin-bottom: 6px;
   }
 
   .admin-modal-desc {
     color: var(--text-muted);
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: 12.5px;
+    line-height: 1.75;
     margin-bottom: 8px;
   }
 
   .admin-modal-error {
     margin-top: 8px;
     color: #ff9d9d;
-    font-size: 12px;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.8px;
     min-height: 18px;
   }
 
@@ -394,8 +427,9 @@
     height: 36px;
     padding: 0 12px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.8px;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
     cursor: pointer;
   }
 
@@ -407,8 +441,9 @@
     height: 36px;
     padding: 0 12px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.8px;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
     cursor: pointer;
   }
 
@@ -750,8 +785,8 @@
 
   @media (max-width: 768px) {
     .wrap { padding: 18px 16px 48px; max-width: 100%; }
-    .logo { font-size: 28px; }
-    .title { font-size: 24px; }
+    .logo { font-size: 22px; }
+    .title { font-size: 20px; }
     .footer-links { justify-content: flex-end; align-items: center; gap: 12px; }
     .legal-box { padding: 20px 16px 14px; }
     .legal-title { font-size: 20px; padding-right: 28px; }
@@ -1416,5 +1451,6 @@
   init();
 })();
 </script>
+<script type="module" src="/src/agentation-dev-loader.js"></script>
 </body>
 </html>
