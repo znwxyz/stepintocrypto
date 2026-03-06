@@ -178,19 +178,62 @@
     line-height: 1.6;
   }
   .pager {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    text-align: center;
+    margin-top: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    border-top: 1px solid rgba(30, 58, 95, 0.6);
+    padding-top: 14px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
   }
   .pager a {
-    display: block;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--surface);
+    color: var(--text-muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .pager a:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .pager .pager-center {
+    margin: 0 auto;
     color: var(--text);
+  }
+  .pager .pager-side {
+    min-width: 0;
+    flex: 1;
+  }
+  .pager .pager-prev {
+    justify-content: flex-start;
+  }
+  .pager .pager-next {
+    justify-content: flex-end;
+    text-align: right;
+  }
+  @media (max-width: 768px) {
+    .pager {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .pager .pager-center {
+      margin: 0;
+      order: 1;
+    }
+    .pager .pager-prev {
+      order: 2;
+    }
+    .pager .pager-next {
+      order: 3;
+      justify-content: flex-start;
+      text-align: left;
+    }
   }
   .hub-list { display: grid; gap: 10px; margin-top: 16px; }
   .hub-item {
@@ -270,9 +313,9 @@
       </section></div>
 
     <nav class="pager">
-      <a href="/chapter-06">← CH 06 시장 구조와 트레이딩</a>
-      <a href="/chapters">전체 챕터</a>
-      <a href="/chapter-08">CH 08 MEV →</a>
+      <a class="pager-side pager-prev" href="/chapter-06">← CH 06 시장 구조와 트레이딩</a>
+      <a class="pager-center" href="/chapters">↗ 전체 챕터</a>
+      <a class="pager-side pager-next" href="/chapter-08">CH 08 MEV →</a>
     </nav>
   </main>
   <script type="module" src="/src/agentation-dev-loader.js"></script>
