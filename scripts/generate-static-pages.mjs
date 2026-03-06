@@ -418,6 +418,34 @@ const buildStyles = () => `
     border-color: rgba(255, 107, 53, 0.5);
     background: rgba(255, 107, 53, 0.08);
   }
+  .back-to-top {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(17, 29, 46, 0.92);
+    color: var(--text);
+    cursor: pointer;
+    z-index: 36;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s, opacity 0.2s;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .back-to-top.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .back-to-top:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
   @media (max-width: 768px) {
     .topbar {
       padding: 8px 12px;
@@ -535,6 +563,7 @@ const pageTemplate = ({ title, description, canonicalPath, body, jsonLd }) => `<
       const legalOpenBtns = document.querySelectorAll('[data-legal-open]');
       const legalCloseBtns = document.querySelectorAll('[data-legal-close]');
       const legalOverlays = document.querySelectorAll('.legal-overlay');
+      const backToTopBtn = document.querySelector('[data-back-to-top]');
 
       function openLegalModal(type) {
         const overlay = document.getElementById('legal-' + type + '-overlay');
@@ -565,6 +594,23 @@ const pageTemplate = ({ title, description, canonicalPath, body, jsonLd }) => `<
           if (event.target === overlay) closeLegalModal(overlay);
         });
       });
+
+      if (backToTopBtn) {
+        const toggleBackToTop = () => {
+          if (window.scrollY > 320) {
+            backToTopBtn.classList.add('show');
+          } else {
+            backToTopBtn.classList.remove('show');
+          }
+        };
+
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('scroll', toggleBackToTop, { passive: true });
+        toggleBackToTop();
+      }
     })();
   </script>
   <script type="module" src="/src/agentation-dev-loader.js"></script>
@@ -654,6 +700,7 @@ const buildChapterBody = (chapter, prevChapter, nextChapter) => {
           : '<span></span>'
       }
     </nav>
+    <button class="back-to-top" type="button" aria-label="맨 위로 이동" data-back-to-top>↑</button>
   </main>`;
 };
 
