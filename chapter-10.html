@@ -30,6 +30,7 @@
     --text: #c8dff5;
     --text-bright: #f0f8ff;
     --text-muted: #7fa0c3;
+    --tracking-base: 0.2px;
   }
   * { box-sizing: border-box; }
   body {
@@ -38,11 +39,21 @@
     color: var(--text);
     font-family: "Noto Sans KR", sans-serif;
     line-height: 1.7;
+    font-weight: 300;
+    letter-spacing: var(--tracking-base);
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  .shell { max-width: 980px; margin: 0 auto; padding: 28px 20px 48px; }
-  .topnav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; margin-bottom: 18px; }
+  .shell { max-width: 900px; margin: 0 auto; padding: 28px 20px 48px; }
+  .topnav {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 11px;
+    margin-bottom: 18px;
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 1px;
+  }
   .hero {
     background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
     border: 1px solid var(--border);
@@ -53,37 +64,71 @@
   .label {
     display: inline-block;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 12px;
+    font-size: 10px;
     color: var(--accent);
     margin-bottom: 8px;
+    letter-spacing: 2px;
   }
-  h1 { margin: 0 0 8px; color: var(--text-bright); font-size: 28px; line-height: 1.2; }
-  .subtitle { margin: 0; color: var(--text-muted); font-size: 13px; }
+  h1 {
+    margin: 0 0 8px;
+    color: var(--text-bright);
+    font-size: 22px;
+    line-height: 1.3;
+    font-family: "Syne", sans-serif;
+    font-weight: 800;
+  }
+  .subtitle {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 1px;
+  }
   .key-points, .section, .toc, .card, table {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
   }
   .toc, .key-points { padding: 16px; margin-bottom: 14px; }
-  .toc h2, .key-points h2 { margin: 0 0 10px; font-size: 16px; color: var(--text-bright); }
+  .toc h2, .key-points h2 {
+    margin: 0 0 10px;
+    font-size: 10px;
+    color: var(--accent);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .toc li, .key-points li {
+    font-size: 13px;
+    line-height: 1.6;
+  }
   ul { margin: 0; padding-left: 20px; }
   .sections { display: grid; gap: 14px; }
   .section { padding: 18px; }
-  .section h2 { margin: 0 0 10px; font-size: 18px; color: var(--text-bright); }
-  .section-body { font-size: 14px; }
+  .section h2 {
+    margin: 0 0 12px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "Syne", sans-serif;
+    font-weight: 700;
+  }
+  .section-body { font-size: 13.5px; line-height: 1.85; }
   .section-body p { margin: 0 0 12px; }
   .section-body h3 {
     margin: 18px 0 10px;
-    font-size: 15px;
-    color: var(--text-bright);
-    font-family: "IBM Plex Mono", monospace;
-  }
-  .section-body h4 {
-    margin: 14px 0 8px;
     font-size: 13px;
     color: var(--accent);
     font-family: "IBM Plex Mono", monospace;
-    letter-spacing: 0.2px;
+    letter-spacing: 1px;
+    font-weight: 400;
+  }
+  .section-body h4 {
+    margin: 14px 0 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.8px;
+    font-weight: 400;
   }
   .section-body ul {
     margin: 0 0 12px;
@@ -107,11 +152,12 @@
   .card { margin-top: 12px; padding: 12px 14px; }
   .card h3 {
     margin: 0 0 6px;
-    font-size: 12px;
-    letter-spacing: 1px;
+    font-size: 9px;
+    letter-spacing: 2px;
     font-family: "IBM Plex Mono", monospace;
     text-transform: uppercase;
     color: var(--accent);
+    font-weight: 400;
   }
   .card.warn { border-color: rgba(255, 107, 53, 0.6); background: rgba(255, 107, 53, 0.08); }
   .card.warn h3 { color: var(--accent2); }
@@ -119,7 +165,18 @@
   .card.success h3 { color: var(--accent3); }
   table { width: 100%; border-collapse: collapse; margin-top: 12px; overflow: hidden; }
   th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
-  th { background: rgba(0, 212, 255, 0.08); color: var(--text-bright); font-size: 11px; }
+  th {
+    background: rgba(0, 212, 255, 0.08);
+    color: var(--accent);
+    font-size: 10px;
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 2px;
+    font-weight: 400;
+  }
+  td {
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
   .pager {
     margin-top: 18px;
     display: grid;
@@ -142,8 +199,14 @@
     background: var(--surface);
     padding: 14px;
   }
-  .hub-item h2 { margin: 0 0 6px; font-size: 16px; color: var(--text-bright); }
-  .hub-item p { margin: 0; color: var(--text-muted); font-size: 13px; }
+  .hub-item h2 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    color: var(--text-bright);
+    font-family: "Syne", sans-serif;
+    font-weight: 700;
+  }
+  .hub-item p { margin: 0; color: var(--text-muted); font-size: 12.5px; line-height: 1.7; }
 </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"하이퍼리퀴드 - Step into Crypto","description":"dYdX는 막대한 수수료 수익을 회사가 독식하고 토큰 홀더에게 가치가 없어 붕괴했습니다. 하이퍼리퀴드는 이 빈틈을 파고들어 수수료의 99%를 HYPE 바이백·소각 에 투자했습니다. 출시 초 2달러 토큰이 단기간에 60달러로 치솟으며 강력한 선순환을 만들었습니다.","inLanguage":"ko-KR","isPartOf":{"@type":"WebSite","name":"Step into Crypto","url":"https://stepintocrypto.xyz/"},"mainEntityOfPage":"https://stepintocrypto.xyz/chapter-10","url":"https://stepintocrypto.xyz/chapter-10","position":11,"author":{"@type":"Person","name":"Max8"}}</script>
 </head>
