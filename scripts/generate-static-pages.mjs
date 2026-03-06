@@ -28,6 +28,13 @@ const normalizeForExcerpt = (html) =>
     .replace(/<\/?span class="term">/g, '');
 
 const buildStyles = () => `
+  @font-face {
+    font-family: "DinaChaumontDisplayBold";
+    src: url("/fonts/DinaChaumont-DisplayBold.otf") format("opentype");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+  }
   :root {
     --bg: #050811;
     --surface: #0d1520;
@@ -275,6 +282,16 @@ const buildStyles = () => `
     border-radius: 10px;
     background: var(--surface);
     padding: 14px;
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+  }
+  .hub-item:hover {
+    border-color: var(--accent);
+    background: rgba(0, 212, 255, 0.06);
+    text-decoration: none;
+    transform: translateY(-1px);
   }
   .hub-item h2 {
     margin: 0 0 6px;
@@ -414,11 +431,11 @@ const buildHubBody = (chapters) => {
   const items = chapters
     .map((ch) => {
       const excerpt = stripHtml(normalizeForExcerpt(ch.sections?.[0]?.body || '')).slice(0, 180);
-      return `<article class="hub-item">
-        <h2><a href="/chapter-${ch.num}">CH ${escapeHtml(ch.num)} · ${escapeHtml(ch.title)}</a></h2>
+      return `<a class="hub-item" href="/chapter-${ch.num}">
+        <h2>CH ${escapeHtml(ch.num)} · ${escapeHtml(ch.title)}</h2>
         <p>${escapeHtml(ch.subtitle)}</p>
         <p>${escapeHtml(excerpt)}...</p>
-      </article>`;
+      </a>`;
     })
     .join('');
 
@@ -429,8 +446,7 @@ const buildHubBody = (chapters) => {
     </nav>
     <header class="hero">
       <span class="label">CONTENT HUB</span>
-      <h1>Step into Crypto 챕터 라이브러리</h1>
-      <p class="subtitle">각 챕터를 독립 URL에서 바로 읽을 수 있습니다. (검색엔진 크롤링 최적화)</p>
+      <h1>챕터 라이브러리</h1>
     </header>
     <section class="hub-list">${items}</section>
   </main>`;
@@ -482,14 +498,14 @@ const writeStaticChapterPages = async () => {
   }
 
   const hubHtml = pageTemplate({
-    title: 'Step into Crypto 챕터 라이브러리',
+    title: '챕터 라이브러리',
     description: '크립토 기초부터 DeFi, MEV, DAO, DePIN까지 챕터별로 읽을 수 있는 정적 콘텐츠 허브',
     canonicalPath: '/chapters',
     body: buildHubBody(chapters),
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'Step into Crypto 챕터 라이브러리',
+      name: '챕터 라이브러리',
       url: `${baseUrl}/chapters`,
       inLanguage: 'ko-KR',
     },

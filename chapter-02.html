@@ -20,6 +20,13 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
   <style>
+  @font-face {
+    font-family: "DinaChaumontDisplayBold";
+    src: url("/fonts/DinaChaumont-DisplayBold.otf") format("opentype");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+  }
   :root {
     --bg: #050811;
     --surface: #0d1520;
@@ -267,6 +274,16 @@
     border-radius: 10px;
     background: var(--surface);
     padding: 14px;
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
+  }
+  .hub-item:hover {
+    border-color: var(--accent);
+    background: rgba(0, 212, 255, 0.06);
+    text-decoration: none;
+    transform: translateY(-1px);
   }
   .hub-item h2 {
     margin: 0 0 6px;
