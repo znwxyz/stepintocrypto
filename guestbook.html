@@ -61,23 +61,25 @@
     padding: 26px 40px 60px;
   }
 
-  .top {
+  .topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 14px;
   }
 
   .logo {
     display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
+    align-items: center;
+    gap: 6px;
     text-decoration: none;
     color: var(--text-bright);
     font-family: 'DinaChaumontDisplayBold', 'Syne', sans-serif;
     font-size: 25px;
-    font-weight: 800;
     line-height: 1.1;
   }
   .logo,
@@ -90,16 +92,7 @@
     box-shadow: none !important;
   }
 
-  .logo-line {
-    display: inline-block;
-  }
-
-  .logo-crypto {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--accent);
-  }
+  .logo-crypto { color: var(--accent); }
 
   .logo img {
     width: 14px;
@@ -785,6 +778,7 @@
 
   @media (max-width: 768px) {
     .wrap { padding: 18px 16px 48px; max-width: 100%; }
+    .topbar { padding: 8px 12px; }
     .logo { font-size: 22px; }
     .title { font-size: 20px; }
     .footer-links { justify-content: flex-end; align-items: center; gap: 12px; }
@@ -834,8 +828,8 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="top">
-      <a class="logo" href="/"><span class="logo-line">Step into</span><span class="logo-line logo-crypto">Crypto <img src="favicon.svg" alt=""></span></a>
+    <div class="topbar">
+      <a class="logo" href="/">Step into <span class="logo-crypto">Crypto</span><img src="favicon.svg" alt=""></a>
       <a class="back" href="/">메인으로</a>
     </div>
 
