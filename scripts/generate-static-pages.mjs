@@ -55,31 +55,39 @@ const buildStyles = () => `
   .shell { max-width: 900px; margin: 0 auto; padding: 28px 20px 48px; }
   .topnav {
     display: flex;
-    gap: 12px;
+    gap: 16px;
     flex-wrap: wrap;
     font-size: 11px;
     margin-bottom: 18px;
     font-family: "IBM Plex Mono", monospace;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+    align-items: center;
   }
   .topnav a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 34px;
-    padding: 0 12px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--surface2);
+    padding: 0;
+    border: none;
+    background: transparent;
     color: var(--text);
     text-decoration: none;
-    transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+    transition: color 0.2s, opacity 0.2s;
+    opacity: 0.9;
   }
   .topnav a:hover {
-    border-color: var(--accent);
     color: var(--accent);
     text-decoration: none;
-    background: rgba(0, 212, 255, 0.08);
+    opacity: 1;
+  }
+  .topnav a + a::before {
+    content: "·";
+    color: var(--text-muted);
+    margin-right: 16px;
   }
   .hero {
     background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
