@@ -54,6 +54,25 @@
     font-family: "IBM Plex Mono", monospace;
     letter-spacing: 1px;
   }
+  .topnav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+  }
+  .topnav a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    text-decoration: none;
+    background: rgba(0, 212, 255, 0.08);
+  }
   .hero {
     background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(13, 21, 32, 0.95));
     border: 1px solid var(--border);
@@ -179,9 +198,9 @@
   }
   .pager {
     margin-top: 22px;
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    justify-content: space-between;
     gap: 14px;
     border-top: 1px solid rgba(30, 58, 95, 0.6);
     padding-top: 14px;
@@ -202,12 +221,11 @@
     text-decoration: none;
   }
   .pager .pager-center {
-    margin: 0 auto;
+    justify-self: center;
     color: var(--text);
   }
   .pager .pager-side {
     min-width: 0;
-    flex: 1;
   }
   .pager .pager-prev {
     justify-content: flex-start;
@@ -215,25 +233,6 @@
   .pager .pager-next {
     justify-content: flex-end;
     text-align: right;
-  }
-  @media (max-width: 768px) {
-    .pager {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .pager .pager-center {
-      margin: 0;
-      order: 1;
-    }
-    .pager .pager-prev {
-      order: 2;
-    }
-    .pager .pager-next {
-      order: 3;
-      justify-content: flex-start;
-      text-align: left;
-    }
   }
   .hub-list { display: grid; gap: 10px; margin-top: 16px; }
   .hub-item {
