@@ -554,6 +554,10 @@ const pageTemplate = ({ title, description, canonicalPath, body, jsonLd }) => `<
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=IBM+Plex+Mono:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
   <style>${buildStyles()}</style>
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   ${body}
